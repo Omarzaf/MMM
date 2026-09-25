@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code Donation — Meaning, Man and Model</title>
+<meta name="description" content="Pakistan built every input to an open-source economy except the one that pays for it. Six years of GitHub data on a ratio that never moved.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  /* Set the ground before first paint so there is no flash of the wrong mode. */
+  (function () {
+    try {
+      var saved = localStorage.getItem('mmm-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
+    } catch (e) { document.documentElement.dataset.theme = 'light'; }
+  })();
+</script>
+<style>
+/* ============================================================ tokens
+   Mirrors tokens/*.css. Inlined so the entry is a standalone file, as the
+   other entries in the series are. Copper is deliberately not redefined
+   for dark mode — it is the one constant across both grounds. */
+:root {
+  --paper-1:#f4f1ea; --paper-2:#eee9df; --paper-3:#e5e0d3; --paper-4:#ddd7c8;
+  --ink-1:#2e2b27; --ink-2:#3f3b35; --ink-3:#5c584f; --ink-4:#726c5e;
+  --ink-5:#8c8578; --ink-6:#a39a86; --ink-7:#c0b8a5;
+  --copper:#8a5a3b;
+
+  --surface-page:var(--paper-1); --surface-hover:var(--paper-2);
+  --rule-hairline:var(--paper-3); --rule-structural:var(--paper-4);
+  --text-display:var(--ink-1); --text-body:var(--ink-2); --text-lead:var(--ink-3);
+  --text-support:var(--ink-4); --text-label:var(--ink-6); --text-faint:var(--ink-7);
+
+  --font-display:"Newsreader",Georgia,serif;
+  --font-body:"Newsreader",Georgia,serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+
+  --type-entry-size:46px; --type-entry-line:1.18; --type-entry-track:0.005em;
+  --type-h2-size:30px; --type-h2-line:1.28;
+  --type-h3-size:21px; --type-h3-line:1.35;
+  --type-lead-size:21px; --type-lead-line:1.6;
+  --type-body-size:18px; --type-body-line:1.78;
+  --measure-prose:64ch; --measure-lead:60ch;
+  --type-label-size:11px; --type-label-track:0.14em;
+  --type-label-size-sm:10px; --type-label-track-sm:0.1em;
+  --type-label-track-lg:0.18em;
+  --type-support-size:14px; --type-support-line:1.5;
+  --type-marginalia-size:16px; --type-marginalia-line:1.6;
+  --measure-marginalia:34ch;
+
+  --space-1:5px; --space-2:12px; --space-3:20px; --space-4:28px;
+  --space-5:40px; --space-6:56px; --space-7:76px; --space-8:104px;
+  --rule-weight:1px; --radius-image:2px;
+  --contents-max:760px; --rail-width:300px; --rail-left-width:200px;
+  --gutter-column:76px; --gutter-left:48px;
+  /* Three zones cannot fit the legacy 1120px page max: 200+48+760+76+300 = 1384.
+     See DESIGN-REVIEW-2026-08-18.md, outstanding item 5 — flagged, not assumed. */
+  --page-max-entry:1384px;
+
+  --gap-heading-body:var(--space-2); --gap-paragraph:var(--space-3);
+  --gap-block:var(--space-4); --gap-section:var(--space-6); --gap-page:var(--space-5);
+
+  --ease-standard:ease; --dur-hover:160ms;
+  color-scheme:light;
+}
+:root[data-theme="dark"] {
+  --paper-1:#1c1815; --paper-2:#241f1a; --paper-3:#332c25; --paper-4:#443a30;
+  --ink-1:#f3ede1; --ink-2:#ddd5c5; --ink-3:#c2b8a3; --ink-4:#a89c85;
+  --ink-5:#8f8368; --ink-6:#756a54; --ink-7:#4c4335;
+  color-scheme:dark;
+}
+
+/* ============================================================ base */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--surface-page); color:var(--text-body);
+  font-family:var(--font-body); font-size:var(--type-body-size);
+  line-height:var(--type-body-line);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+p{margin:0 0 var(--gap-paragraph)}
+em{color:var(--text-lead)}
+strong{color:var(--text-display); font-weight:600}
+code{font-family:var(--font-mono); font-size:0.84em; color:var(--text-body)}
+
+.mono{font-family:var(--font-mono); text-transform:uppercase;
+  font-size:var(--type-label-size); letter-spacing:var(--type-label-track);
+  color:var(--text-support)}
+.mono.sm{font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm)}
+.mono.lg{letter-spacing:var(--type-label-track-lg)}
+.mono.faint{color:var(--text-label)}
+.mono.ink{color:var(--text-display)}
+
+/* ============================================================ chrome */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--space-3) var(--space-5);
+  background:var(--surface-page);
+}
+.topbar a{text-decoration:none}
+.topbar a:hover{color:var(--copper)}
+.theme-toggle{
+  background:none; border:0; padding:var(--space-1) 0; cursor:pointer;
+  font-family:var(--font-mono); text-transform:uppercase;
+  font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm);
+  color:var(--text-support);
+}
+.theme-toggle:hover{color:var(--copper)}
+
+/* Four tracks: nav | gutter | content | rail. The rail track is empty in the
+   flow — the marginalia float into it — but it must be reserved, or the grid
+   centres on the nav+content width alone and pushes the rail off-screen. */
+.page{
+  max-width:calc(var(--page-max-entry) + var(--space-3) * 2); margin:0 auto;
+  padding:var(--space-8) var(--space-3) var(--space-8);
+  display:grid;
+  grid-template-columns:
+    var(--rail-left-width)
+    var(--gutter-left)
+    minmax(0,var(--contents-max))
+    calc(var(--gutter-column) + var(--rail-width));
+  justify-content:center;
+}
+.leftnav{grid-column:1}
+.article{grid-column:3}
+
+/* ---- left rail: sticky contents nav ---- */
+.leftnav{position:sticky; top:var(--space-8); align-self:start;
+  display:flex; flex-direction:column; gap:var(--space-2)}
+.leftnav .heading{margin-bottom:var(--space-1)}
+.leftnav a{
+  display:flex; gap:var(--space-2); align-items:baseline; text-decoration:none;
+  color:var(--text-support); transition:color var(--dur-hover) var(--ease-standard);
+}
+.leftnav a .num{font-family:var(--font-mono); font-size:var(--type-label-size-sm);
+  letter-spacing:var(--type-label-track-sm); color:var(--text-label);
+  transition:color var(--dur-hover) var(--ease-standard)}
+.leftnav a .t{font-size:14px; line-height:1.4}
+.leftnav a:hover{color:var(--text-display)}
+.leftnav a.is-active{color:var(--text-display)}
+.leftnav a.is-active .num{color:var(--copper)}
+
+/* ---- content column ---- */
+.article{min-width:0}
+.article > p, .article > ul, .article > ol{max-width:var(--measure-prose)}
+
+/* ---- right rail: marginalia, pulled out of the flow so prose keeps its rhythm ---- */
+.margin{
+  float:right; clear:right;
+  width:var(--rail-width);
+  margin-right:calc(-1 * (var(--rail-width) + var(--gutter-column)));
+  margin-bottom:var(--gap-block);
+  margin-left:var(--gutter-column);
+}
+.margin-thought{
+  font-style:italic; font-size:var(--type-marginalia-size);
+  line-height:var(--type-marginalia-line); max-width:var(--measure-marginalia);
+  color:var(--text-lead); margin:0;
+}
+.margin-note .term{display:block; margin-bottom:var(--space-1)}
+.margin-note p{font-size:var(--type-support-size); line-height:var(--type-support-line);
+  color:var(--text-support); margin:0}
+
+/* ============================================================ hero */
+.hero{margin-bottom:var(--gap-page)}
+.hero .eyebrow{display:flex; align-items:center; gap:var(--space-2);
+  margin-bottom:var(--space-5)}
+.hero h1{
+  font-size:var(--type-entry-size); line-height:var(--type-entry-line);
+  letter-spacing:var(--type-entry-track); font-weight:500;
+  color:var(--text-display); margin:0 0 var(--space-3);
+}
+.thesis{
+  font-style:italic; font-size:var(--type-lead-size); line-height:var(--type-lead-line);
+  color:var(--text-lead); max-width:var(--measure-lead); margin:0 0 var(--space-4);
+}
+.lede{max-width:var(--measure-prose); color:var(--text-body); margin:0 0 var(--space-4)}
+.disclaimer{max-width:var(--measure-prose); margin:0; font-size:var(--type-support-size);
+  line-height:var(--type-support-line); color:var(--text-support)}
+.disclaimer .mono{font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm)}
+figure.entry-mark{margin:var(--gap-page) 0 var(--gap-page)}
+figure.entry-mark svg{border:0}
+
+/* ---- TL;DR ---- */
+.tldr{
+  border-top:var(--rule-weight) solid var(--rule-structural);
+  border-bottom:var(--rule-weight) solid var(--rule-structural);
+  padding:var(--gap-block) 0; margin:var(--gap-page) 0;
+  max-width:var(--measure-prose);
+}
+.tldr .heading{display:block; margin-bottom:var(--gap-heading-body)}
+.tldr ol{margin:0; padding-left:1.15em}
+.tldr li{margin-bottom:var(--space-1)}
+.tldr li:last-child{margin-bottom:0}
+
+/* ============================================================ sections */
+section{
+  border-top:var(--rule-weight) solid var(--rule-structural);
+  padding-top:var(--gap-block); margin-top:var(--gap-section);
+}
+section > .num{display:block; margin-bottom:var(--space-1)}
+h2{font-size:var(--type-h2-size); line-height:var(--type-h2-line); font-weight:500;
+  color:var(--text-display); margin:0 0 var(--gap-heading-body);
+  max-width:var(--measure-prose)}
+h3{font-size:var(--type-h3-size); line-height:var(--type-h3-line); font-weight:500;
+  color:var(--text-display); margin:var(--gap-block) 0 var(--gap-heading-body);
+  max-width:var(--measure-prose)}
+.article ul,.article ol{padding-left:1.2em}
+.article li{margin-bottom:var(--space-2)}
+
+/* ============================================================ figures */
+figure{margin:var(--gap-block) 0; max-width:var(--contents-max)}
+figure svg{display:block; width:100%; height:auto;
+  border:var(--rule-weight) solid var(--rule-hairline); border-radius:var(--radius-image)}
+figcaption{margin-top:var(--space-2); max-width:var(--measure-prose);
+  font-family:var(--font-mono); text-transform:uppercase;
+  font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm);
+  line-height:1.7; color:var(--text-support)}
+
+/* ---- the one bespoke interactive ---- */
+.levers{
+  margin:var(--gap-block) 0; max-width:var(--contents-max);
+  border-top:var(--rule-weight) solid var(--rule-structural);
+  border-bottom:var(--rule-weight) solid var(--rule-structural);
+  padding:var(--gap-block) 0;
+}
+.levers .controls{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5);
+  margin-bottom:var(--gap-block)}
+.lever label{display:block; margin-bottom:var(--space-2)}
+.lever .val{font-family:var(--font-mono); font-size:16px; color:var(--text-display);
+  letter-spacing:0.02em}
+.lever input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; background:transparent;
+  margin:var(--space-2) 0 0; cursor:pointer;
+}
+.lever input[type=range]::-webkit-slider-runnable-track{
+  height:1px; background:var(--rule-structural)}
+.lever input[type=range]::-moz-range-track{height:1px; background:var(--rule-structural)}
+.lever input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:11px; height:11px; border-radius:50%;
+  background:var(--copper); margin-top:-5px; border:0}
+.lever input[type=range]::-moz-range-thumb{
+  width:11px; height:11px; border-radius:50%; background:var(--copper); border:0}
+.lever input[type=range]:focus-visible{outline:1px solid var(--copper); outline-offset:6px}
+.levers .readout{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4);
+  padding-top:var(--gap-block);
+  border-top:var(--rule-weight) solid var(--rule-hairline)}
+.readout .k{display:block; margin-bottom:var(--space-1)}
+.readout .v{font-family:var(--font-mono); font-size:22px; color:var(--text-display);
+  letter-spacing:0.01em; display:block}
+.readout .sub{font-size:13px; line-height:1.45; color:var(--text-support);
+  margin-top:var(--space-1); display:block}
+.readout .v.hit{color:var(--copper)}
+
+/* ============================================================ citations + endnotes */
+sup.cite{line-height:0}
+sup.cite a{font-family:var(--font-mono); font-size:9.5px; color:var(--copper);
+  text-decoration:none; padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+.endnotes{border-top:var(--rule-weight) solid var(--rule-structural);
+  padding-top:var(--gap-block); margin-top:var(--gap-section)}
+.endnotes .heading{display:block; margin-bottom:var(--gap-heading-body)}
+.endnotes ol{margin:0; padding-left:1.6em; max-width:var(--measure-prose)}
+.endnotes li{font-size:var(--type-support-size); line-height:var(--type-support-line);
+  color:var(--text-support); margin-bottom:var(--space-2)}
+.endnotes li:target{color:var(--text-body)}
+.endnotes a{color:inherit}
+.endnotes a:hover{color:var(--copper)}
+
+.colophon{display:flex; justify-content:space-between; gap:var(--space-4);
+  margin-top:var(--gap-section); padding-top:var(--space-3);
+  border-top:var(--rule-weight) solid var(--rule-structural)}
+
+/* ============================================================ responsive
+   Review item 5 proposed default: the left nav collapses first, then the
+   right rail stacks below the content. Implemented here, flagged for Umar. */
+@media (max-width:1423px){
+  .page{grid-template-columns:
+    minmax(0,var(--contents-max))
+    calc(var(--gutter-column) + var(--rail-width));}
+  .leftnav{display:none}
+  .article{grid-column:1}
+}
+@media (max-width:1175px){
+  .page{grid-template-columns:minmax(0,var(--contents-max))}
+  .margin{
+    float:none; width:auto; max-width:var(--measure-prose);
+    margin:var(--gap-block) 0; padding-left:var(--space-3);
+    border-left:var(--rule-weight) solid var(--rule-structural);
+  }
+  .margin-thought{max-width:none}
+}
+@media (max-width:760px){
+  .page{padding:var(--space-7) var(--space-3) var(--space-6)}
+  .topbar{padding:var(--space-3)}
+  :root{--type-entry-size:34px; --type-h2-size:25px; --type-lead-size:19px;
+        --type-body-size:17px}
+  .levers .controls{grid-template-columns:1fr; gap:var(--space-4)}
+  .levers .readout{grid-template-columns:1fr; gap:var(--space-3)}
+  figure{overflow-x:auto}
+  figure svg{min-width:620px}
+  .colophon{flex-direction:column; gap:var(--space-2)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mono sm" href="../../index.html">← Meaning, Man and Model</a>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode">Dark</button>
+</div>
+
+<div class="page">
+
+  <nav class="leftnav" aria-label="Contents">
+    <span class="mono sm faint heading">Contents</span>
+    <a href="#s1"><span class="num">01</span><span class="t">First, fix the denominator</span></a>
+    <a href="#s2"><span class="num">02</span><span class="t">Winning the derivative, losing the level</span></a>
+    <a href="#s3"><span class="num">03</span><span class="t">The ratio that would not move</span></a>
+    <a href="#s4"><span class="num">04</span><span class="t">The explanation I am not selling</span></a>
+    <a href="#s5"><span class="num">05</span><span class="t">Where the hours actually go</span></a>
+    <a href="#s6"><span class="num">06</span><span class="t">The institutional void</span></a>
+    <a href="#s7"><span class="num">07</span><span class="t">What follows</span></a>
+    <a href="#s8"><span class="num">08</span><span class="t">Predictions</span></a>
+    <a href="#s9"><span class="num">09</span><span class="t">The bottom line</span></a>
+    <a href="#s10"><span class="num">10</span><span class="t">Sources and method</span></a>
+  </nav>
+
+  <article class="article">
+
+    <header class="hero">
+      <div class="eyebrow">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="var(--ink-5)" stroke-width="1"/>
+        </svg>
+        <span class="mono lg">Entry IV — Essay — September 2026</span>
+      </div>
+      <h1>Code Donation; situation of Pakistan’s open source community</h1>
+      <p class="thesis">Pakistan built every input to an open-source economy except the one
+      that pays for it. Six years of growth has not fixed that, because growth was never the
+      missing input.</p>
+      <p class="lede">What the GitHub record says about why Pakistan produces developers at
+      scale and public code at a trickle — and why the most satisfying explanation for it
+      does not survive its own test.</p>
+      <p class="disclaimer"><span class="mono sm">AI disclaimer</span> — Ideation by me,
+      compilation by Astra.</p>
+    </header>
+
+    <figure class="entry-mark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 470" width="760" height="470" role="img" aria-label="Entry mark: seven concentric rings, one per year from 2020 to 2026, sized so area tracks Pakistan’s GitHub account base. A copper arc on each ring shows that year’s open-source conversion rate. The rings grow eightfold; the arc stays the same width.">
+<rect width="760" height="470" fill="var(--paper-1, #f4f1ea)"/>
+<line x1="581.00" y1="236.00" x2="588.00" y2="236.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="577.95" y1="270.90" x2="581.89" y2="271.60" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="568.88" y1="304.75" x2="572.64" y2="306.11" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="554.07" y1="336.50" x2="560.13" y2="340.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="533.97" y1="365.20" x2="537.04" y2="367.77" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="509.20" y1="389.97" x2="511.77" y2="393.04" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="480.50" y1="410.07" x2="484.00" y2="416.13" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="448.75" y1="424.88" x2="450.11" y2="428.64" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="414.90" y1="433.95" x2="415.60" y2="437.89" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="380.00" y1="437.00" x2="380.00" y2="444.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="345.10" y1="433.95" x2="344.40" y2="437.89" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="311.25" y1="424.88" x2="309.89" y2="428.64" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="279.50" y1="410.07" x2="276.00" y2="416.13" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="250.80" y1="389.97" x2="248.23" y2="393.04" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="226.03" y1="365.20" x2="222.96" y2="367.77" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="205.93" y1="336.50" x2="199.87" y2="340.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="191.12" y1="304.75" x2="187.36" y2="306.11" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="182.05" y1="270.90" x2="178.11" y2="271.60" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="179.00" y1="236.00" x2="172.00" y2="236.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="182.05" y1="201.10" x2="178.11" y2="200.40" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="191.12" y1="167.25" x2="187.36" y2="165.89" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="205.93" y1="135.50" x2="199.87" y2="132.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="226.03" y1="106.80" x2="222.96" y2="104.23" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="250.80" y1="82.03" x2="248.23" y2="78.96" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="279.50" y1="61.93" x2="276.00" y2="55.87" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="311.25" y1="47.12" x2="309.89" y2="43.36" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="345.10" y1="38.05" x2="344.40" y2="34.11" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="380.00" y1="35.00" x2="380.00" y2="28.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="414.90" y1="38.05" x2="415.60" y2="34.11" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="448.75" y1="47.12" x2="450.11" y2="43.36" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="480.50" y1="61.93" x2="484.00" y2="55.87" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="509.20" y1="82.03" x2="511.77" y2="78.96" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="533.97" y1="106.80" x2="537.04" y2="104.23" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="554.07" y1="135.50" x2="560.13" y2="132.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="568.88" y1="167.25" x2="572.64" y2="165.89" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="577.95" y1="201.10" x2="581.89" y2="200.40" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<line x1="380" y1="236" x2="380.00" y2="42.00" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75" stroke-dasharray="2 4"/>
+<line x1="380" y1="236" x2="242.82" y2="373.18" stroke="var(--ink-7, #c0b8a5)" stroke-width="0.75"/>
+<circle cx="380" cy="236" r="66.29" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,169.71 A66.29,66.29 0 0,1 433.63,197.04" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="333.13" cy="282.87" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<text x="334.25" y="270.48" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end" dominant-baseline="middle">2020</text>
+<circle cx="380" cy="236" r="80.72" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,155.28 A80.72,80.72 0 0,1 459.92,224.63" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="322.92" cy="293.08" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<circle cx="380" cy="236" r="95.36" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,140.64 A95.36,95.36 0 0,1 455.35,177.55" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="312.57" cy="303.43" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<circle cx="380" cy="236" r="113.19" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,122.81 A113.19,113.19 0 0,1 463.72,159.82" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="299.96" cy="316.04" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<text x="296.79" y="298.70" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end" dominant-baseline="middle">2023</text>
+<circle cx="380" cy="236" r="134.39" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,101.61 A134.39,134.39 0 0,1 476.51,142.48" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="284.97" cy="331.03" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<circle cx="380" cy="236" r="154.29" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,81.71 A154.29,154.29 0 0,1 498.88,137.65" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="270.90" cy="345.10" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<circle cx="380" cy="236" r="186.00" fill="none" stroke="var(--ink-5, #8c8578)" stroke-width="0.75"/>
+<path d="M380.00,50.00 A186.00,186.00 0 0,1 525.16,119.70" fill="none" stroke="#8a5a3b" stroke-width="2.4" stroke-linecap="butt"/>
+<circle cx="248.48" cy="367.52" r="1.6" fill="var(--ink-5, #8c8578)"/>
+<text x="238.64" y="342.52" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end" dominant-baseline="middle">2026</text>
+<circle cx="380" cy="236" r="4" fill="none" stroke="var(--ink-1, #2e2b27)" stroke-width="1.2"/>
+<text x="28" y="40" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)">THE BASE, 2020 → 2026</text>
+<text x="28" y="62" font-family="'Newsreader', Georgia, serif" font-size="21" fill="var(--ink-1, #2e2b27)">7.87×</text>
+<text x="732" y="40" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)" text-anchor="end">THE SHARE THAT GAVE IT AWAY</text>
+<text x="732" y="62" font-family="'Newsreader', Georgia, serif" font-size="21" fill="#8a5a3b" text-anchor="end">0.60% → 0.57%</text>
+<text x="380" y="436" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" letter-spacing="0.05em" fill="var(--ink-4, #726c5e)" text-anchor="middle">RING AREA ∝ GITHUB ACCOUNTS · COPPER ARC ∝ CONVERSION RATE AT 1% = 90°</text>
+<text x="380" y="454" font-family="'Newsreader', Georgia, serif" font-size="11" font-style="italic" fill="var(--ink-4, #726c5e)" text-anchor="middle">The rings grow eightfold. The arc does not move.</text>
+</svg>
+    </figure>
+
+    <div class="tldr">
+      <span class="mono lg heading">TL;DR</span>
+      <ol>
+        <li>Pakistan's GitHub base grew 7.87× between Q1 2020 and Q1 2026. Its open-source
+        contributors grew 7.50×. Contribution has tracked the base almost exactly; no
+        intervention has moved the ratio.</li>
+        <li>Correcting for internet penetration closes about a third of the gap to Vietnam.
+        Two-thirds of it is real. Pakistan trails Bangladesh on both denominators.</li>
+        <li>Pakistan has the fastest contributor growth in its peer set and the lowest level.
+        At current rates it converges with Vietnam around 2036 and India around 2055.</li>
+        <li>Pakistan and Bangladesh are locked out of GitHub Sponsors — a fact absent from
+        every Pakistani policy document I could find. Tested across 140 economies it does
+        not explain the gap: the effect vanishes inside Pakistan's own income band.</li>
+        <li>The phrase "open source" appears zero times in the Pakistan Software Export
+        Board's 85-page annual report for 2025.</li>
+      </ol>
+    </div>
+
+    <p>Count the Pakistani developers on GitHub and you get a triumph. Count the ones who
+    publish, and you get the same triumph, scaled down by a constant that has not moved
+    since 2020.</p>
+
+    <aside class="margin">
+      <div class="margin-note">
+        <span class="mono sm term">MIT-licensed contributor</span>
+        <p>GitHub's Innovation Graph counts unique developers located in an economy who made
+        at least one push to a repository carrying a given licence in a quarter. It is a
+        lower-bound proxy for open-source activity, not a census of contributors.</p>
+      </div>
+    </aside>
+
+    <p>Between the first quarter of 2020 and the first quarter of 2026, the number of GitHub
+    accounts located in Pakistan rose from 317,224 to 2,497,496 — a 7.87× increase,
+    compounding at 41.0% a year.<sup class="cite"><a href="#note-1">1</a></sup> Over the
+    identical window, the number of Pakistani developers pushing code to at least one
+    MIT-licensed repository rose from 1,896 to 14,211 — a 7.50× increase, compounding at
+    39.9% a year.<sup class="cite"><a href="#note-2">2</a></sup></p>
+
+    <p>Those two numbers are, for practical purposes, the same number — and to the extent they
+    differ, public contribution grew 1.1 percentage points a year <em>slower</em> than the
+    base. Pakistan's open-source output has expanded in almost exact proportion to the number
+    of Pakistanis on the platform, and no faster. Six years of extraordinary growth produced
+    no intensity gain at all. Every additional contributor is explained by additional people
+    showing up; none is explained by Pakistanis becoming more likely to build in public.</p>
+
+    <p>This is the finding that should organise Pakistani technology policy, and it is absent
+    from it. The country's instruments — graduate production, skills trainings, certification
+    volume, company registration, export targets — all act on the base. None acts on the
+    ratio. The data now cover six years and an eightfold expansion, which is enough to say
+    with some confidence that acting on the base does not move the ratio.</p>
+
+    <p>What follows tries to establish that claim carefully, and then to test the single most
+    attractive explanation for it. The explanation turns out not to survive. I have kept it
+    in the essay anyway, because the way it fails is more instructive than the way it would
+    have succeeded.</p>
+
+    <!-- ===================================================== I -->
+    <section id="s1">
+      <span class="mono sm num">Section 01</span>
+      <h2>First, fix the denominator</h2>
+
+      <p>Before making any argument about a gap, it is worth asking whether the gap is partly
+      an artefact of measurement. Cross-country comparisons of developer activity are
+      routinely normalised by total population, which is the wrong denominator and
+      systematically flatters countries with high internet penetration.</p>
+
+      <aside class="margin">
+        <p class="margin-thought">The denominator correction was the first thing I ran, and
+        I half expected it to make the problem go away. It didn't. That was the moment this
+        stopped being a story about unfair comparisons and started being a story about
+        something real.</p>
+      </aside>
+
+      <p>Pakistan's internet penetration was 57.3% in 2024. Vietnam's was 84.2%, Estonia's
+      92.2%, India's 64.9%, Bangladesh's 53.4%.<sup class="cite"><a href="#note-3">3</a></sup>
+      Dividing developer counts by total population therefore charges Pakistan for the 43% of
+      its people who are not online and could not contribute to a public repository under any
+      policy regime.</p>
+
+      <p>Recomputing against internet users rather than population changes the picture — but
+      not as much as one might hope.</p>
+
+      <figure>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 326" width="760" height="326" role="img" aria-label="Fig. 01 — The denominator does some of the work, but not all of it">
+<rect width="760" height="326" fill="var(--paper-1, #f4f1ea)"/>
+<text x="0" y="17" font-family="'Newsreader', Georgia, serif" font-size="15.5" font-weight="600" fill="var(--ink-1, #2e2b27)">Fig. 01 — The denominator does some of the work, but not all of it</text>
+<text x="0" y="35" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)">UNIQUE DEVELOPERS PUSHING TO MIT-LICENSED REPOSITORIES, Q1 2026, PER 100,000 PEOPLE VS PER 100,000 INTERNET USERS</text><line x1="132.0" y1="62" x2="132.0" y2="270" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><text x="132.0" y="285" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">0</text><line x1="244.0" y1="62" x2="244.0" y2="270" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><text x="244.0" y="285" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">5</text><line x1="356.0" y1="62" x2="356.0" y2="270" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><text x="356.0" y="285" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">10</text><line x1="468.0" y1="62" x2="468.0" y2="270" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><text x="468.0" y="285" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">15</text><line x1="580.0" y1="62" x2="580.0" y2="270" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><text x="580.0" y="285" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">20</text><line x1="692.0" y1="62" x2="692.0" y2="270" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><text x="692.0" y="285" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">25</text><text x="120" y="78" font-family="'Newsreader', Georgia, serif" font-size="13.5" fill="var(--ink-1, #2e2b27)" text-anchor="end" font-weight="600">Pakistan</text><rect x="132" y="64" width="124.7" height="14" fill="var(--ink-5, #8c8578)"/><text x="262.7" y="75" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">5.6</text><rect x="132" y="81" width="217.9" height="14" fill="#8a5a3b"/><text x="355.9" y="92" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">9.7</text><text x="120" y="130" font-family="'Newsreader', Georgia, serif" font-size="13.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">Bangladesh</text><text x="120" y="144" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">1.03× → 1.10× VS PK</text><rect x="132" y="116" width="128.5" height="14" fill="var(--ink-5, #8c8578)"/><text x="266.5" y="127" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">5.7</text><rect x="132" y="133" width="240.6" height="14" fill="#8a5a3b"/><text x="378.6" y="144" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">10.7</text><text x="120" y="182" font-family="'Newsreader', Georgia, serif" font-size="13.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">India</text><text x="120" y="196" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">2.39× → 2.11× VS PK</text><rect x="132" y="168" width="298.6" height="14" fill="var(--ink-5, #8c8578)"/><text x="436.6" y="179" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">13.3</text><rect x="132" y="185" width="459.8" height="14" fill="#8a5a3b"/><text x="597.8" y="196" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">20.5</text><text x="120" y="234" font-family="'Newsreader', Georgia, serif" font-size="13.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">Vietnam</text><text x="120" y="248" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">3.31× → 2.25× VS PK</text><rect x="132" y="220" width="412.8" height="14" fill="var(--ink-5, #8c8578)"/><text x="550.8" y="231" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">18.4</text><rect x="132" y="237" width="490.5" height="14" fill="#8a5a3b"/><text x="628.5" y="248" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.2" fill="var(--ink-2, #3f3b35)">21.9</text><line x1="132" y1="270" x2="692" y2="270" stroke="var(--paper-4, #ddd7c8)" stroke-width="1"/><text x="412.0" y="302" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" letter-spacing="0.05em" fill="var(--ink-4, #726c5e)" text-anchor="middle">CONTRIBUTORS PER 100,000</text><rect x="132" y="305" width="11" height="11" fill="var(--ink-5, #8c8578)"/><text x="148" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)">per 100k population</text><rect x="302" y="305" width="11" height="11" fill="#8a5a3b"/><text x="318" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)">per 100k internet users</text><text x="760" y="314" font-family="'Newsreader', Georgia, serif" font-size="10" font-style="italic" fill="var(--ink-4, #726c5e)" text-anchor="end">Estonia omitted (152.5 / 100k users) — off scale</text>
+</svg>
+        <figcaption>Fig. 01 — MIT-licensed contributors per 100,000, Q1 2026, against total
+        population and against internet users. Sources: GitHub Innovation Graph; World Bank.
+        Author's calculations.</figcaption>
+      </figure>
+
+      <p>The Vietnam gap compresses from 3.31× to 2.25×, a reduction of roughly a third. The
+      India gap compresses from 2.39× to 2.11×. Against Bangladesh the correction runs the
+      other way and is worth stating plainly, because it is often reported backwards: Pakistan
+      is behind Bangladesh on <em>both</em> denominators, and the correction widens rather
+      than closes the gap. Bangladesh leads by 1.03× per head of population and by 1.10× per
+      internet user, because Pakistan's slightly higher penetration means more of its
+      population is already online and still not contributing.</p>
+
+      <p>This is the honest result. About a third of the apparent Pakistan–Vietnam gap is a
+      denominator artefact. Two-thirds of it is real. Any analysis reporting the raw per-capita
+      figure without this correction overstates the problem by roughly 30%; any analysis using
+      the correction to dismiss the problem overstates the fix.</p>
+
+      <p>Every cross-country figure in the rest of this essay is computed per 100,000 internet
+      users.</p>
+    </section>
+
+    <!-- ===================================================== II -->
+    <section id="s2">
+      <span class="mono sm num">Section 02</span>
+      <h2>Pakistan is winning the derivative and losing the level</h2>
+
+      <p>The second common error is to read a low level as evidence of stagnation. Pakistan's
+      open-source contributor base is not stagnant. It is the fastest-growing in its peer set,
+      by a clear margin.</p>
+
+      <p>Between Q1 2020 and Q1 2026, Pakistan's MIT-licensed contributor count compounded at
+      39.9% a year. Over the identical window India grew at 36.3%, Bangladesh at 34.9%, Sri
+      Lanka at 33.8%, Nepal at 30.2%, Vietnam at 29.1%, and Estonia at
+      14.8%.<sup class="cite"><a href="#note-2">2</a></sup></p>
+
+      <figure>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" width="760" height="380" role="img" aria-label="Fig. 02 — Pakistan has the lowest level and the fastest growth in its peer set">
+<rect width="760" height="380" fill="var(--paper-1, #f4f1ea)"/>
+<text x="0" y="17" font-family="'Newsreader', Georgia, serif" font-size="15.5" font-weight="600" fill="var(--ink-1, #2e2b27)">Fig. 02 — Pakistan has the lowest level and the fastest growth in its peer set</text>
+<text x="0" y="35" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)">MIT-LICENSED CONTRIBUTORS PER 100,000 INTERNET USERS (Q1 2026) AGAINST COMPOUND ANNUAL GROWTH IN CONTRIBUTORS, Q1 2020 – Q1 2026</text><line x1="74" y1="158.8" x2="674" y2="158.8" stroke="var(--paper-3, #e5e0d3)"/><line x1="74" y1="112.4" x2="674" y2="112.4" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="301.5" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end">0</text><text x="64" y="255.1" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end">10</text><text x="64" y="208.7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end">20</text><text x="64" y="162.3" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end">30</text><text x="64" y="115.9" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end">40</text><text x="64" y="69.5" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="end">50</text><line x1="74.0" y1="66" x2="74.0" y2="298" stroke="var(--paper-3, #e5e0d3)"/><text x="74.0" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">26%</text><line x1="224.0" y1="66" x2="224.0" y2="298" stroke="var(--paper-3, #e5e0d3)"/><text x="224.0" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">30%</text><line x1="374.0" y1="66" x2="374.0" y2="298" stroke="var(--paper-3, #e5e0d3)"/><text x="374.0" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">34%</text><line x1="524.0" y1="66" x2="524.0" y2="298" stroke="var(--paper-3, #e5e0d3)"/><text x="524.0" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">38%</text><line x1="674.0" y1="66" x2="674.0" y2="298" stroke="var(--paper-3, #e5e0d3)"/><text x="674.0" y="314" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">42%</text><line x1="74" y1="298" x2="674" y2="298" stroke="var(--paper-4, #ddd7c8)"/><line x1="74" y1="66" x2="74" y2="298" stroke="var(--paper-4, #ddd7c8)"/><circle cx="595.0" cy="252.9" r="11" fill="#8a5a3b" opacity="0.18"/><circle cx="595.0" cy="252.9" r="5" fill="#8a5a3b"/><text x="595.0" y="230.9" font-family="'Newsreader', Georgia, serif" font-size="13" fill="var(--ink-1, #2e2b27)" text-anchor="middle" font-weight="600">Pakistan</text><text x="595.0" y="242.9" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="middle">9.7 / 100k · 40%/yr</text><circle cx="406.6" cy="248.2" r="5" fill="var(--ink-5, #8c8578)"/><text x="406.6" y="228.2" font-family="'Newsreader', Georgia, serif" font-size="13" fill="var(--ink-1, #2e2b27)" text-anchor="middle" >Bangladesh</text><text x="406.6" y="240.2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="middle">10.7 / 100k · 35%/yr</text><circle cx="460.3" cy="202.8" r="5" fill="var(--ink-5, #8c8578)"/><text x="460.3" y="182.8" font-family="'Newsreader', Georgia, serif" font-size="13" fill="var(--ink-1, #2e2b27)" text-anchor="middle" >India</text><text x="460.3" y="194.8" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="middle">20.5 / 100k · 36%/yr</text><circle cx="190.6" cy="196.4" r="5" fill="var(--ink-5, #8c8578)"/><text x="190.6" y="176.4" font-family="'Newsreader', Georgia, serif" font-size="13" fill="var(--ink-1, #2e2b27)" text-anchor="middle" >Vietnam</text><text x="190.6" y="188.4" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="middle">21.9 / 100k · 29%/yr</text><circle cx="365.4" cy="86.2" r="5" fill="var(--ink-5, #8c8578)"/><text x="365.4" y="66.2" font-family="'Newsreader', Georgia, serif" font-size="13" fill="var(--ink-1, #2e2b27)" text-anchor="middle" >Sri Lanka</text><text x="365.4" y="78.2" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="middle">45.6 / 100k · 34%/yr</text><circle cx="232.0" cy="171.7" r="5" fill="var(--ink-5, #8c8578)"/><text x="232.0" y="151.7" font-family="'Newsreader', Georgia, serif" font-size="13" fill="var(--ink-1, #2e2b27)" text-anchor="middle" >Nepal</text><text x="232.0" y="163.7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="middle">27.2 / 100k · 30%/yr</text><text x="374.0" y="332" font-family="'Newsreader', Georgia, serif" font-size="11" font-style="italic" fill="var(--ink-4, #726c5e)" text-anchor="middle">growth in MIT contributors, 2020–26 (CAGR)</text><text transform="translate(20,182.0) rotate(-90)" font-family="'Newsreader', Georgia, serif" font-size="11" font-style="italic" fill="var(--ink-4, #726c5e)" text-anchor="middle">MIT contributors per 100,000 internet users</text><text x="674" y="364" font-family="'Newsreader', Georgia, serif" font-size="10" font-style="italic" fill="var(--ink-4, #726c5e)" text-anchor="end">Estonia omitted: 152.5 / 100k users at 14.8%/yr — highest level, slowest growth.</text>
+</svg>
+        <figcaption>Fig. 02 — Contribution intensity against contribution growth. Pakistan
+        occupies the bottom-right quadrant: lowest level, fastest growth. Sources: GitHub
+        Innovation Graph; World Bank. Author's calculations.</figcaption>
+      </figure>
+
+      <aside class="margin">
+        <div class="margin-note">
+          <span class="mono sm term">Laggard-converger</span>
+          <p>An economy with the lowest level and the highest growth rate in its comparison
+          set. The position implies eventual catch-up, but says nothing about whether the
+          timescale is politically useful.</p>
+        </div>
+      </aside>
+
+      <p>Pakistan sits in the bottom-right quadrant — the position of a genuine
+      laggard-converger. This is good news, and it is the part of the story Pakistani
+      officials are entitled to tell.</p>
+
+      <p>It is not, however, a reason for patience, because the arithmetic of convergence is
+      brutal. Pakistan's growth advantage over Vietnam is 10.8 percentage points a year.
+      Applied to a 2.25× per-user gap, that closes the distance in roughly <strong>ten
+      years</strong> — around 2036, and only if Vietnam's rate holds and Pakistan's does not
+      decay as its base grows. Against India, where Pakistan's growth advantage is only 3.6
+      points, the implied convergence horizon is <strong>twenty-nine years</strong>. Against
+      Sri Lanka, whose rate is 6.1 points below Pakistan's but whose level is 4.7× higher, it
+      is <strong>thirty-five years</strong>.<sup class="cite"><a href="#note-4">4</a></sup></p>
+
+      <p>So the correct statement is neither "Pakistan is failing" nor "Pakistan is catching
+      up." It is: <em>Pakistan is converging on a timescale far longer than any of its stated
+      digital-economy targets, and closing that gap faster requires changing the rate, not
+      waiting on it.</em></p>
+    </section>
+
+    <!-- ===================================================== III -->
+    <section id="s3">
+      <span class="mono sm num">Section 03</span>
+      <h2>The ratio that would not move</h2>
+
+      <p>Six years is long enough for an experiment to finish. Pakistan ran one without
+      meaning to.</p>
+
+      <p>The default Pakistani policy reflex in technology is volume: more graduates, more
+      trainings, more certifications, more registered companies. The open-source data offer an
+      unusually clean natural experiment on whether volume works, because we can watch the
+      base grow nearly eightfold and ask what happened to the conversion rate.</p>
+
+      <figure>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img" aria-label="Fig. 03 — The base grew 7.9×. The share of it contributing publicly did not move.">
+<rect width="760" height="360" fill="var(--paper-1, #f4f1ea)"/>
+<text x="0" y="17" font-family="'Newsreader', Georgia, serif" font-size="15.5" font-weight="600" fill="var(--ink-1, #2e2b27)">Fig. 03 — The base grew 7.9×. The share of it contributing publicly did not move.</text>
+<text x="0" y="35" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)">PAKISTAN-LOCATED GITHUB ACCOUNTS AND MIT-LICENSED CONTRIBUTORS AS A SHARE OF THAT BASE, FIRST QUARTER OF EACH YEAR</text><line x1="74" y1="284.0" x2="674" y2="284.0" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="287.5" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" fill="var(--ink-4, #726c5e)" text-anchor="end">0k</text><line x1="74" y1="243.6" x2="674" y2="243.6" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="247.1" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" fill="var(--ink-4, #726c5e)" text-anchor="end">500k</text><line x1="74" y1="203.2" x2="674" y2="203.2" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="206.7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" fill="var(--ink-4, #726c5e)" text-anchor="end">1,000k</text><line x1="74" y1="162.8" x2="674" y2="162.8" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="166.3" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" fill="var(--ink-4, #726c5e)" text-anchor="end">1,500k</text><line x1="74" y1="122.5" x2="674" y2="122.5" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="126.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" fill="var(--ink-4, #726c5e)" text-anchor="end">2,000k</text><line x1="74" y1="82.1" x2="674" y2="82.1" stroke="var(--paper-3, #e5e0d3)"/><text x="64" y="85.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.6" fill="var(--ink-4, #726c5e)" text-anchor="end">2,500k</text><rect x="94.6" y="258.4" width="44.6" height="25.6" fill="var(--ink-5, #8c8578)"/><text x="116.9" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2020</text><rect x="180.3" y="246.0" width="44.6" height="38.0" fill="var(--ink-5, #8c8578)"/><text x="202.6" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2021</text><rect x="266.0" y="231.0" width="44.6" height="53.0" fill="var(--ink-5, #8c8578)"/><text x="288.3" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2022</text><rect x="351.7" y="209.3" width="44.6" height="74.7" fill="var(--ink-5, #8c8578)"/><text x="374.0" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2023</text><rect x="437.4" y="178.7" width="44.6" height="105.3" fill="var(--ink-5, #8c8578)"/><text x="459.7" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2024</text><rect x="523.1" y="145.2" width="44.6" height="138.8" fill="var(--ink-5, #8c8578)"/><text x="545.4" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2025</text><rect x="608.9" y="82.3" width="44.6" height="201.7" fill="var(--ink-5, #8c8578)"/><text x="631.1" y="300" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">2026</text><line x1="74" y1="214.8" x2="674" y2="214.8" stroke="var(--ink-5, #8c8578)" stroke-width="1" stroke-dasharray="3 3"/><text x="82" y="208.8" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)">2020 CONVERSION RATE 0.60%</text><path d="M116.9,214.8 L202.6,104.3 L288.3,221.7 L374.0,238.0 L459.7,245.4 L545.4,228.7 L631.1,224.8" fill="none" stroke="#8a5a3b" stroke-width="2"/><circle cx="116.9" cy="214.8" r="3.6" fill="#8a5a3b"/><text x="116.9" y="230.8" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.60%</text><circle cx="202.6" cy="104.3" r="3.6" fill="#8a5a3b"/><text x="202.6" y="94.3" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.91%</text><circle cx="288.3" cy="221.7" r="3.6" fill="#8a5a3b"/><text x="288.3" y="237.7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.58%</text><circle cx="374.0" cy="238.0" r="3.6" fill="#8a5a3b"/><text x="374.0" y="254.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.53%</text><circle cx="459.7" cy="245.4" r="3.6" fill="#8a5a3b"/><text x="459.7" y="261.4" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.51%</text><circle cx="545.4" cy="228.7" r="3.6" fill="#8a5a3b"/><text x="545.4" y="218.7" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.56%</text><circle cx="631.1" cy="224.8" r="3.6" fill="#8a5a3b"/><text x="631.1" y="214.8" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="#8a5a3b" text-anchor="middle">0.57%</text><line x1="74" y1="284" x2="674" y2="284" stroke="var(--paper-4, #ddd7c8)"/><text x="74" y="64" font-family="'Newsreader', Georgia, serif" font-size="11" font-style="italic" fill="var(--ink-4, #726c5e)">GitHub accounts (bars)</text><text x="674" y="64" font-family="'Newsreader', Georgia, serif" font-size="11" font-style="italic" fill="#8a5a3b" text-anchor="end">conversion rate (line)</text><text x="74" y="344" font-family="'Newsreader', Georgia, serif" font-size="10.5" font-style="italic" fill="var(--ink-4, #726c5e)">0.60% in 2020. 0.57% in 2026. Sevenfold growth in the base has not changed the share that contributes publicly.</text>
+</svg>
+        <figcaption>Fig. 03 — Pakistan-located GitHub accounts and the share of that base
+        pushing to MIT-licensed repositories, Q1 of each year. Source: GitHub Innovation
+        Graph. Author's calculations.</figcaption>
+      </figure>
+
+      <aside class="margin">
+        <div class="margin-note">
+          <span class="mono sm term">Conversion rate</span>
+          <p>Quarterly MIT contributors divided by the cumulative stock of located accounts.
+          A flow over a stock: its level is not directly interpretable, but its trend, and the
+          relative growth of its two parts, are.</p>
+        </div>
+      </aside>
+
+      <p>Between Q1 2020 and Q1 2026, Pakistan's located GitHub accounts rose from 317,224 to
+      2,497,496. Over the same period the share of that base contributing to MIT-licensed
+      repositories went from 0.60% to 0.57%. It spiked to 0.91% in 2021, fell to 0.51% by
+      2024, and has partially recovered. The trend line is, for practical purposes,
+      flat.<sup class="cite"><a href="#note-1">1</a></sup></p>
+
+      <p>Two caveats belong here rather than in a footnote.</p>
+
+      <p>The first is that this ratio divides a quarterly <em>flow</em> of contributors by a
+      cumulative <em>stock</em> of accounts. Because account stocks age and accumulate dormant
+      members, a mechanically declining ratio would be the naive expectation; a flat ratio is
+      therefore very mildly better than nothing. The second is that the 2021 spike almost
+      certainly reflects pandemic-era conditions rather than a policy effect, and should not be
+      treated as a target that Pakistan once hit and then lost.</p>
+
+      <p>Neither caveat rescues the headline. The cleanest statement does not depend on the
+      ratio at all: contributors grew 7.50× while the base grew 7.87×, measured the same way at
+      both endpoints. Public contribution has tracked the base almost exactly.</p>
+
+      <p>Six years of extraordinary growth in the developer base produced no improvement in the
+      rate at which that base converts into public contribution. Whatever governs the conversion
+      rate, it is not the size of the pool.</p>
+
+      <p>This should discipline the policy response more than any cross-country comparison in
+      this essay. Pakistan does not need another order-of-magnitude expansion in graduate
+      production to get an order-of-magnitude improvement in open-source capacity. It needs to
+      change a ratio that has not moved in six years — and adding people to the base has
+      demonstrably not done it.</p>
+    </section>
+
+    <!-- ===================================================== IV -->
+    <section id="s4">
+      <span class="mono sm num">Section 04</span>
+      <h2>The most attractive explanation, and why I am not going to sell it to you</h2>
+
+      <p>There is a clean, mechanical, verifiable explanation available for why Pakistani
+      developers do not convert into public contributors, and I want to present it at full
+      strength before explaining why I do not believe it carries the weight.</p>
+
+      <aside class="margin">
+        <div class="margin-note">
+          <span class="mono sm term">GitHub Sponsors</span>
+          <p>GitHub's mechanism for paying individual maintainers directly. Sponsoring is open
+          to anyone; <em>receiving</em> funds requires residence in one of 103 supported
+          regions, a list set by payment-processing and financial-compliance geography.</p>
+        </div>
+      </aside>
+
+      <p>GitHub Sponsors is the largest single mechanism by which individual open-source
+      maintainers receive money for their work. GitHub's documentation is explicit: "Anyone in
+      any region can sponsor eligible maintainers, but you must reside in a supported region to
+      receive funds."<sup class="cite"><a href="#note-5">5</a></sup> The supported list runs to
+      103 regions. It includes India, Vietnam, Estonia, Sri Lanka, Indonesia, Malaysia, the
+      Philippines, Singapore, Thailand and Cambodia.</p>
+
+      <p>It does not include Pakistan. It does not include Bangladesh.</p>
+
+      <aside class="margin">
+        <p class="margin-thought">I found this on a Friday and spent the weekend convinced I
+        had the whole essay. A hard gate, externally imposed, that explains the anomaly nobody
+        else explains — it is the kind of finding you want. Then I ran it against every economy
+        in the dataset instead of the five I had picked, and it fell apart. Keeping the corpse
+        on the page felt more honest than quietly burying it.</p>
+      </aside>
+
+      <p>That fact appears in no Pakistani policy document I could find, and it is not trivial.
+      A Pakistani maintainer who builds a widely used library and attracts sponsors cannot
+      collect. Unlike "curriculum gaps" or "cultural preferences," this is not a soft variable
+      requiring a behavioural story. It is a hard gate with no intermediate step to theorise.</p>
+
+      <p>It also explains a specific anomaly that other theories do not. Pakistan ≈ Bangladesh
+      is a strange result on every conventional metric — Pakistan has more graduates, more
+      exports, more policy attention and a larger ecosystem. It is not a strange result if the
+      binding constraint is a payment rail closed to both and open to their comparators.</p>
+
+      <p>This is the argument an earlier draft of this essay made, and made as its central
+      thesis. It is wrong, or at least unsupported, and the test that shows it is
+      straightforward.</p>
+
+      <h3>The test</h3>
+
+      <p>The claim above rests on five observations. Five is not a sample. The GitHub Innovation
+      Graph and the Sponsors region list are both public, so the hypothesis can be tested against
+      every economy in the dataset rather than a hand-picked set.</p>
+
+      <p>Matching the licence data to World Bank population and internet-penetration figures
+      yields 140 economies with complete data: 97 eligible for Sponsors, 43 not. Across all 140,
+      the median eligible economy records 33.4 MIT contributors per 100,000 internet users
+      against 8.3 for the median ineligible economy — a ratio of 4.03×. On its face that is a
+      powerful result.</p>
+
+      <p>It is also almost entirely an income effect. Sponsors eligibility tracks
+      payment-processor coverage, anti-money-laundering posture and financial-compliance
+      geography, all of which correlate strongly with national income. Eligible economies are
+      richer, and richer economies contribute more to open source for many reasons that have
+      nothing to do with GitHub.</p>
+
+      <p>Conditioning on World Bank income group dissolves most of the effect.</p>
+
+      <figure>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-label="Fig. 04 — The headline eligibility gap is an income gap">
+<rect width="760" height="300" fill="var(--paper-1, #f4f1ea)"/>
+<text x="0" y="17" font-family="'Newsreader', Georgia, serif" font-size="15.5" font-weight="600" fill="var(--ink-1, #2e2b27)">Fig. 04 — The headline eligibility gap is an income gap</text>
+<text x="0" y="35" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)">MEDIAN MIT CONTRIBUTORS PER 100,000 INTERNET USERS, ELIGIBLE VS INELIGIBLE ECONOMIES, BY WORLD BANK INCOME GROUP</text><line x1="150.0" y1="74" x2="150.0" y2="234" stroke="var(--paper-3, #e5e0d3)"/><text x="150.0" y="250" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">0</text><line x1="272.4" y1="74" x2="272.4" y2="234" stroke="var(--paper-3, #e5e0d3)"/><text x="272.4" y="250" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">20</text><line x1="394.7" y1="74" x2="394.7" y2="234" stroke="var(--paper-3, #e5e0d3)"/><text x="394.7" y="250" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">40</text><line x1="517.1" y1="74" x2="517.1" y2="234" stroke="var(--paper-3, #e5e0d3)"/><text x="517.1" y="250" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">60</text><line x1="639.4" y1="74" x2="639.4" y2="234" stroke="var(--paper-3, #e5e0d3)"/><text x="639.4" y="250" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">80</text><text x="138" y="90.0" font-family="'Newsreader', Georgia, serif" font-size="12.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">All economies</text><text x="138" y="103.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">RATIO 4.03×</text><rect x="150" y="77.0" width="204.1" height="12" fill="#8a5a3b"/><text x="360.1" y="86.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">33.4</text><rect x="150" y="92.0" width="50.6" height="12" fill="var(--ink-5, #8c8578)"/><text x="206.6" y="101.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">8.3</text><text x="138" y="130.0" font-family="'Newsreader', Georgia, serif" font-size="12.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">High income</text><text x="138" y="143.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">RATIO 0.94×</text><rect x="150" y="117.0" width="458.2" height="12" fill="#8a5a3b"/><text x="614.2" y="126.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">74.9</text><rect x="150" y="132.0" width="485.7" height="12" fill="var(--ink-5, #8c8578)"/><text x="641.7" y="141.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">79.4</text><text x="138" y="170.0" font-family="'Newsreader', Georgia, serif" font-size="12.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">Upper middle income</text><text x="138" y="183.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">RATIO 1.40×</text><rect x="150" y="157.0" width="88.8" height="12" fill="#8a5a3b"/><text x="244.8" y="166.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">14.5</text><rect x="150" y="172.0" width="63.6" height="12" fill="var(--ink-5, #8c8578)"/><text x="219.6" y="181.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">10.4</text><text x="138" y="210.0" font-family="'Newsreader', Georgia, serif" font-size="12.5" fill="var(--ink-1, #2e2b27)" text-anchor="end">Lower middle income</text><text x="138" y="223.0" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">RATIO 1.26×</text><rect x="150" y="197.0" width="58.7" height="12" fill="#8a5a3b"/><text x="214.7" y="206.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">9.6</text><rect x="150" y="212.0" width="46.7" height="12" fill="var(--ink-5, #8c8578)"/><text x="202.7" y="221.6" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.8" fill="var(--ink-2, #3f3b35)">7.6</text><line x1="150" y1="234" x2="670" y2="234" stroke="var(--paper-4, #ddd7c8)"/><rect x="150" y="255" width="11" height="11" fill="#8a5a3b"/><text x="166" y="264" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)">eligible for Sponsors</text><rect x="330" y="255" width="11" height="11" fill="var(--ink-5, #8c8578)"/><text x="346" y="264" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)">not eligible</text><text x="150" y="286" font-family="'Newsreader', Georgia, serif" font-size="10.5" font-style="italic" fill="var(--ink-4, #726c5e)">The 4.0× gap across all economies falls to 1.3× inside Pakistan’s own income band, and reverses at high income.</text>
+</svg>
+        <figcaption>Fig. 04 — Median MIT contributors per 100,000 internet users, eligible vs
+        ineligible economies, by World Bank income group. Sources: GitHub Innovation Graph;
+        GitHub Docs; World Bank. Author's calculations.</figcaption>
+      </figure>
+
+      <aside class="margin">
+        <div class="margin-note">
+          <span class="mono sm term">Mann–Whitney U</span>
+          <p>A rank-based test of whether two samples are drawn from the same distribution. It
+          makes no normality assumption, which matters here because contribution intensity is
+          heavily right-skewed.</p>
+        </div>
+      </aside>
+
+      <p>Among high-income economies the gap reverses: ineligible economies post a
+      <em>higher</em> median (79.4 vs 74.9). Among upper-middle-income economies it falls to
+      1.40×. Among lower-middle-income economies — Pakistan's actual peer group — it falls to
+      1.26×, medians of 9.6 against 7.6.</p>
+
+      <p>That remaining difference is not distinguishable from noise. A Mann–Whitney rank-sum
+      test on the 32 lower-middle-income economies returns U = 153 with a two-sided permutation
+      p of 0.32. For upper-middle-income economies, p = 0.11. Neither approaches conventional
+      significance.<sup class="cite"><a href="#note-6">6</a></sup></p>
+
+      <figure>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320" role="img" aria-label="Fig. 05 — Among Pakistan’s income peers, Sponsors eligibility does not separate the field">
+<rect width="760" height="320" fill="var(--paper-1, #f4f1ea)"/>
+<text x="0" y="17" font-family="'Newsreader', Georgia, serif" font-size="15.5" font-weight="600" fill="var(--ink-1, #2e2b27)">Fig. 05 — Among Pakistan’s income peers, Sponsors eligibility does not separate the field</text>
+<text x="0" y="35" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9.4" letter-spacing="0.055em" fill="var(--ink-4, #726c5e)">MIT CONTRIBUTORS PER 100,000 INTERNET USERS, Q1 2026 — ALL LOWER-MIDDLE-INCOME ECONOMIES IN THE DATASET</text><line x1="108.0" y1="86" x2="108.0" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="108.0" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">0</text><line x1="190.8" y1="86" x2="190.8" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="190.8" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">5</text><line x1="273.6" y1="86" x2="273.6" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="273.6" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">10</text><line x1="356.3" y1="86" x2="356.3" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="356.3" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">15</text><line x1="439.1" y1="86" x2="439.1" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="439.1" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">20</text><line x1="521.9" y1="86" x2="521.9" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="521.9" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">25</text><line x1="604.7" y1="86" x2="604.7" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="604.7" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">30</text><line x1="687.4" y1="86" x2="687.4" y2="254" stroke="var(--paper-3, #e5e0d3)"/><text x="687.4" y="270" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" fill="var(--ink-4, #726c5e)" text-anchor="middle">35</text><line x1="108" y1="254" x2="704" y2="254" stroke="var(--paper-4, #ddd7c8)"/><text x="94" y="127" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" letter-spacing="0.05em" fill="var(--ink-4, #726c5e)" text-anchor="end">ELIGIBLE</text><text x="94" y="140" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">n=14</text><line x1="108" y1="130" x2="704" y2="130" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><line x1="266.8" y1="100" x2="266.8" y2="160" stroke="#8a5a3b" stroke-width="1.5" stroke-dasharray="4 3"/><text x="271.8" y="96" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.4" fill="#8a5a3b">MEDIAN 9.6</text><circle cx="160.6" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="169.2" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="175.6" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="202.9" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="215.3" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="246.1" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="263.5" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="270.1" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="278.0" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="310.1" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="317.7" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="447.8" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="521.8" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="660.3" cy="130" r="4.6" fill="#8a5a3b" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><line x1="660.3" y1="123" x2="660.3" y2="119" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="660.3" y="116" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">Kenya</text><line x1="447.8" y1="123" x2="447.8" y2="119" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="447.8" y="116" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">India</text><line x1="317.7" y1="137" x2="317.7" y2="141" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="317.7" y="151" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">Nigeria</text><line x1="175.6" y1="123" x2="175.6" y2="119" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="175.6" y="116" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">Senegal</text><text x="94" y="215" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="9" letter-spacing="0.05em" fill="var(--ink-4, #726c5e)" text-anchor="end">NOT ELIGIBLE</text><text x="94" y="228" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.2" fill="var(--ink-4, #726c5e)" text-anchor="end">n=18</text><line x1="108" y1="218" x2="704" y2="218" stroke="var(--paper-3, #e5e0d3)" stroke-width="1"/><line x1="234.4" y1="188" x2="234.4" y2="248" stroke="var(--ink-5, #8c8578)" stroke-width="1.5" stroke-dasharray="4 3"/><text x="239.4" y="184" font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="8.4" fill="var(--ink-5, #8c8578)">MEDIAN 7.6</text><circle cx="140.2" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="142.0" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="187.5" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="189.0" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="191.1" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="194.2" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="220.7" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="221.8" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="223.9" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="244.9" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="251.7" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="254.5" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="254.9" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="269.0" cy="218" r="6" fill="var(--ink-5, #8c8578)" fill-opacity="1" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="285.8" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="299.3" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="399.7" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><circle cx="558.6" cy="218" r="4.6" fill="var(--ink-5, #8c8578)" fill-opacity="0.58" stroke="var(--paper-1, #f4f1ea)" stroke-width="0.9"/><line x1="558.6" y1="211" x2="558.6" y2="207" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="558.6" y="204" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">Nepal</text><line x1="285.8" y1="225" x2="285.8" y2="229" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="285.8" y="239" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">Bangladesh</text><line x1="269.0" y1="211" x2="269.0" y2="207" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="269.0" y="204" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle" font-weight="600">Pakistan</text><line x1="140.2" y1="225" x2="140.2" y2="229" stroke="var(--ink-5, #8c8578)" stroke-width="1"/><text x="140.2" y="239" font-family="'Newsreader', Georgia, serif" font-size="11.5" fill="var(--ink-1, #2e2b27)" text-anchor="middle">Tajikistan</text><text x="406.0" y="288" font-family="'Newsreader', Georgia, serif" font-size="11" font-style="italic" fill="var(--ink-4, #726c5e)" text-anchor="middle">MIT contributors per 100,000 internet users</text><text x="108" y="308" font-family="'Newsreader', Georgia, serif" font-size="10.5" font-style="italic" fill="var(--ink-4, #726c5e)">Medians 9.6 vs 7.6. Mann–Whitney U = 153, two-sided p = 0.32 — not distinguishable from noise.</text>
+</svg>
+        <figcaption>Fig. 05 — Every lower-middle-income economy in the dataset, ranked by
+        contribution intensity and shaded by Sponsors eligibility. The two groups interleave.
+        Sources: GitHub Innovation Graph; GitHub Docs; World Bank. Author's calculations.</figcaption>
+      </figure>
+
+      <p>The individual cases make the point more vividly than the medians. Nepal is ineligible,
+      poorer than Pakistan, has internet penetration of 46.3% against Pakistan's 57.3%, and
+      records 27.2 MIT contributors per 100,000 internet users — 2.8× Pakistan's 9.7. Lebanon is
+      ineligible and posts 17.6. Zambia is ineligible and posts 11.6. In the other direction,
+      Senegal, Côte d'Ivoire, Tanzania, Namibia, Uzbekistan and Ghana are all eligible and all
+      sit below Pakistan.</p>
+
+      <p>Sri Lanka is the case that should trouble Pakistani policymakers most, and it does not
+      require the eligibility story at all. Sri Lanka has internet penetration of 54.6% —
+      slightly <em>below</em> Pakistan's — a population of 21.8 million against Pakistan's 255
+      million, and a far smaller software sector. It records 45.6 MIT contributors per 100,000
+      internet users, 4.7× Pakistan's rate.<sup class="cite"><a href="#note-6">6</a></sup></p>
+
+      <h3>What I conclude</h3>
+
+      <p>The gate is real. What I cannot show is that it is load-bearing. Pakistan's exclusion
+      from GitHub Sponsors is verifiable, undocumented in Pakistani policy, and worth fixing on
+      its own terms — a removable friction on exactly the population most likely to become
+      maintainers. But the cross-national evidence does not support treating it as the binding
+      constraint, and an essay that led with it would be selling a single-cause story that its
+      own data refute.</p>
+
+      <p>I would add one methodological note in its favour, because the test is not decisive
+      either. Eligibility is an economy-level binary applied to a heavily skewed outcome with
+      small within-band samples; a real effect of the size plausibly at stake here would be hard
+      to detect at n = 32. The test does not show that the gate does not matter. It shows that
+      the gate cannot carry an argument by itself, which is a weaker and more defensible claim.</p>
+
+      <p>The flat conversion rate in Fig. 03 needs no cross-country inference at all. It is the
+      more robust finding, and the rest of this essay is built on it.</p>
+    </section>
+
+    <!-- ===================================================== V -->
+    <section id="s5">
+      <span class="mono sm num">Section 05</span>
+      <h2>Where the hours actually go</h2>
+
+      <p>If Pakistani developer time is not going into public repositories, it is worth asking
+      where it is going. The answer is not idleness.</p>
+
+      <p>Pakistan's ICT exports reached a record $4.6 billion in FY2025-26, up 21% year on year,
+      producing an ICT trade surplus of $3.9 billion — though still roughly $400 million short
+      of the government's own $5 billion target.<sup class="cite"><a href="#note-7">7</a></sup>
+      Within that total, Pakistani IT freelancers earned about $1.16 billion, up 49% from $779
+      million the previous year, and roughly a quarter of national IT export earnings. Total
+      freelancer foreign-exchange receipts, across all categories rather than IT alone, reached
+      about $1.76 billion.<sup class="cite"><a href="#note-8">8</a></sup></p>
+
+      <aside class="margin">
+        <p class="margin-thought">The freelancer billion is the number that reframed this for
+        me. Pakistan already has a large population of independent developers who sell hours
+        into global markets and get paid across borders. The capability is there and the payment
+        problem is solved. It is only the public-good version of the work that has no buyer.</p>
+      </aside>
+
+      <p>That freelancer billion is the most analytically interesting number in Pakistan's
+      technology economy. It represents a large population of individual developers working
+      without institutional employment, selling hours directly into global markets, and
+      successfully getting paid across borders. This is precisely the demographic that in
+      Vietnam or India supplies a meaningful share of open-source contribution.</p>
+
+      <p>In Pakistan it does not, and the reason is not mysterious. For a freelancer, an hour
+      spent on a client deliverable has a market price and a functioning collection mechanism.
+      An hour spent maintaining a public dependency has neither. Faced with that spread, the
+      freelancer sells the hour. This is not a failure of civic spirit. It is arithmetic.</p>
+
+      <p>Note that this mechanism does not require the Sponsors gate to be binding. It requires
+      only that domestic demand for public code is approximately zero, which is separately
+      demonstrable and is the subject of the next section.</p>
+
+      <p>The standard caveat here is that the Innovation Graph observes only public activity, so
+      some portion of Pakistan's apparent deficit is real work hidden inside private client
+      repositories. That caveat is correct and it strengthens the argument rather than weakening
+      it: the missing output is not missing capability, it is capability that has been routed
+      into private appropriation because the public route does not pay.</p>
+    </section>
+
+    <!-- ===================================================== VI -->
+    <section id="s6">
+      <span class="mono sm num">Section 06</span>
+      <h2>The institutional void, stated precisely</h2>
+
+      <p>Pakistan's policy documents are not hostile to open source. The Digital Pakistan Policy
+      of 2018 contains a dedicated Section 8, "Open Source," with three clauses: enhance
+      government capacity to evaluate open-source ICT products; "Ensure fair consideration of
+      both types of software i.e. open source and proprietary during the procurement process";
+      and "Encourage R&amp;D of 'Open Source' across the country through appropriate
+      means."<sup class="cite"><a href="#note-9">9</a></sup></p>
+
+      <p>That is the entirety of it. No target, no owner, no timeline, no budget line.</p>
+
+      <p>The contrast with India is not one of enthusiasm but of machinery. India's <em>Policy on
+      Adoption of Open Source Software for Government of India</em> states at Clause 4, under
+      "Nature of Compliance," a single word: <strong>Mandatory</strong>. Clause 6 requires that
+      government organisations "must include a specific requirement in Request for Proposal (RFP)
+      for all suppliers to consider OSS along with CSS while responding," and that "Suppliers
+      shall provide justification for exclusion of OSS in their
+      response."<sup class="cite"><a href="#note-10">10</a></sup></p>
+
+      <aside class="margin">
+        <p class="margin-thought">I expected India's policy to be stronger than it reads. The
+        operative verb is "shall endeavour to adopt," which is soft. What makes it work is not
+        conviction but paperwork: an RFP clause that someone has to fill in, and a justification
+        someone has to write. Pakistan's "fair consideration" asks nobody to write anything.</p>
+      </aside>
+
+      <p>India's policy is weaker than its reputation — its core verb in Clause 3 is "shall
+      endeavour to adopt," which is hortatory language inside a mandatory wrapper, and Clause 7
+      provides broad exceptions. But it creates a procurement obligation that generates paperwork,
+      and paperwork generates compliance. "Fair consideration" generates nothing.</p>
+
+      <p>On the institutional side, Pakistan's position is weaker than even sympathetic accounts
+      suggest. I checked the three organisations usually named as the country's open-source
+      community infrastructure, via the GitHub API, on 19 September
+      2026:<sup class="cite"><a href="#note-11">11</a></sup></p>
+
+      <ul>
+        <li><strong>Open Source Foundation Pakistan</strong> (<code>github.com/osfp-Pakistan</code>)
+        holds 206 public repositories. The organisation profile was last updated in September
+        2019. It has 19 followers. Its repository count is substantially an artefact of forking
+        rather than a measure of production.</li>
+        <li><strong>Open Source Software Pakistan</strong> (<code>github.com/OSSpk</code>) has
+        <strong>one</strong> public repository and was last updated in December 2024. It has 145
+        followers.</li>
+        <li><strong>Code for Pakistan</strong> (<code>github.com/codeforpakistan</code>) is the
+        exception. Created in May 2013, it holds 261 public repositories and was active as
+        recently as 12 September 2026. It is a genuine, functioning civic-technology
+        institution.</li>
+      </ul>
+
+      <p>So the accurate statement is not that Pakistan has "at least two open-source foundations
+      plus informal groups." It is that <strong>Pakistan has one living open-source institution of
+      national significance, and it is a civic-tech nonprofit that was not designed to be the
+      country's open-source community body.</strong></p>
+
+      <p>One further data point closes the argument about institutional priority. The Pakistan
+      Software Export Board's Annual Report for January–December 2025 runs to 85 pages and covers
+      skills programmes, export promotion, company registration, and the flagship SkillTech
+      Pakistan initiative targeting 430,000 advanced digital-skills trainings over three years in
+      partnership with Huawei and ZTE. A full-text search of that report for the phrase "open
+      source" returns <strong>zero matches</strong>.<sup class="cite"><a href="#note-12">12</a></sup></p>
+
+      <p>That is not thin support. That is absence.</p>
+    </section>
+
+    <!-- ===================================================== VII -->
+    <section id="s7">
+      <span class="mono sm num">Section 07</span>
+      <h2>What follows</h2>
+
+      <p>If the binding constraint is the conversion rate rather than the size of the base, the
+      intervention set changes shape. Exhortation, curriculum reform and awareness campaigns act
+      on a margin that is not binding. What is needed is domestic demand for public code, and a
+      route by which building it pays.</p>
+
+      <p>Before the list, it is worth making the trade-off explicit, because both levers do work
+      and the honest case for prioritising the conversion rate is narrower than the rhetoric
+      usually allows.</p>
+
+      <div class="levers" id="levers">
+        <span class="mono lg heading" style="display:block;margin-bottom:var(--space-1)">Fig. 06 — The two levers</span>
+        <p style="font-size:var(--type-support-size);line-height:var(--type-support-line);color:var(--text-support);max-width:var(--measure-prose);margin:0 0 var(--gap-block)">
+          Projected Pakistani MIT contributors in Q1 2030. Drag either lever. The reference line
+          is the count Pakistan would record today at Vietnam's current contribution intensity,
+          applied to Pakistan's current internet-using population — about 32,000 a quarter.
+        </p>
+        <div class="controls">
+          <div class="lever">
+            <label for="lvGrowth">
+              <span class="mono sm">Account growth, 2026–30</span>
+              <span class="val" id="lvGrowthVal">15%/yr</span>
+            </label>
+            <input type="range" id="lvGrowth" min="0" max="40" step="1" value="15"
+                   aria-describedby="lvGrowthVal">
+          </div>
+          <div class="lever">
+            <label for="lvConv">
+              <span class="mono sm">Conversion rate</span>
+              <span class="val" id="lvConvVal">0.57%</span>
+            </label>
+            <input type="range" id="lvConv" min="40" max="120" step="1" value="57"
+                   aria-describedby="lvConvVal">
+          </div>
+        </div>
+        <div class="readout" aria-live="polite">
+          <div>
+            <span class="mono sm k">Accounts, Q1 2030</span>
+            <span class="v" id="outAcc">4,368,000</span>
+            <span class="sub">from 2,497,496 today</span>
+          </div>
+          <div>
+            <span class="mono sm k">MIT contributors / qtr</span>
+            <span class="v" id="outMit">24,900</span>
+            <span class="sub">from 14,211 today</span>
+          </div>
+          <div>
+            <span class="mono sm k">Against the reference</span>
+            <span class="v" id="outRatio">0.78×</span>
+            <span class="sub" id="outNote">short of Vietnam's current intensity</span>
+          </div>
+        </div>
+      </div>
+
+      <p>Two things fall out of that arithmetic. Holding the conversion rate at today's 0.57%,
+      Pakistan reaches the reference only if account growth holds at roughly 22% a year for four
+      more years — plausible, but it requires the base to keep compounding at half its recent
+      rate with no further decay. Holding growth at a more realistic 15%, the conversion rate
+      needs to reach about 0.73% instead. Both are real levers. The difference is that Pakistan
+      has been pulling the first one for six years and has never touched the second.</p>
+
+      <p>The ordering below reflects the evidence, including the part of the evidence that
+      weakened my own preferred hypothesis.</p>
+
+      <p><strong>One: use procurement, because it is the only lever that creates guaranteed
+      demand.</strong> This is now the highest-priority item rather than the payment rail.
+      Pakistan should move from "fair consideration" to an India-style requirement that custom,
+      taxpayer-funded government software be evaluated for open release, with written
+      justification when source cannot be published. The distinction that matters is not
+      proprietary versus open in general, but <em>commodity products</em> versus <em>custom
+      software the public has already paid for once</em>. Contracts should assign the government
+      sufficient rights to publish, and should budget for maintenance past delivery. This creates
+      paid work for public code inside Pakistan, which no external platform decision can veto.</p>
+
+      <p><strong>Two: build the domestic payment substitute now, rather than waiting.</strong> A
+      maintenance fund that pays Pakistani developers, in rupees, through domestic banking, for
+      upstream contributions to projects that Pakistani institutions actually depend on, requires
+      nobody's permission. It should pay for the unglamorous work — dependency upgrades, release
+      engineering, security response, documentation, localisation, packaging — and it should pay
+      for contributions to <em>international</em> projects Pakistan relies on, not only software
+      invented locally. Credibility in open source is earned by maintaining what others use.</p>
+
+      <p><strong>Three: treat the payment rail as infrastructure policy, not a technology-company
+      problem.</strong> The State Bank, the Ministry of IT and PSEB should pursue Sponsors and
+      equivalent-platform eligibility as a named objective with an owner and a deadline, in the
+      same way market-access barriers are pursued for any other export sector. This is a
+      financial-compliance and diplomatic task, not a software task. I rank it third rather than
+      first because the evidence in Section 04 does not support treating it as decisive — but it
+      is cheap, it is tractable, and every maintainer-career initiative built on a rail that stops
+      at the border has a hole in the middle of it.</p>
+
+      <p><strong>Four: attach open source to a programme that already exists rather than inventing
+      one.</strong> SkillTech Pakistan is already running at 430,000-training scale with named
+      delivery partners. An open-source practicum requiring accepted upstream contributions — to a
+      real project, with a real issue tracker, a real review process, and an external maintainer —
+      is a modification to an existing programme, not a new budget line. Documentation,
+      localisation, testing and security fixes should count as contributions alongside code.</p>
+
+      <p><strong>Five: measure the ratio, not the volume.</strong> Pakistan measures exports,
+      registrations, trainings and certifications. It does not measure repeat contributors,
+      maintainers, accepted upstream pull requests, public-sector repositories released, or
+      dependencies under Pakistani maintenance. The Innovation Graph provides a free, reproducible
+      baseline for the first of these. The conversion rate in Fig. 03 is the single number a
+      Pakistani open-source strategy should be judged against, and it currently sits where it sat
+      in 2020.</p>
+    </section>
+
+    <!-- ===================================================== VIII -->
+    <section id="s8">
+      <span class="mono sm num">Section 08</span>
+      <h2>Predictions, so this can be wrong</h2>
+
+      <p>An argument that cannot fail is not an argument. Five falsifiable claims follow from the
+      diagnosis above, and the first two are the ones that would hurt most if they failed.</p>
+
+      <ol>
+        <li><strong>Absent a procurement rule or a domestic maintenance fund, Pakistan's MIT
+        conversion rate will remain between 0.50% and 0.65% through Q1 2030</strong>, regardless
+        of graduate output, because that is what it has done through an eightfold expansion of the
+        base.</li>
+        <li><strong>Curriculum-only and training-only interventions will move contributor counts
+        but not the conversion rate.</strong> More students pushing to GitHub raises numerator and
+        denominator together.</li>
+        <li><strong>If Pakistan gains GitHub Sponsors eligibility and nothing else changes, the
+        conversion rate will rise by less than 0.10 percentage points within eight quarters.</strong>
+        This is the prediction that distinguishes my position from the earlier draft's; if the rate
+        jumps, the payment-gate thesis was right and I was wrong to demote it.</li>
+        <li><strong>Bangladesh will continue to track Pakistan closely on per-user contribution
+        intensity</strong>, because the two economies share the relevant structural features, not
+        merely the ineligibility.</li>
+        <li><strong>Sri Lanka, eligible and twelve times smaller, will retain a
+        contribution-intensity lead over Pakistan through 2030</strong> unless Pakistan creates
+        domestic demand for public code.</li>
+      </ol>
+    </section>
+
+    <!-- ===================================================== IX -->
+    <section id="s9">
+      <span class="mono sm num">Section 09</span>
+      <h2>The bottom line</h2>
+
+      <p>Pakistan has built the supply side of an open-source ecosystem and none of the demand
+      side. It produces the developers. It does not buy the public good they could make.</p>
+
+      <aside class="margin">
+        <p class="margin-thought">What stayed with me is that this is one of the few problems in
+        Pakistani technology policy where nobody else has to agree to anything. No treaty, no
+        platform decision, no foreign approval. The state could start buying public code on
+        Monday.</p>
+      </aside>
+
+      <p>The country's instinct, when confronted with this, will be to train more people. The data
+      in Fig. 03 say plainly that this will not work: the base grew nearly eightfold and the
+      conversion rate did not move. The binding constraint is not how many Pakistanis can write
+      software. It is that writing software for the commons pays a Pakistani developer nothing, and
+      that no Pakistani institution — not the Ministry, not PSEB, not the universities — is
+      currently on the other side of that transaction.</p>
+
+      <p>The most satisfying version of this argument would have been the payment rail: a single
+      hard gate, externally imposed, mechanically decisive. I tested it and it did not hold up.
+      What remains is less dramatic and more actionable, because it is entirely within Pakistan's
+      own control. Nobody outside the country needs to grant permission for the state to start
+      buying public code.</p>
+
+      <p>Open source is the one place where reputation, strategic autonomy and reusable
+      infrastructure can be accumulated without first accumulating capital. A country can donate
+      its way into the infrastructure other countries depend on. Pakistan has the donors. Nobody
+      has asked them.</p>
+    </section>
+
+    <!-- ===================================================== X -->
+    <section id="s10">
+      <span class="mono sm num">Section 10</span>
+      <h2>Notes on sources and method</h2>
+
+      <p>All GitHub figures are from the GitHub Innovation Graph, which publishes quarterly
+      economy-level data as raw CSVs in a public repository. Figures were retrieved on 19 September
+      2026 and reflect the Q1 2026 release. All per-capita, growth, ratio and significance
+      calculations are mine, computed directly from those primary CSVs and from World Bank
+      population and internet-penetration data via the World Bank API. None are taken from
+      secondary reporting.</p>
+
+      <h3>Verification ledger</h3>
+
+      <p>Claims in this piece were checked directly against primary sources. Specifically verified:
+      all MIT contributor counts and GitHub account counts, recomputed from the Innovation Graph
+      CSVs; population and internet-penetration figures, retrieved from the World Bank API; the
+      GitHub Sponsors supported-region list of 103 entries and the eligibility sentence, read from
+      the GitHub Docs source file; the Digital Pakistan Policy Section 8 clauses, read from the
+      ministry-hosted PDF; India's OSS policy Clauses 3, 4, 6 and 7, read from the MeitY PDF; the
+      three GitHub organisation profiles, queried via the GitHub REST API; the PSEB Annual Report
+      2025 full-text search results, run against the 85-page PDF; and Pakistan's FY2025-26 ICT
+      export and freelancer earnings figures, cross-checked across multiple outlets reporting the
+      IT Minister's and PSEB's statements.</p>
+
+      <aside class="margin">
+        <div class="margin-note">
+          <span class="mono sm term">Suppression floor</span>
+          <p>The Innovation Graph licence file appears to withhold economy-quarter cells below
+          roughly 100 pushers — the smallest value anywhere in the file is 101. Small economies are
+          therefore truncated out of the cross-country sample.</p>
+        </div>
+      </aside>
+
+      <p><strong>Carried forward from the underlying research memo but not independently verified,
+      and therefore used sparingly or not at all:</strong> the Higher Education Commission's
+      "75,000+ annual IT graduates" figure; the 2026 National Skill Competency Test results; Ignite
+      and Ministry of IT programme budgets; Estonia's <em>koodivaramu.eesti.ee</em> national code
+      repository; Bangladesh's e-Service Bus open-source composition. Each should be confirmed
+      before publication if it is to be cited.</p>
+
+      <p><strong>Two claims in the research memo did not survive verification and have been
+      dropped.</strong> The memo states that PSEB "explicitly lists 'open source technologies'
+      among specialized fields it seeks to develop"; the phrase does not appear anywhere in PSEB's
+      Annual Report 2025. The memo's "600,000+ IT/ITeS professionals" workforce figure likewise does
+      not appear in that report — the string "600,000" returns zero matches — and it is not used
+      here.</p>
+
+      <h3>Known limitations, stated rather than buried</h3>
+
+      <ul>
+        <li>The Innovation Graph observes only <em>public</em> activity on GitHub. Private
+        repositories, self-hosted Git and GitLab are invisible. Pakistan's true software output is
+        larger than these figures show.</li>
+        <li>GitHub assigns location from user activity, not nationality. Diaspora developers and VPN
+        users are misattributed in both directions.</li>
+        <li>Developer-account counts include inactive accounts. The conversion ratio divides a
+        quarterly flow by a cumulative stock; its level should not be over-interpreted. Its trend,
+        and the near-identical growth rates of numerator and denominator, are the load-bearing
+        results.</li>
+        <li>Licence categories overlap. A developer pushing to MIT, Apache and GPL repositories in
+        one quarter appears in all three. The MIT count is used throughout as a consistent
+        lower-bound proxy and is never summed with other licences.</li>
+        <li>The licence dataset suppresses economy-quarter cells below roughly 100 pushers, which
+        truncates small economies and biases the cross-country sample toward larger ones.</li>
+        <li>Population and internet users are denominators of convenience. Neither is a working-age
+        or tertiary-educated denominator.</li>
+        <li>The eligibility analysis covers 140 economies with complete data. Within-income-band
+        sample sizes are small (n = 32 for lower-middle-income), so the null result is evidence
+        against a <em>large</em> effect, not evidence of no effect.</li>
+        <li>World Bank internet-penetration data are 2024; population data are 2025; GitHub data are
+        Q1 2026. The series are not perfectly contemporaneous.</li>
+        <li>The projection in Fig. 06 is arithmetic, not a forecast. It assumes constant rates and
+        holds internet penetration fixed at its 2024 level.</li>
+      </ul>
+    </section>
+
+    <!-- ===================================================== endnotes -->
+    <div class="endnotes">
+      <span class="mono lg heading">Sources</span>
+      <ol>
+        <li id="note-1"><a href="https://github.com/github/innovationgraph/blob/main/data/developers.csv" target="_blank" rel="noreferrer">GitHub Innovation Graph, <code>developers.csv</code></a> — Pakistan-located accounts, Q1 of each year: 317,224 (2020); 470,394 (2021); 656,514 (2022); 924,871 (2023); 1,303,816 (2024); 1,718,562 (2025); 2,497,496 (2026). Conversion rate by year, computed against <code>licenses.csv</code>: 0.60%, 0.91%, 0.58%, 0.53%, 0.51%, 0.56%, 0.57%. Retrieved 19 September 2026.</li>
+        <li id="note-2"><a href="https://github.com/github/innovationgraph/blob/main/data/licenses.csv" target="_blank" rel="noreferrer">GitHub Innovation Graph, <code>licenses.csv</code></a> — MIT pushers, Q1 2026: Pakistan 14,211; Bangladesh 10,081; India 195,150; Vietnam 18,721; Estonia 1,922; Sri Lanka 5,421; Nepal 3,734. Q1 2020: Pakistan 1,896; India 30,436; Bangladesh 1,675; Vietnam 4,042; Estonia 841; Sri Lanka 946; Nepal 766. CAGR computed over six years. Retrieved 19 September 2026.</li>
+        <li id="note-3"><a href="https://data.worldbank.org/indicator/IT.NET.USER.ZS" target="_blank" rel="noreferrer">World Bank, <em>Individuals using the Internet (% of population)</em>, indicator <code>IT.NET.USER.ZS</code></a>, 2024: Pakistan 57.25, India 64.94, Bangladesh 53.42, Vietnam 84.15, Estonia 92.24, Sri Lanka 54.59, Nepal 46.30. Population, indicator <code>SP.POP.TOTL</code>, 2025: Pakistan 255,219,554; India 1,463,865,525; Bangladesh 175,686,899; Vietnam 101,598,527; Estonia 1,366,475; Sri Lanka 21,756,000.</li>
+        <li id="note-4"><a href="https://github.com/github/innovationgraph/blob/main/data/licenses.csv" target="_blank" rel="noreferrer">Author’s calculation from GitHub Innovation Graph, <code>licenses.csv</code></a> — convergence horizons solve (1+g<sub>PK</sub>)<sup>t</sup> ÷ (1+g<sub>peer</sub>)<sup>t</sup> = the current per-user gap, using the growth rates in note 2 and the levels in Fig. 01. Vietnam: 2.25× gap, +10.8pp advantage, t = 10.1 years. India: 2.11×, +3.6pp, t = 28.7. Sri Lanka: 4.69×, +6.1pp, t = 34.6. Bangladesh: 1.10×, +5.0pp, t = 2.7. These assume constant growth rates and illustrate the arithmetic rather than forecasting it; Pakistan's rate will almost certainly decay as its base grows, which lengthens every horizon.</li>
+        <li id="note-5"><a href="https://github.com/github/docs/blob/main/content/sponsors/getting-started-with-github-sponsors/about-github-sponsors.md" target="_blank" rel="noreferrer">GitHub Docs, "About GitHub Sponsors," supported-regions section</a> — "Anyone in any region can sponsor eligible maintainers, but you must reside in a supported region to receive funds." The list comprises 103 regions; Pakistan, Bangladesh, Nepal, China and Taiwan are absent. Retrieved 19 September 2026.</li>
+        <li id="note-6"><a href="eligibility-panel-q1-2026.json" target="_blank" rel="noreferrer">Author’s full-sample eligibility analysis — the 140-economy panel, published alongside this entry</a>: 140 economies with complete GitHub, population and internet-penetration data (97 eligible, 43 ineligible). Median MIT contributors per 100,000 internet users — all economies: 33.4 eligible vs 8.3 ineligible (4.03×); high income: 74.9 vs 79.4 (0.94×); upper-middle income: 14.5 vs 10.4 (1.40×, two-sided permutation p = 0.11); lower-middle income: 9.6 vs 7.6 (1.26×, Mann–Whitney U = 153, two-sided permutation p = 0.32, n = 32). Income groups per World Bank classification; GitHub and World Bank inputs are those in notes 2 and 3.</li>
+        <li id="note-7"><a href="https://www.arabnews.pk/node/2651367/pakistan" target="_blank" rel="noreferrer">"Pakistan's ICT exports hit record $4.6 billion in FY2025-26, minister says," Arab News Pakistan</a> — $4.6bn, up 21% on FY2024-25; ICT trade surplus $3.9bn, up 18%; approximately $400m short of the $5bn target.</li>
+        <li id="note-8"><a href="https://propakistani.pk/2026/07/20/pakistani-freelancers-earn-record-1-76-billion-in-fy26/" target="_blank" rel="noreferrer">"Pakistani Freelancers Earn Record $1.76 Billion in FY26," ProPakistani</a> — total freelancer foreign exchange $1.76bn, up 78% from $984m; IT freelancers $1.16bn, up 49% from $779m. PSEB's Top Freelancer Award materials cite $1.1bn contributed to IT/ITeS exports, roughly 25% of the $4.6bn total. The three figures use different definitions and should not be used interchangeably.</li>
+        <li id="note-9"><a href="https://moib.gov.pk/Downloads/Policy/digital_pakistan_policy(22-05-2018).pdf" target="_blank" rel="noreferrer">Government of Pakistan, Ministry of IT &amp; Telecom, <em>Digital Pakistan Policy</em>, 22 May 2018</a>, Section 8 ("Open Source"), clauses 8.1–8.3; the implementation matrix assigns "Open Source — Skills &amp; Capabilities" to the Ministry of IT &amp; Telecom. Text extracted and verified 19 September 2026.</li>
+        <li id="note-10"><a href="https://www.meity.gov.in/static/uploads/2024/02/policy_on_adoption_of_oss.pdf" target="_blank" rel="noreferrer">Government of India, Department of Electronics &amp; Information Technology, <em>Policy on Adoption of Open Source Software for Government of India</em>, F. No. 1(3)/2014 – EG II</a>. Clause 3 (Policy Statement: "shall endeavour to adopt Open Source Software in all e-Governance systems … as a preferred option"); Clause 4 (Nature of Compliance: "Mandatory"); Clause 6 (How to comply); Clause 7 (Exception). Text extracted and verified 19 September 2026.</li>
+        <li id="note-11"><a href="https://api.github.com/orgs/codeforpakistan" target="_blank" rel="noreferrer">GitHub REST API, organisation endpoints</a>, retrieved 19 September 2026. <code>osfp-Pakistan</code> — 206 public repos, created 2015-02-17, profile updated 2019-09-26, 19 followers. <code>OSSpk</code> — 1 public repo, updated 2024-12-04, 145 followers. <code>codeforpakistan</code> — 261 public repos, created 2013-05-13, updated 2026-09-12, 150 followers.</li>
+        <li id="note-12"><a href="https://techdestination.com/wp-content/uploads/2026/01/Annual-Report-2025-v2-compressed.pdf" target="_blank" rel="noreferrer">Pakistan Software Export Board, <em>Annual Report, January–December 2025</em>, 85pp</a>. Full-text search for "open source" / "Open Source" / "open-source" returns zero matches; search for "600,000" returns zero matches. SkillTech Pakistan described as launched September 2025, targeting 430,000 advanced digital-skills trainings over three years, with Huawei and ZTE partnerships. This copy is a third-party mirror; the citation should be re-pointed at PSEB's own publication before release.</li>
+      </ol>
+    </div>
+
+    <div class="colophon">
+      <span class="mono sm faint">Ideation by Umar Zafar · compilation by Astra</span>
+      <span class="mono sm faint">MMXXVI</span>
+    </div>
+
+  </article>
+</div>
+
+<script>
+(function () {
+  /* ---- theme toggle ---- */
+  var root = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  function paint() { btn.textContent = root.dataset.theme === 'dark' ? 'Light' : 'Dark'; }
+  paint();
+  btn.addEventListener('click', function () {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    try { localStorage.setItem('mmm-theme', root.dataset.theme); } catch (e) {}
+    paint();
+  });
+
+  /* ---- scroll-spy for the left nav ---- */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.leftnav a'));
+  var sections = links
+    .map(function (a) { return document.querySelector(a.getAttribute('href')); })
+    .filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length) {
+    var visible = new Map();
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.set(e.target.id, e.intersectionRatio);
+        else visible.delete(e.target.id);
+      });
+      var best = null, bestTop = Infinity;
+      visible.forEach(function (_, id) {
+        var top = document.getElementById(id).getBoundingClientRect().top;
+        if (top < bestTop) { bestTop = top; best = id; }
+      });
+      links.forEach(function (a) {
+        a.classList.toggle('is-active', a.getAttribute('href') === '#' + best);
+      });
+    }, { rootMargin: '-15% 0px -70% 0px', threshold: [0, 0.25, 0.5, 1] });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+
+  /* ---- Fig. 06: the two levers ---- */
+  var ACC26 = 2497496;            // located GitHub accounts, Q1 2026
+  var REFERENCE = 31999;          // Vietnam's Q1 2026 intensity applied to Pakistan's internet users
+  var g = document.getElementById('lvGrowth'), c = document.getElementById('lvConv');
+  var gV = document.getElementById('lvGrowthVal'), cV = document.getElementById('lvConvVal');
+  var oAcc = document.getElementById('outAcc'), oMit = document.getElementById('outMit');
+  var oRatio = document.getElementById('outRatio'), oNote = document.getElementById('outNote');
+  var fmt = new Intl.NumberFormat('en-US');
+  function round(n, to) { return Math.round(n / to) * to; }
+  function recompute() {
+    var growth = Number(g.value) / 100;
+    var conv = Number(c.value) / 10000;          // slider is in hundredths of a percent
+    var acc = ACC26 * Math.pow(1 + growth, 4);
+    var mit = acc * conv;
+    var ratio = mit / REFERENCE;
+    gV.textContent = Number(g.value) + '%/yr';
+    cV.textContent = (Number(c.value) / 100).toFixed(2) + '%';
+    oAcc.textContent = fmt.format(round(acc, 1000));
+    oMit.textContent = fmt.format(round(mit, 100));
+    // Test the displayed value, so the wording never contradicts the number.
+    var shown = Number(ratio.toFixed(2));
+    oRatio.textContent = shown.toFixed(2) + '×';
+    oRatio.classList.toggle('hit', shown >= 1);
+    oNote.textContent = shown >= 1
+      ? 'at or above Vietnam’s current intensity'
+      : 'short of Vietnam’s current intensity';
+  }
+  [g, c].forEach(function (el) { el.addEventListener('input', recompute); });
+  recompute();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+export default {
+  id: 'distribution',
+  number: '02',
+  group: 'Side A — Circulation',
+  title: 'Distribution in stages',
+  wordBudget: [700, 900],
+  blocks: [
+    {
+      kind: 'paragraph',
+      text: 'The first stage was not just global platforms arriving from outside. Before Spotify came to Pakistan, local start-ups tried to put Pakistani music catalogues online. Taazi and Patari were reported in 2015 as legal music-streaming services, and Patari’s early public story included catalogue access, an app strategy, talk of royalties, and later seed funding. Pakistani founders and musicians were already trying to build a lawful way to get paid for domestic music online. But launch stories are not enough. Founders’ plans, catalogue claims, and funding news do not prove that artists were reliably paid.',
+      sourceIds: ['L003', 'S015', 'S016', 'S042'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'Patari’s later payment disputes make that difference impossible to ignore. News reports described musicians complaining that they had not been paid, and the company struggling after its early promise. These reports are not audited accounts or a final verdict on every payment. What it shows is narrower but firmer: inside one local platform, building an audience, leaning on brand sponsors, struggling to sell subscriptions, and paying artists could all come apart. An app could make finding music feel modern while payment dates, royalty accounting, and artists’ bargaining power stayed fragile.',
+      sourceIds: ['S017', 'L007', 'S016'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'YouTube’s 2016 return sits beside these local experiments as a different kind of opening. No Pakistani music company had to build anything; the dominant video site simply became available again. Brand-funded shows also widened the mainstream route. Coke Studio and other corporate stages could offer polished production, huge audiences, and a showcase for Pakistani culture abroad, at a scale few independent artists could match. The trap is to read this as equal opportunity. A branded stage can lift a few chosen artists while the wider economy depends on a few middlemen, sponsors’ decisions, and undisclosed earnings after release.',
+      sourceIds: ['S004', 'S010', 'S018', 'S020', 'S021'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'Hip-hop shows this pattern more sharply. Rap crews and neighborhood networks could build an audience before any institution noticed them, and online channels made that word-of-mouth spread easier to see. Lyari Underground’s path ran from local collective work, to attention through Patari Tabeer, to disruption, and then to a studio its members built themselves. It shows visibility without the infrastructure problem being solved. Young Stunners’ public history points to a crew of friends, songs spread through file-sharing, and live shows before mainstream fame. These cases show distribution as a sequence of things people did, not just a platform logo.',
+      sourceIds: ['L024', 'L025', 'L030'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'The 2020 pandemic did not invent home recording, but it exposed how much it mattered. Live gigs, weddings, and venues were disrupted, while music made in bedrooms and home studios became more visible. Abdullah Siddiqui’s room-made path and reports on Coke Studio 2020 being produced in home studios show how remote production became part of the professional story. The point is not that every artist suddenly had equal tools. It is that music could keep circulating through bedrooms, laptops, phones, and long-distance collaboration while live income was under strain.',
+      sourceIds: ['L008', 'L009', 'L010', 'L032'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'Spotify’s arrival in 2021 added a global audio company and its playlist system. The launch was Spotify’s own announcement that it was now available in more than 80 new markets, including Pakistan. It gave no local subscriber numbers, no payout rates, and no promise of equal access to its editors’ playlists. Later Spotify Pakistan programs, including EQUAL, RADAR, Fresh Finds, masterclasses, and local playlists, show the company actively building a market. They are evidence of what Spotify did in Pakistan, not a neutral map of the whole music economy. Playlists and recommendation algorithms are gatekeepers that decide who gets heard, not empty pipes that simply deliver what listeners already want.',
+      sourceIds: ['S005', 'L014', 'S030', 'S031'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'Spotify’s five-year Pakistan figures are useful only at the right scale. Spotify reported that listening grew more than 750 percent since launch. Streams of Pakistani artists rose more than sevenfold since 2021, and the number of Pakistani artists on the platform rose nearly 75 percent. Users created more than 15 million playlists, and the average listener streamed more than 140 artists a year. These are Spotify’s own figures, given without the underlying totals and with nothing on revenue. They cannot be turned into a national market share, an average artist income, or proof that playlist spots were fairly shared across scenes.',
+      sourceIds: ['L019'],
+      claimMode: 'first-party-attributed',
+    },
+    { kind: 'figure', figureId: 'spotify-pulse' },
+    {
+      kind: 'paragraph',
+      text: 'The streaming years also brought deals with global record companies. Warner’s partnership with Giraffe, Mass Appeal’s partnerships with Pakistan-linked artists, and campaigns backed by platforms show Pakistan being plugged into the global industry, selectively. They show that Pakistani music, including music for Pakistanis abroad, caught the eye of global companies. They are limited because public announcements rarely reveal how a deal works: advances that must be earned back, who owns the recordings and the songs, how royalties are counted, or whether jobs were created. A global connection can spread music further while hiding who earns from it.',
+      sourceIds: ['S009', 'L015', 'S008', 'S010'],
+      claimMode: 'synthesis',
+    },
+    { kind: 'figure', figureId: 'distribution-stage' },
+    {
+      kind: 'paragraph',
+      text: 'So distribution unfolds in stages: local production, a boost from a platform or a brand, global circulation, and unanswered questions about rights and income. Hip-hop fits this sequence because its crews and bedroom producers often start outside the formal industry and reach platforms later. But the same sequence is a warning against overclaiming. Access widened faster than fair visibility, and visibility widened far faster than any public evidence of pay, ownership, or secure careers.',
+      sourceIds: ['S017', 'S025', 'S027', 'S028', 'L019', 'L030'],
+      claimMode: 'synthesis',
+    },
+  ],
+  establishes: 'Music distribution widened from local streaming start-ups to global audio platforms, brand-funded stages, and selective deals with international record companies.',
+  unknown: 'The record still barely measures how platforms choose whom to promote, how royalties are settled, who owns what, or how ordinary artists make a living.',
+};

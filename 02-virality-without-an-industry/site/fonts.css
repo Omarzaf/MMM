@@ -1,0 +1,12 @@
+/* fonts.css — GENERATED, do not hand-edit.
+   Latin-subset Newsreader + IBM Plex Mono (SIL Open Font License 1.1),
+   shipped as package-local woff2 under assets/hiphop-pakistan/fonts/ and
+   referenced by relative path — no external requests, no data: URIs, so the
+   package stays within its self-contained security contract (verify-site).
+   Prepended into the single inlined <style> at build time. */
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:400;font-display:swap;src:url("assets/hiphop-pakistan/fonts/newsreader-400.woff2") format("woff2");}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:500;font-display:swap;src:url("assets/hiphop-pakistan/fonts/newsreader-500.woff2") format("woff2");}
+@font-face{font-family:"Newsreader";font-style:italic;font-weight:400;font-display:swap;src:url("assets/hiphop-pakistan/fonts/newsreader-400-italic.woff2") format("woff2");}
+@font-face{font-family:"Newsreader";font-style:italic;font-weight:500;font-display:swap;src:url("assets/hiphop-pakistan/fonts/newsreader-500-italic.woff2") format("woff2");}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url("assets/hiphop-pakistan/fonts/ibm-plex-mono-400.woff2") format("woff2");}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url("assets/hiphop-pakistan/fonts/ibm-plex-mono-500.woff2") format("woff2");}

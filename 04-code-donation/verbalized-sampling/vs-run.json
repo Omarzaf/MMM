@@ -1,0 +1,85 @@
+{
+  "library": "verbalized-sampling 0.1.3 (CHATS-Lab)",
+  "loaded_from": "installed wheel, methods/prompt.py + methods/factory.py",
+  "method": "vs_standard",
+  "paper_name": "VS-Standard",
+  "k": 5,
+  "probability_definition": "explicit",
+  "probability_tuning": 0.10,
+  "distribution_instruction": "Randomly sample the responses from the distribution, with the probability of each response must be below 0.1.",
+  "sampling_model": "the assistant executing this session — the library emits prompts, it does not host a model; no API key was configured",
+  "selection_rule": "take the lowest-probability candidate that remains factually identical to the source passage and stays inside the series voice (first person, past tense, plainly stated, no rhetorical questions)",
+  "scope": "prose framing only — no numeric claim, citation or hedge was altered by sampling",
+  "passages": [
+    {
+      "id": "A",
+      "site": "opening sentence",
+      "source": "There are two growth rates in Pakistan's open-source data, and almost everything that has been written about the subject reports the wrong one.",
+      "responses": [
+        {"probability": 0.34, "text": "There are two growth rates in Pakistan's open-source data, and almost everything written about the subject reports the wrong one."},
+        {"probability": 0.21, "text": "Pakistan's open-source story is usually told with one number. It needs two, and the second is the one nobody quotes."},
+        {"probability": 0.08, "text": "Two numbers describe Pakistan's open-source decade. Reported together they say something nobody has said; reported apart, as they always are, they say nothing."},
+        {"probability": 0.05, "text": "Count the Pakistani developers on GitHub and you get a triumph. Count the ones who publish, and you get the same triumph, scaled down by a constant that has not moved since 2020."},
+        {"probability": 0.03, "text": "Everything written about Pakistani open source quotes a growth rate. It is the wrong growth rate, and the right one has been sitting in a public CSV for six years."}
+      ],
+      "selected": 0.05,
+      "why": "States the finding as an image rather than announcing that a finding is coming. 'Scaled down by a constant' is the whole essay in five words and is literally accurate."
+    },
+    {
+      "id": "B",
+      "site": "thesis line",
+      "source": "Pakistan's open-source problem is not that too few people can write software. It is that writing it in public pays a Pakistani developer nothing, and nothing Pakistan has tried in six years has changed that.",
+      "responses": [
+        {"probability": 0.30, "text": "Pakistan's open-source problem is not that too few people can write software. It is that writing it in public pays nothing."},
+        {"probability": 0.18, "text": "Pakistan has spent six years growing the number of people who can write software, and none of it growing the number who give it away."},
+        {"probability": 0.07, "text": "The country produces programmers at scale and public code at a trickle. The gap between those two facts is a price, not a shortage."},
+        {"probability": 0.04, "text": "Pakistan built every input to an open-source economy except the one that pays for it. Six years of growth has not fixed that, because growth was never the missing input."},
+        {"probability": 0.02, "text": "Nothing in Pakistan buys public code. Every other fact about the sector is downstream of that one."}
+      ],
+      "selected": 0.04,
+      "why": "Drops the 'not X, it is Y' construction, which is the strongest mode in this genre. Names the supply/demand asymmetry directly and pre-empts the volume reflex in the same breath."
+    },
+    {
+      "id": "C",
+      "site": "section 03 opening",
+      "source": "Here is the finding that makes the rest of the argument necessary.",
+      "responses": [
+        {"probability": 0.31, "text": "Here is the finding that makes the rest of the argument necessary."},
+        {"probability": 0.20, "text": "This is the core of the argument, and it is a single ratio."},
+        {"probability": 0.09, "text": "The rest of this essay exists because of one ratio that refused to move."},
+        {"probability": 0.05, "text": "Six years is long enough for an experiment to finish. Pakistan ran one without meaning to."},
+        {"probability": 0.03, "text": "If you want to know whether volume works, Pakistan has just spent six years testing it at national scale."}
+      ],
+      "selected": 0.05,
+      "why": "Frames the section as a natural experiment that already concluded, which is what the data actually are, instead of flagging importance and making the reader wait."
+    },
+    {
+      "id": "D",
+      "site": "section 04, 'What I conclude' opening",
+      "source": "The honest reading is this.",
+      "responses": [
+        {"probability": 0.33, "text": "The honest reading is this."},
+        {"probability": 0.19, "text": "So where does that leave the payment gate?"},
+        {"probability": 0.08, "text": "Here is what survives."},
+        {"probability": 0.05, "text": "I am left with a smaller claim than I wanted."},
+        {"probability": 0.02, "text": "The gate is real. What I cannot show is that it is load-bearing."}
+      ],
+      "selected": 0.02,
+      "why": "Says the conclusion instead of announcing honesty. 'Load-bearing' is the precise distinction the section spent 900 words earning."
+    },
+    {
+      "id": "E",
+      "site": "closing paragraph",
+      "source": "Open source is the one part of the software economy where a poor country can accumulate reputation, strategic autonomy and reusable infrastructure without first accumulating capital. Pakistan is currently declining that option by default rather than by decision.",
+      "responses": [
+        {"probability": 0.28, "text": "Open source is the one part of the software economy where a poor country can accumulate reputation, strategic autonomy and reusable infrastructure without first accumulating capital. Pakistan is declining that option by default rather than by decision."},
+        {"probability": 0.16, "text": "Open source is the cheapest strategic asset available to a poor country. Pakistan is not buying it."},
+        {"probability": 0.07, "text": "Reputation, autonomy and infrastructure are normally bought with capital. Open source is the one place they can be earned with attention instead, and Pakistan is not paying attention either."},
+        {"probability": 0.04, "text": "Every other route to technological standing requires capital Pakistan does not have. This one requires a budget line it has not written."},
+        {"probability": 0.02, "text": "A country can donate its way into the infrastructure other countries depend on. Pakistan has the donors. Nobody has asked them."}
+      ],
+      "selected": 0.02,
+      "why": "Closes on the donation frame the retitled piece opens with, and ends on the actionable fact — the constraint is that no one has asked — rather than on a diagnosis."
+    }
+  ]
+}

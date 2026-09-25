@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-09-03T04:15:00Z",
+  "source_directory": ".",
+  "top_level_files": 13,
+  "subdirectories_present_before_audit": 0,
+  "standalone_archives_found": 0,
+  "briefing_source_files": 12,
+  "briefing_units_observed": 14,
+  "non_briefing_files": 1,
+  "unreadable_source_files": 0,
+  "exact_duplicate_file_groups": 0,
+  "nominal_expected_briefings_for_exactly_15_days_at_15_minute_cadence": 1440,
+  "nominal_missing_briefings": 1426,
+  "observed_span_start_utc": "2026-08-18T19:24:00Z",
+  "observed_span_end_utc": "2026-09-03T02:21:00Z",
+  "observed_span_minutes": 22017,
+  "observed_strict_window_minutes": 215.82,
+  "observed_strict_window_share_of_span_percent": 0.98,
+  "approximate_expected_briefings_across_observed_span_at_15_minute_cadence": 1468,
+  "approximate_missing_briefings_across_observed_span": 1454,
+  "observed_share_of_span_expected_percent": 0.95,
+  "all_interbrief_gaps_exceed_30_minutes": true,
+  "nominal_title_dates_without_a_briefing": [
+    "2026-08-19",
+    "2026-08-24"
+  ],
+  "normalized_pkt_dates_without_a_window_between_first_and_last_pkt_date": [
+    "2026-08-24",
+    "2026-09-02"
+  ],
+  "timestamp_policy": "Use explicit internal UTC/PKT windows as authoritative; treat filename dates/times and filesystem timestamps as discovery metadata only; label reconstructed endpoints approximate."
+}

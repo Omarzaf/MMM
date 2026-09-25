@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Makkah Pact: Can a Treaty Deter War Without Starting One?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper-1: #f4f1ea;
+    --paper-2: #eee9df;
+    --paper-3: #e5e0d3;
+    --paper-4: #ddd7c8;
+    --ink-1: #2e2b27;
+    --ink-2: #3f3b35;
+    --ink-3: #5c584f;
+    --ink-4: #726c5e;
+    --ink-5: #8c8578;
+    --ink-6: #a39a86;
+    --ink-7: #c0b8a5;
+    --copper: #8a5a3b;
+    --surface-page: var(--paper-1);
+    --surface-hover: var(--paper-2);
+    --rule-hairline: var(--paper-3);
+    --rule-structural: var(--paper-4);
+    --text-display: var(--ink-1);
+    --text-body: var(--ink-2);
+    --text-lead: var(--ink-3);
+    --text-support: var(--ink-4);
+    --text-label: var(--ink-6);
+    --text-faint: var(--ink-7);
+    --link-hover: var(--copper);
+    --font-display: "Newsreader", Georgia, serif;
+    --font-body: "Newsreader", Georgia, serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    --type-entry-size: 46px;
+    --type-entry-line: 1.18;
+    --type-h2-size: 30px;
+    --type-h2-line: 1.28;
+    --type-h3-size: 21px;
+    --type-h3-line: 1.35;
+    --type-body-size: 18px;
+    --type-body-line: 1.78;
+    --type-label-size: 11px;
+    --type-label-size-sm: 10px;
+    --type-label-track: 0.14em;
+    --type-label-track-sm: 0.1em;
+    --type-support-size: 14px;
+    --type-support-line: 1.5;
+    --type-marginalia-size: 16px;
+    --type-marginalia-line: 1.6;
+    --type-marginalia-style: italic;
+    --type-marginalia-weight: 400;
+    --measure-prose: 64ch;
+    --measure-lead: 60ch;
+    --measure-marginalia: 34ch;
+    --space-1: 5px; --space-2: 12px; --space-3: 20px; --space-4: 28px;
+    --space-5: 40px; --space-6: 56px; --space-7: 76px; --space-8: 104px;
+    --gap-heading-body: var(--space-2);
+    --gap-paragraph: var(--space-3);
+    --gap-block: var(--space-4);
+    --gap-section: var(--space-6);
+    --gap-page: var(--space-5);
+    --page-max: 1120px;
+    --contents-max: 760px;
+    --rail-width: 300px;
+    --rail-left-width: 200px;
+    --gutter-column: 76px;
+    --gutter-left: 48px;
+    --rule-weight: 1px;
+    --radius-image: 2px;
+    --ease-standard: ease;
+    --dur-hover: 160ms;
+    --dur-theme: 220ms;
+  }
+
+  [data-theme="dark"] {
+    --paper-1: #1c1815;
+    --paper-2: #241f1a;
+    --paper-3: #332c25;
+    --paper-4: #443a30;
+    --ink-1: #f3ede1;
+    --ink-2: #ddd5c5;
+    --ink-3: #c2b8a3;
+    --ink-4: #a89c85;
+    --ink-5: #8f8368;
+    --ink-6: #756a54;
+    --ink-7: #4c4335;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--surface-page);
+    color: var(--text-body);
+    line-height: var(--type-body-line);
+    font-size: var(--type-body-size);
+    -webkit-font-smoothing: antialiased;
+    transition: background var(--dur-theme) var(--ease-standard), color var(--dur-theme) var(--ease-standard);
+  }
+  ::selection { background: var(--paper-4); color: var(--text-display); }
+
+  .entry-frame {
+    display: grid;
+    grid-template-columns: var(--rail-left-width) minmax(0, var(--contents-max)) var(--rail-width);
+    column-gap: var(--gutter-left);
+    justify-content: center;
+    max-width: var(--page-max);
+    margin: 0 auto;
+    padding: 0 var(--space-3);
+  }
+
+  .left-rail { position: relative; }
+  .left-nav {
+    position: sticky; top: var(--space-7);
+    display: flex; flex-direction: column; gap: var(--space-2);
+  }
+  .left-nav a {
+    display: flex; gap: var(--space-2); align-items: baseline;
+    text-decoration: none; color: var(--text-support);
+    transition: color var(--dur-hover) var(--ease-standard);
+  }
+  .left-nav a.active { color: var(--text-display); }
+  .left-nav a:hover { color: var(--copper); }
+  .left-nav .nav-num {
+    font-family: var(--font-mono); font-size: var(--type-label-size-sm);
+    letter-spacing: var(--type-label-track-sm); color: var(--text-faint); min-width: 18px;
+  }
+  .left-nav a.active .nav-num { color: var(--copper); }
+  .left-nav .nav-title { font-family: var(--font-body); font-size: 14px; line-height: 1.4; }
+
+  .content-col { min-width: 0; }
+
+  .right-rail { position: relative; }
+  .right-rail-inner {
+    position: sticky; top: var(--space-7);
+    display: flex; flex-direction: column; gap: var(--space-5);
+  }
+  .right-rail-head {
+    font-family: var(--font-mono); text-transform: uppercase;
+    letter-spacing: var(--type-label-track-sm); font-size: var(--type-label-size-sm);
+    color: var(--text-faint); margin-bottom: var(--space-2);
+  }
+  .margin-thought {
+    font-family: var(--font-body);
+    font-style: var(--type-marginalia-style);
+    font-weight: var(--type-marginalia-weight);
+    font-size: var(--type-marginalia-size);
+    line-height: var(--type-marginalia-line);
+    max-width: var(--measure-marginalia);
+    color: var(--text-lead);
+    padding-bottom: var(--space-4);
+    border-bottom: var(--rule-weight) solid var(--rule-hairline);
+  }
+  .margin-thought:last-child { border-bottom: none; }
+  .margin-note { padding-bottom: var(--space-4); border-bottom: var(--rule-weight) solid var(--rule-hairline); }
+  .margin-note:last-child { border-bottom: none; }
+  .margin-note-term {
+    font-family: var(--font-mono); text-transform: uppercase;
+    letter-spacing: var(--type-label-track-sm); font-size: var(--type-label-size-sm);
+    color: var(--text-label); margin-bottom: var(--space-1);
+  }
+  .margin-note-body {
+    font-family: var(--font-body); font-size: var(--type-support-size);
+    line-height: var(--type-support-line); color: var(--text-support);
+  }
+
+  .theme-toggle {
+    position: fixed; top: 22px; right: 22px; z-index: 60;
+    display: flex; align-items: center; gap: 7px;
+    background: none; border: none; cursor: pointer; padding: 0;
+    color: var(--text-label);
+    transition: color var(--dur-hover) var(--ease-standard);
+  }
+  .theme-toggle:hover { color: var(--copper); }
+  .theme-toggle .toggle-label {
+    font-family: var(--font-mono); font-size: var(--type-label-size-sm);
+    letter-spacing: var(--type-label-track-sm); text-transform: uppercase;
+  }
+
+  .mono { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--type-label-track); }
+  .mono-sm { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--type-label-track-sm); font-size: var(--type-label-size-sm); }
+  .dashed-rule { flex:1; height:1px; background: repeating-linear-gradient(90deg, var(--text-faint) 0, var(--text-faint) 3px, transparent 3px, transparent 9px); }
+
+  .hero { padding: var(--space-8) 0 var(--space-6); }
+  .eyebrow { font-family: var(--font-mono); font-size: var(--type-label-size-sm); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-label); margin-bottom: var(--space-4); }
+  .hero h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.9rem, 4.4vw, 2.7rem); line-height: var(--type-entry-line); letter-spacing: 0.003em; color: var(--text-display); max-width: 22ch; margin-bottom: var(--space-4); }
+  .lead { font-style: italic; font-size: 21px; line-height: 1.6; color: var(--text-lead); max-width: var(--measure-lead); padding-bottom: var(--space-4); margin-bottom: var(--space-3); }
+  .hero-meta { font-size: var(--type-support-size); line-height: 1.6; color: var(--text-support); max-width: var(--measure-lead); }
+
+  .tldr { border-top: var(--rule-weight) solid var(--rule-structural); border-bottom: var(--rule-weight) solid var(--rule-structural); padding: var(--gap-block) 0; margin: var(--gap-page) 0; }
+  .tldr-head { margin-bottom: var(--gap-heading-body); }
+  .tldr ul { margin: 0; padding-left: 1.1em; list-style: disc; }
+  .tldr li { font-family: var(--font-body); font-size: var(--type-body-size); line-height: var(--type-body-line); color: var(--text-body); margin-bottom: var(--space-1); }
+  .tldr li:last-child { margin-bottom: 0; }
+
+  section { padding: var(--gap-section) 0; border-top: var(--rule-weight) solid var(--rule-structural); }
+  section:first-of-type { border-top: var(--rule-weight) solid var(--rule-structural); }
+  .section-mark { display:flex; align-items:center; gap: 16px; margin-bottom: var(--gap-heading-body); }
+  .section-mark .num { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; color: var(--copper); }
+
+  h2 { font-family: var(--font-display); font-weight: 400; font-size: var(--type-h2-size); line-height: var(--type-h2-line); color: var(--text-display); max-width: 30ch; margin-bottom: var(--gap-heading-body); }
+  h3 { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: var(--type-h3-size); color: var(--text-lead); margin: var(--gap-block) 0 var(--space-2); }
+  p { max-width: var(--measure-prose); margin-bottom: var(--gap-paragraph); color: var(--text-body); }
+  strong { color: var(--text-display); font-weight: 500; }
+  em { color: var(--text-lead); font-style: italic; }
+  sub, sup { font-size: 0.7em; }
+  sup a { color: var(--copper); text-decoration: none; transition: color var(--dur-hover) var(--ease-standard); }
+  sup a:hover { text-decoration: underline; }
+
+  .note { max-width: var(--measure-prose); border-left: 1px solid var(--ink-5); padding-left: var(--space-4); margin: var(--gap-block) 0; }
+  .note p { margin-bottom: var(--space-2); }
+  .note p:last-child { margin-bottom: 0; }
+
+  .central-q { max-width: 640px; margin: var(--gap-section) auto; text-align: center; padding: var(--space-4) 0; }
+  .central-q .rule { height:1px; background: repeating-linear-gradient(90deg, var(--text-faint) 0, var(--text-faint) 3px, transparent 3px, transparent 9px); margin: 0 auto var(--space-4); width: 72px; }
+  .central-q .rule.bottom { margin: var(--space-4) auto 0; }
+  .central-q .q-text { font-style: italic; font-size: 21px; line-height: 1.6; color: var(--text-lead); }
+
+  .eq-box { border-top: var(--rule-weight) solid var(--rule-hairline); border-bottom: var(--rule-weight) solid var(--rule-hairline); padding: var(--space-4) 0; margin: var(--gap-block) 0; text-align: center; font-family: var(--font-mono); font-size: 1rem; color: var(--text-display); overflow-x: auto; }
+  .eq-box .eq-label { display:block; font-size: var(--type-label-size-sm); letter-spacing: var(--type-label-track); text-transform: uppercase; color: var(--text-label); margin-bottom: var(--space-2); }
+
+  .table-wrap { margin: var(--gap-block) 0; overflow-x: auto; border-top: var(--rule-weight) solid var(--rule-structural); border-bottom: var(--rule-weight) solid var(--rule-structural); }
+  table { width:100%; border-collapse: collapse; font-size: 15px; }
+  th { font-family: var(--font-mono); font-size: var(--type-label-size-sm); letter-spacing: var(--type-label-track-sm); text-transform: uppercase; color: var(--text-label); font-weight: 400; text-align:left; padding: var(--space-2) var(--space-3); border-bottom: var(--rule-weight) solid var(--rule-structural); white-space: nowrap; background: var(--surface-hover); }
+  td { padding: var(--space-2) var(--space-3); border-bottom: var(--rule-weight) solid var(--rule-hairline); vertical-align: top; color: var(--text-body); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface-hover); }
+  td.num { font-family: var(--font-mono); color: var(--text-label); font-size: 13px; }
+
+  .interactive-box { background: var(--surface-hover); border: var(--rule-weight) solid var(--rule-structural); padding: var(--gap-block); margin: var(--gap-block) 0; }
+  .interactive-box h4 { font-family: var(--font-mono); font-size: var(--type-label-size); text-transform: uppercase; letter-spacing: var(--type-label-track); color: var(--text-label); font-weight: 400; margin-bottom: var(--space-2); }
+  .interactive-box .hint { font-size: var(--type-support-size); color: var(--text-support); max-width: var(--measure-prose); margin-bottom: var(--space-4); }
+  .slider-row { display:flex; align-items:center; gap: var(--space-3); margin-bottom: var(--space-3); flex-wrap: wrap; }
+  .slider-row label { min-width: 190px; font-family: var(--font-mono); font-size: 12px; color: var(--text-support); letter-spacing: 0.02em; }
+  .slider-row input[type=range] { flex: 1; min-width: 140px; -webkit-appearance: none; appearance: none; height: 1px; background: var(--text-faint); outline: none; }
+  .slider-row input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 11px; height: 11px; border-radius: 50%; background: var(--text-display); cursor: pointer; border: 2px solid var(--surface-hover); }
+  .slider-row input[type=range]::-moz-range-thumb { width: 11px; height: 11px; border-radius: 50%; background: var(--text-display); cursor: pointer; border: 2px solid var(--surface-hover); }
+  .slider-val { font-family: var(--font-mono); font-size: 13px; color: var(--text-display); min-width: 44px; text-align:right; }
+  .result-display { margin-top: var(--space-4); padding-top: var(--space-4); border-top: var(--rule-weight) solid var(--rule-structural); font-family: var(--font-mono); font-size: 13px; line-height: 2.1; color: var(--text-support); }
+  .result-display .val { color: var(--text-display); font-weight: 500; }
+  .result-display .deterred { color: var(--text-display); }
+  .result-display .not-deterred { color: var(--text-label); }
+  .result-display .maybe { color: var(--text-lead); }
+
+  .matrix-grid { display:grid; grid-template-columns: 150px 1fr 1fr; gap:1px; background: var(--rule-structural); margin: var(--gap-block) 0; font-size: 14px; }
+  .matrix-grid .cell { padding: var(--space-3); text-align:center; background: var(--surface-page); color: var(--text-body); }
+  .matrix-grid .cell.header { background: var(--surface-hover); font-family: var(--font-mono); font-size: var(--type-label-size); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-label); }
+  .matrix-grid .cell.row-header { background: var(--surface-hover); font-family: var(--font-mono); font-size: var(--type-label-size); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-label); text-align:right; }
+  .matrix-grid .cell.eq { color: var(--text-display); font-weight: 500; box-shadow: inset 0 0 0 1px var(--text-display); }
+  .matrix-grid .cell.eq .star { color: var(--copper); }
+
+  .diagram { margin: var(--gap-section) 0; text-align:center; }
+  .diagram svg { max-width: 100%; height:auto; }
+  .diagram figcaption { font-family: var(--font-mono); font-size: var(--type-label-size); letter-spacing: 0.08em; color: var(--text-label); margin-top: var(--space-3); text-align: left; text-transform: uppercase; line-height: 1.7; }
+  .diagram svg .sk-1 { stroke: var(--ink-1); }
+  .diagram svg .sk-2 { stroke: var(--ink-2); }
+  .diagram svg .sk-3 { stroke: var(--ink-3); }
+  .diagram svg .sk-4 { stroke: var(--ink-4); }
+  .diagram svg .sk-5 { stroke: var(--ink-5); }
+  .diagram svg .sk-6 { stroke: var(--ink-6); }
+  .diagram svg .sk-7 { stroke: var(--ink-7); }
+  .diagram svg .sk-copper { stroke: var(--copper); }
+  .diagram svg .fl-1 { fill: var(--ink-1); }
+  .diagram svg .fl-2 { fill: var(--ink-2); }
+  .diagram svg .fl-3 { fill: var(--ink-3); }
+  .diagram svg .fl-4 { fill: var(--ink-4); }
+  .diagram svg .fl-5 { fill: var(--ink-5); }
+  .diagram svg .fl-6 { fill: var(--ink-6); }
+  .diagram svg .fl-copper { fill: var(--copper); }
+
+  .tiers { margin: var(--gap-block) 0; }
+  .tier { display:flex; align-items:stretch; border-bottom: var(--rule-weight) solid var(--rule-hairline); }
+  .tier:last-child { border-bottom: none; }
+  .tier-label { width: 92px; min-width: 92px; display:flex; align-items:center; justify-content:flex-start; font-family: var(--font-mono); font-size: var(--type-label-size); letter-spacing: 0.08em; text-transform: uppercase; padding: var(--space-4) var(--space-2) var(--space-4) 0; }
+  .tier-1 .tier-label { color: var(--copper); }
+  .tier-2 .tier-label { color: var(--text-lead); }
+  .tier-3 .tier-label { color: var(--text-label); }
+  .tier-body { flex:1; padding: var(--space-4) 0 var(--space-4) var(--space-4); border-left: var(--rule-weight) solid var(--rule-hairline); }
+  .tier-body strong { display:block; margin-bottom: var(--space-1); color: var(--text-display); }
+  .tier-body span { color: var(--text-support); font-size: 15px; line-height: 1.6; }
+
+  details { margin: var(--space-3) 0; border-bottom: var(--rule-weight) solid var(--rule-hairline); }
+  details summary { padding: var(--space-3) 0; cursor: pointer; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-display); list-style: none; display:flex; align-items:baseline; gap: var(--space-2); }
+  details summary::-webkit-details-marker { display:none; }
+  details summary::before { content:'\25B8'; color: var(--text-label); font-size: 0.85em; transition: transform 0.2s; }
+  details[open] summary::before { transform: rotate(90deg); }
+  details .detail-body { padding: 0 0 var(--space-4); font-size: 16px; color: var(--text-lead); max-width: var(--measure-prose); }
+  details .detail-body p { margin-bottom: var(--space-2); }
+
+  .insight { margin: var(--gap-block) 0; padding-top: var(--space-3); border-top: var(--rule-weight) solid var(--rule-hairline); max-width: var(--measure-prose); }
+  .insight .note-label { font-family: var(--font-mono); font-size: var(--type-label-size-sm); letter-spacing: var(--type-label-track); text-transform: uppercase; color: var(--text-label); display:block; margin-bottom: var(--space-2); }
+  .insight div.body { color: var(--text-body); font-size: 17px; line-height: 1.7; }
+  .insight strong { color: var(--text-display); }
+
+  .endnotes { border-top: var(--rule-weight) solid var(--rule-structural); padding-top: var(--gap-block); margin-top: var(--gap-section); }
+  .endnotes-head { margin-bottom: var(--gap-heading-body); }
+  .endnotes ol { margin: 0; padding-left: 1.4em; display: flex; flex-direction: column; gap: var(--space-2); }
+  .endnotes li { font-family: var(--font-body); font-size: var(--type-support-size); line-height: var(--type-support-line); color: var(--text-support); }
+  .endnotes a { color: inherit; }
+  .endnotes a:hover { color: var(--copper); }
+
+  footer { border-top: var(--rule-weight) solid var(--rule-structural); padding: var(--gap-section) 0 var(--space-8); }
+  footer .colophon { margin-top: var(--space-4); display:flex; justify-content:space-between; font-family: var(--font-mono); font-size: var(--type-label-size-sm); letter-spacing: var(--type-label-track); text-transform: uppercase; color: var(--text-label); }
+
+  a { color: var(--text-display); }
+  a:hover { color: var(--copper); }
+
+  @media (max-width: 1400px) {
+    .entry-frame { grid-template-columns: var(--rail-left-width) minmax(0, var(--contents-max)); }
+    .right-rail { display: none; }
+  }
+  @media (max-width: 1000px) {
+    .entry-frame { grid-template-columns: 1fr; max-width: var(--contents-max); }
+    .left-rail { display: none; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 17px; }
+    .theme-toggle { top: 12px; right: 12px; }
+    .hero { padding: var(--space-6) 0 var(--space-5); }
+    section { padding: var(--gap-section) 0; }
+    .matrix-grid { grid-template-columns: 96px 1fr 1fr; font-size: 12px; }
+    .matrix-grid .cell { padding: var(--space-2); }
+    .tier { flex-direction: column; }
+    .tier-label { width:100%; padding: var(--space-2) 0; }
+    .tier-body { border-left:none; border-top: var(--rule-weight) solid var(--rule-hairline); padding-left:0; padding-top:var(--space-3); }
+    .slider-row label { min-width: 100%; }
+    .slider-val { text-align:left; }
+  }
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+  <span class="toggle-label" id="themeLabel">Dark</span>
+</button>
+
+<div class="entry-frame">
+
+  <!-- ═══ LEFT RAIL: sticky contents nav ═══ -->
+  <aside class="left-rail">
+    <nav class="left-nav" id="leftNav">
+      <div class="mono-sm" style="color: var(--text-faint); margin-bottom: var(--space-1);">Contents</div>
+      <a href="#s1"><span class="nav-num">01</span><span class="nav-title">What the Pact Actually Says</span></a>
+      <a href="#s2"><span class="nav-num">02</span><span class="nav-title">Probabilistic Deterrence</span></a>
+      <a href="#s3"><span class="nav-num">03</span><span class="nav-title">The Strategic Network</span></a>
+      <a href="#s4"><span class="nav-num">04</span><span class="nav-title">Crisis Game 1 &mdash; Iran</span></a>
+      <a href="#s5"><span class="nav-num">05</span><span class="nav-title">Crisis Game 2 &mdash; Houthis</span></a>
+      <a href="#s6"><span class="nav-num">06</span><span class="nav-title">Crisis Game 3 &mdash; India&ndash;Pakistan</span></a>
+      <a href="#s7"><span class="nav-num">07</span><span class="nav-title">What Changes the Equilibrium</span></a>
+      <a href="#s8"><span class="nav-num">08</span><span class="nav-title">Tiered Commitment</span></a>
+      <a href="#s9"><span class="nav-num">09</span><span class="nav-title">Seven Testable Predictions</span></a>
+      <a href="#s10"><span class="nav-num">10</span><span class="nav-title">The Bottom Line</span></a>
+    </nav>
+  </aside>
+
+  <!-- ═══ CONTENT COLUMN ═══ -->
+  <div class="content-col">
+
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="eyebrow">Game Theory &middot; Geopolitics &middot; Strategic Studies</div>
+    <h1>The Makkah Pact: Can a Treaty Deter War Without Starting One?</h1>
+    <p class="lead">A game-theory deep dive into the Saudi&ndash;Pakistani&ndash;Turkish defence agreement signed on 7 August 2026, and why the math of deterrence demands imperfection.</p>
+    <p class="hero-meta">Based on a strategic analysis of the Makkah Joint Defence Agreement &middot; SPA, SIPRI, IISS sources</p>
+  </header>
+
+  <!-- ═══ TL;DR ═══ -->
+  <div class="tldr">
+    <div class="tldr-head">
+      <span class="mono" style="font-size: var(--type-label-size); letter-spacing: var(--type-label-track); color: var(--text-label);">TL;DR</span>
+    </div>
+    <ul>
+      <li>The pact is a <strong>probabilistic commitment device</strong>, not an automatic trigger &mdash; deterrence works by raising the adversary&rsquo;s estimated probability of costly response, not by making intervention certain.</li>
+      <li>The most credible equilibrium is <strong>automatic low-cost defensive assistance</strong> (intelligence, air defence, logistics) paired with <strong>discretionary high-cost combat intervention</strong>.</li>
+      <li>The <strong>Iran contingency</strong> is the pact&rsquo;s strongest game-theoretic case because the threat is concrete and cross-cutting interests align.</li>
+      <li>The <strong>India&ndash;Pakistan contingency</strong> presents the sharpest abandonment-versus-entrapment dilemma; support will be heavily conditioned on perceived victimhood.</li>
+      <li><strong>Interoperability</strong> (&lambda;) is the decisive institutional variable &mdash; pre-positioned forces, integrated early warning, and shared command reduce the cost of response and can change which equilibrium the game produces.</li>
+    </ul>
+  </div>
+
+  <main>
+
+  <!-- ═══ SECTION 1 ═══ -->
+  <section id="s1">
+    <div class="section-mark"><span class="num">01</span><span class="dashed-rule"></span></div>
+    <h2>What the Pact Actually Says</h2>
+    <p>On <strong>7 August 2026</strong>, Saudi Arabia, Pakistan, and T&uuml;rkiye signed the <strong>Makkah Joint Defence Agreement</strong>. The <sup><a href="#note-spa">1</a></sup> Saudi Press Agency&rsquo;s joint statement establishes a simple collective-defence principle: <em>an armed attack on one shall be regarded as an attack on all.</em></p>
+    <p>But Turkish Foreign Minister Hakan Fidan immediately complicated that headline. In his account, assistance is <strong>request-based</strong> &mdash; the attacked state must ask for help and specify what it needs. The spectrum runs from intelligence and logistics through ammunition to the deployment of military units. A political-military committee and a permanent secretariat in Saudi Arabia are planned. Interoperability, joint training, and common standards remain works in progress. <sup><a href="#note-fidan">2</a></sup></p>
+    <p>This means the pact is <strong>not a mechanical trigger</strong>. It is a contingent chain:</p>
+
+    <div class="eq-box">
+      <span class="eq-label">The Contingent Alliance Chain</span>
+      Attack &rarr; Invocation &rarr; Consultation &rarr; Choice of Support Level
+    </div>
+
+    <p>That intermediate decision node matters. It prevents entrapment &mdash; allies can say no &mdash; but it also creates the central problem of this analysis: <strong>when the moment arrives, will they say yes?</strong></p>
+
+    <div class="note">
+      <p><strong>Key distinction:</strong> This is <sup><a href="#note-morrow">3</a></sup> not a released treaty text. It is a joint statement plus subsequent commentary. The full legal and operational details remain classified, which means every parameter in the models below is an <em>analytical variable</em>, not an observed treaty provision.</p>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 2 ═══ -->
+  <section id="s2">
+    <div class="section-mark"><span class="num">02</span><span class="dashed-rule"></span></div>
+    <h2>The Core Idea: Probabilistic Deterrence</h2>
+    <p>Here is the insight that drives everything: <strong>deterrence does not require an adversary to believe all three states will automatically go to war.</strong> It only requires the adversary to assign a sufficiently high probability to <em>some</em> costly response.</p>
+    <p>If an attacker believes there is probability <strong>q</strong> that the pact produces a robust military response, the agreement deters whenever the attacker&rsquo;s expected gains fall below the expected costs created by q.</p>
+
+    <div class="central-q">
+      <div class="rule"></div>
+      <p class="q-text">How can the three states make intervention credible enough to deter attack&hellip; without making it so automatic that they invite entrapment?</p>
+      <div class="rule bottom"></div>
+    </div>
+
+    <p>The answer is <strong>graduated commitment</strong>. Make the cheap stuff automatic. Leave the expensive stuff discretionary.</p>
+
+    <div class="interactive-box">
+      <h4>Interactive &mdash; Iran Deterrence Threshold</h4>
+      <p class="hint">Adjust Iran&rsquo;s perceived benefit, the cost of a strong response, and the cost of a weak response. Watch how the deterrence threshold q* changes.</p>
+      <div class="slider-row">
+        <label>B<sub>I</sub> (benefit of attack)</label>
+        <input type="range" id="sl-b" min="0" max="10" step="0.5" value="4">
+        <span class="slider-val" id="val-b">4.0</span>
+      </div>
+      <div class="slider-row">
+        <label>C<sub>H</sub> (cost if strong response)</label>
+        <input type="range" id="sl-ch" min="0" max="15" step="0.5" value="7">
+        <span class="slider-val" id="val-ch">7.0</span>
+      </div>
+      <div class="slider-row">
+        <label>C<sub>L</sub> (cost if weak response)</label>
+        <input type="range" id="sl-cl" min="0" max="10" step="0.5" value="1">
+        <span class="slider-val" id="val-cl">1.0</span>
+      </div>
+      <div class="slider-row">
+        <label>E<sub>I</sub> (escalation risk)</label>
+        <input type="range" id="sl-ei" min="0" max="5" step="0.5" value="0">
+        <span class="slider-val" id="val-ei">0.0</span>
+      </div>
+      <div class="result-display" id="iran-result"></div>
+    </div>
+
+    <div class="insight">
+      <span class="note-label">Note</span>
+      <div class="body"><strong>The striking implication:</strong> The alliance does not have to make intervention certain. If credible preparations raise Iran&rsquo;s perceived probability of a strong response above the threshold, the attack becomes irrational. A 50% chance of a robust response can be enough.</div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 3 ═══ -->
+  <section id="s3">
+    <div class="section-mark"><span class="num">03</span><span class="dashed-rule"></span></div>
+    <h2>The Strategic Network</h2>
+    <p>The Makkah pact does not exist in a vacuum. It overlays existing institutions &mdash; the GCC, NATO, US-GCC security, and bilateral relationships &mdash; creating overlapping, sometimes substitutive, sometimes complementary security networks. The critical feature: almost every player has <strong>cross-cutting interests</strong>.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-i3" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path class="sk-3" d="M0,0 L6,3 L0,6" fill="none" stroke-width="1"/></marker>
+          <marker id="arr-i4" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path class="sk-4" d="M0,0 L6,3 L0,6" fill="none" stroke-width="1"/></marker>
+          <marker id="arr-i5" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path class="sk-5" d="M0,0 L6,3 L0,6" fill="none" stroke-width="1"/></marker>
+          <marker id="arr-i7" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path class="sk-7" d="M0,0 L6,3 L0,6" fill="none" stroke-width="1"/></marker>
+        </defs>
+        <line class="sk-copper" x1="400" y1="80" x2="220" y2="300" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line class="sk-copper" x1="400" y1="80" x2="580" y2="300" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line class="sk-copper" x1="220" y1="300" x2="580" y2="300" stroke-width="1.2" stroke-dasharray="5,3"/>
+        <line class="sk-3" x1="100" y1="200" x2="360" y2="95" stroke-width="1" marker-end="url(#arr-i3)"/>
+        <line class="sk-3" x1="120" y1="330" x2="195" y2="305" stroke-width="1" marker-end="url(#arr-i3)"/>
+        <line class="sk-5" x1="660" y1="130" x2="610" y2="270" stroke-width="0.9" marker-end="url(#arr-i5)"/>
+        <line class="sk-5" x1="660" y1="130" x2="430" y2="85" stroke-width="0.9" marker-end="url(#arr-i5)"/>
+        <line class="sk-5" x1="140" y1="130" x2="240" y2="270" stroke-width="0.9" marker-end="url(#arr-i5)"/>
+        <line class="sk-5" x1="720" y1="240" x2="590" y2="295" stroke-width="0.9" marker-end="url(#arr-i5)"/>
+        <line class="sk-7" x1="130" y1="440" x2="240" y2="310" stroke-width="0.9" stroke-dasharray="4,4" marker-end="url(#arr-i7)"/>
+        <line class="sk-7" x1="130" y1="440" x2="400" y2="90" stroke-width="0.9" stroke-dasharray="4,4" marker-end="url(#arr-i7)"/>
+        <line class="sk-7" x1="130" y1="440" x2="105" y2="210" stroke-width="0.9" stroke-dasharray="4,4" marker-end="url(#arr-i7)"/>
+        <line class="sk-7" x1="700" y1="440" x2="105" y2="210" stroke-width="0.9" stroke-dasharray="4,4" marker-end="url(#arr-i7)"/>
+        <line class="sk-7" x1="700" y1="440" x2="590" y2="300" stroke-width="0.9" stroke-dasharray="4,4" marker-end="url(#arr-i7)"/>
+        <line class="sk-4" x1="370" y1="370" x2="230" y2="310" stroke-width="1" marker-end="url(#arr-i4)" marker-start="url(#arr-i4)"/>
+        <line class="sk-4" x1="80" y1="248" x2="100" y2="223" stroke-width="1" marker-end="url(#arr-i4)" marker-start="url(#arr-i4)"/>
+        <rect class="sk-1" x="350" y="55" width="100" height="50" fill="none" stroke-width="1.3"/>
+        <text class="fl-1" x="400" y="84" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.03em">SAUDI ARABIA</text>
+        <rect class="sk-1" x="170" y="275" width="100" height="50" fill="none" stroke-width="1.3"/>
+        <text class="fl-1" x="220" y="304" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.03em">PAKISTAN</text>
+        <rect class="sk-1" x="530" y="275" width="100" height="50" fill="none" stroke-width="1.3"/>
+        <text class="fl-1" x="580" y="304" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.03em">T&Uuml;RKIYE</text>
+        <rect class="sk-3" x="55" y="185" width="90" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-3" x="100" y="209" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">IRAN</text>
+        <rect class="sk-3" x="65" y="300" width="110" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-3" x="120" y="324" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">HOUTHIS</text>
+        <rect class="sk-4" x="320" y="350" width="100" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-4" x="370" y="374" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">INDIA</text>
+        <rect class="sk-4" x="43" y="250" width="76" height="32" fill="none" stroke-width="1"/>
+        <text class="fl-4" x="81" y="270" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">ISRAEL</text>
+        <rect class="sk-5" x="100" y="105" width="80" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-5" x="140" y="129" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">US</text>
+        <rect class="sk-5" x="620" y="105" width="80" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-5" x="660" y="129" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">NATO</text>
+        <rect class="sk-5" x="690" y="210" width="100" height="40" fill="none" stroke-width="0.9"/>
+        <text class="fl-5" x="740" y="234" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9">EU/ASPIDES</text>
+        <rect class="sk-7" x="80" y="420" width="100" height="40" fill="none" stroke-width="0.9"/>
+        <text class="fl-6" x="130" y="444" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">CHINA</text>
+        <rect class="sk-7" x="650" y="420" width="100" height="40" fill="none" stroke-width="0.9"/>
+        <text class="fl-6" x="700" y="444" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">RUSSIA</text>
+        <text class="fl-copper" x="305" y="215" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="0.06em">MAKKAH PACT</text>
+        <text class="fl-3" x="60" y="170" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="0.06em">THREAT</text>
+        <text class="fl-6" x="55" y="478" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="0.06em">DIPLOMACY / ECONOMICS</text>
+      </svg>
+      <figcaption>Fig. 01 &mdash; Strategic network around the Makkah Pact. Copper dashed = pact members. Threat vectors, alliance infrastructure, and diplomatic ties are distinguished by line weight and tone.</figcaption>
+    </figure>
+
+    <p>Saudi Arabia wants deterrence against Iran but not permanent war. Pakistan values Saudi support but cannot welcome an anti-Iran war on its western frontier. T&uuml;rkkiye wants autonomy but also benefits from NATO. <strong>These cross-cutting incentives make a rigid two-bloc outcome less likely than a multilayered bargaining equilibrium.</strong></p>
+  </section>
+
+  <!-- ═══ SECTION 4 ═══ -->
+  <section id="s4">
+    <div class="section-mark"><span class="num">04</span><span class="dashed-rule"></span></div>
+    <h2>Crisis Game 1: Iran Strikes Saudi Arabia</h2>
+    <p>This is the pact&rsquo;s <strong>strongest strategic case</strong>. Saudi Arabia reported being targeted by 1,069 drones, 110 ballistic missiles, and 20 cruise missiles between 28 February and 2 April 2026 &mdash; <sup><a href="#note-unsc">4</a></sup> figures submitted to the UN Security Council. The threat is concrete, not hypothetical.</p>
+
+    <h3>The Game</h3>
+    <p>Players: <strong>Iran, Saudi Arabia, Pakistan, T&uuml;rkkiye</strong>. The US and GCC enter as exogenous support variables.</p>
+
+    <details>
+      <summary>Game structure (click to expand)</summary>
+      <div class="detail-body">
+        <p><strong>Step 1:</strong> Nature draws the alliance&rsquo;s type &mdash; high resolve (H) or low resolve (L). Iran sees signals but doesn&rsquo;t observe the true type directly.</p>
+        <p><strong>Step 2:</strong> Iran chooses: no attack, limited attack, or major attack.</p>
+        <p><strong>Step 3:</strong> Saudi Arabia invokes the pact. Pakistan and T&uuml;rkkiye each choose a support level: abstain, limited defensive aid, or robust military aid.</p>
+        <p><strong>Step 4:</strong> Iran observes the response and chooses: de-escalate, continue, or escalate.</p>
+      </div>
+    </details>
+
+    <h3>The Math</h3>
+    <p>Iran&rsquo;s expected utility from attacking:</p>
+    <div class="eq-box">
+      <span class="eq-label">Iran's Expected Utility</span>
+      U<sub>I</sub>(A) = B<sub>I</sub> &minus; [q &middot; C<sub>H</sub> + (1&minus;q) &middot; C<sub>L</sub>] &minus; E<sub>I</sub>
+    </div>
+    <p>Deterrence holds when U<sub>I</sub>(A) &le; 0, which requires:</p>
+    <div class="eq-box">
+      <span class="eq-label">The Deterrence Threshold</span>
+      q &ge; q* = (B<sub>I</sub> &minus; E<sub>I</sub> &minus; C<sub>L</sub>) / (C<sub>H</sub> &minus; C<sub>L</sub>)
+    </div>
+
+    <h3>The Continuation Game</h3>
+    <p>After an initial strike, the alliance and Iran face a coordination problem:</p>
+
+    <div class="matrix-grid">
+      <div class="cell"></div>
+      <div class="cell header">Iran De-escalates</div>
+      <div class="cell header">Iran Continues</div>
+      <div class="cell row-header">Alliance Robust</div>
+      <div class="cell eq">(3, &minus;2) <span class="star">&#9733;</span></div>
+      <div class="cell">&minus;4, &minus;5</div>
+      <div class="cell row-header">Alliance Weak</div>
+      <div class="cell">1, 0</div>
+      <div class="cell eq">(&minus;3, 3) <span class="star">&#9733;</span></div>
+    </div>
+
+    <p>There are <strong>two Nash equilibria</strong>. But when the alliance moves first and Iran observes, the <sup><a href="#note-spe">5</a></sup> subgame-perfect equilibrium is:</p>
+
+    <div class="eq-box">
+      <span class="eq-label">Subgame-Perfect Nash Equilibrium</span>
+      Robust Response &rarr; Iranian De-escalation
+    </div>
+
+    <div class="insight">
+      <span class="note-label">Note</span>
+      <div class="body"><strong>Why interoperability (&lambda;) is everything:</strong> Pre-positioned defences, compatible data links, and established deployment procedures reduce the cost of a robust response and can literally change which equilibrium the game produces. The pact&rsquo;s first institutional priority should be air and missile defence of Saudi critical infrastructure.</div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 5 ═══ -->
+  <section id="s5">
+    <div class="section-mark"><span class="num">05</span><span class="dashed-rule"></span></div>
+    <h2>Crisis Game 2: The Houthi Attribution Problem</h2>
+    <p>The Houthi scenario has a different structure. The identity of the attacker is usually clear &mdash; it&rsquo;s the Houthis. What&rsquo;s unclear is <strong>how much operational control Iran exercised over that particular attack</strong>. This is a <sup><a href="#note-bayes">6</a></sup> Bayesian game of incomplete information.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 750 380" xmlns="http://www.w3.org/2000/svg">
+        <rect class="sk-4" x="280" y="15" width="190" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-2" x="375" y="39" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="0.03em">NATURE: HOUTHI TYPE</text>
+        <rect class="sk-5" x="100" y="100" width="170" height="36" fill="none" stroke-width="0.9"/>
+        <text class="fl-3" x="185" y="122" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">AUTONOMOUS (A)</text>
+        <rect class="sk-5" x="480" y="100" width="170" height="36" fill="none" stroke-width="0.9"/>
+        <text class="fl-3" x="565" y="122" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">SPONSOR-DIRECTED (P)</text>
+        <line class="sk-5" x1="310" y1="55" x2="185" y2="100" stroke-width="0.9"/>
+        <line class="sk-5" x1="440" y1="55" x2="565" y2="100" stroke-width="0.9"/>
+        <rect class="sk-1" x="270" y="170" width="210" height="36" fill="none" stroke-width="1.2"/>
+        <text class="fl-1" x="375" y="192" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.03em">HOUTHI ATTACK</text>
+        <line class="sk-6" x1="185" y1="136" x2="340" y2="170" stroke-width="0.9"/>
+        <line class="sk-6" x1="565" y1="136" x2="410" y2="170" stroke-width="0.9"/>
+        <rect class="sk-copper" x="260" y="240" width="230" height="36" fill="none" stroke-width="1.3"/>
+        <text class="fl-copper" x="375" y="262" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="11" letter-spacing="0.03em">NOISY ATTRIBUTION SIGNAL (S)</text>
+        <line class="sk-copper" x1="375" y1="206" x2="375" y2="240" stroke-width="1"/>
+        <rect class="sk-6" x="50" y="320" width="170" height="40" fill="none" stroke-width="1"/>
+        <text class="fl-4" x="135" y="344" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">D: ESCORT / INTERCEPT</text>
+        <rect class="sk-3" x="290" y="320" width="170" height="40" fill="none" stroke-width="1.1"/>
+        <text class="fl-2" x="375" y="344" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">H: STRIKE HOUTHI ASSETS</text>
+        <rect class="sk-1" x="530" y="320" width="170" height="40" fill="none" stroke-width="1.3"/>
+        <text class="fl-1" x="615" y="344" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10">S: STRIKE IRAN</text>
+        <line class="sk-6" x1="275" y1="276" x2="135" y2="320" stroke-width="0.9"/>
+        <line class="sk-5" x1="375" y1="276" x2="375" y2="320" stroke-width="0.9"/>
+        <line class="sk-3" x1="475" y1="276" x2="615" y2="320" stroke-width="0.9"/>
+        <text class="fl-6" x="185" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9">LOW THRESHOLD</text>
+        <text class="fl-6" x="375" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9">MEDIUM</text>
+        <text class="fl-6" x="565" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9">HIGH &#956;* REQUIRED</text>
+      </svg>
+      <figcaption>Fig. 02 &mdash; Bayesian attribution game. Response intensity depends on the posterior belief about sponsor control; the response boxes darken as escalation rises.</figcaption>
+    </figure>
+
+    <p>The coalition uses Bayes&rsquo; rule to update its belief about Iranian control after each noisy intelligence signal:</p>
+    <div class="eq-box">
+      <span class="eq-label">Bayesian Update</span>
+      &mu;(s) = P(P|s) = [&pi; &middot; f(s|P)] / [&pi; &middot; f(s|P) + (1&minus;&pi;) &middot; f(s|A)]
+    </div>
+
+    <p>Direct retaliation against Iran becomes rational only when:</p>
+    <div class="eq-box">
+      <span class="eq-label">Attribution Threshold for Escalation</span>
+      &mu; &gt; &mu;* = (M + E &minus; C<sub>D</sub> &minus; L<sub>D</sub>) / (B + M)
+    </div>
+
+    <p>Here&rsquo;s the critical comparative static: <strong>the cheaper and more effective defensive maritime options become, the higher the attribution threshold for attacking Iran directly</strong>. The <sup><a href="#note-eu">7</a></sup> EU&rsquo;s EUNAVFOR ASPIDES mission (extended through February 2027) provides exactly this kind of alternative &mdash; it decreases the marginal value of escalation while increasing defensive capacity.</p>
+
+    <div class="insight">
+      <span class="note-label">Note</span>
+      <div class="body"><strong>Repetition matters.</strong> Each Houthi attack provides a new observation. If signals consistently indicate sponsor direction, the posterior P(P|s<sub>1</sub>,...,s<sub>n</sub>) can eventually cross &mu;*, making a stronger response rational. The equilibrium is one of <em>calibrated defence</em> &mdash; not automatic war, but stepwise escalation conditional on accumulated evidence.</div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 6 ═══ -->
+  <section id="s6">
+    <div class="section-mark"><span class="num">06</span><span class="dashed-rule"></span></div>
+    <h2>Crisis Game 3: India&ndash;Pakistan Escalation</h2>
+    <p>This is the <strong>most difficult contingency</strong> because it presents the strongest abandonment-versus-entrapment dilemma in <sup><a href="#note-snyder">8</a></sup> Glenn Snyder&rsquo;s classic alliance terminology. Saudi Arabia and T&uuml;rkkiye want the pact to deter an attack on Pakistan &mdash; but neither wants to encourage Pakistani risk-taking on the assumption that partners will rescue it.</p>
+
+    <h3>The Responsibility Game</h3>
+    <p>Nature draws who initiated the crisis: India (I) or Pakistan (P). Saudi Arabia and T&uuml;rkkiye receive an imperfect signal and form a posterior belief <strong>p</strong> that India was the aggressor.</p>
+
+    <p>Their expected utility of supporting Pakistan:</p>
+    <div class="eq-box">
+      <span class="eq-label">Expected Utility of Support</span>
+      EU(S) = p(V + M) &minus; M &minus; C
+    </div>
+
+    <p>And the threshold for support becomes:</p>
+    <div class="eq-box">
+      <span class="eq-label">The Support Threshold</span>
+      p &gt; &tau; = (M + C) / (V + M + R)
+    </div>
+
+    <p><strong>This is a powerful result.</strong> Saudi/Turkish support should not be predicted simply from whether &ldquo;Pakistan is a treaty ally.&rdquo; It depends on whether their posterior belief that Pakistan is the victim exceeds the threshold &tau;.</p>
+
+    <div class="interactive-box">
+      <h4>Interactive &mdash; Support Threshold Calculator</h4>
+      <p class="hint">Adjust the value of alliance (V), entrapment cost (M), aid cost (C), and reputational loss (R). See what posterior belief p is needed for Saudi/Turkish support.</p>
+      <div class="slider-row">
+        <label>V (alliance value)</label>
+        <input type="range" id="sl-v" min="0" max="20" step="0.5" value="8">
+        <span class="slider-val" id="val-v">8.0</span>
+      </div>
+      <div class="slider-row">
+        <label>M (entrapment cost)</label>
+        <input type="range" id="sl-m" min="0" max="15" step="0.5" value="5">
+        <span class="slider-val" id="val-m">5.0</span>
+      </div>
+      <div class="slider-row">
+        <label>C (aid cost)</label>
+        <input type="range" id="sl-c" min="0" max="10" step="0.5" value="3">
+        <span class="slider-val" id="val-c">3.0</span>
+      </div>
+      <div class="slider-row">
+        <label>R (reputational loss if abandon)</label>
+        <input type="range" id="sl-r" min="0" max="15" step="0.5" value="6">
+        <span class="slider-val" id="val-r">6.0</span>
+      </div>
+      <div class="result-display" id="indpak-result"></div>
+    </div>
+
+    <h3>India&rsquo;s Decision</h3>
+    <p>India factors in the probability of Makkah-alliance intervention <strong>q<sub>A</sub></strong> and the probability of nuclear escalation <strong>q<sub>N</sub></strong>:</p>
+    <div class="eq-box">
+      <span class="eq-label">India's Deterrence Condition</span>
+      q<sub>A</sub>K<sub>A</sub> + q<sub>N</sub>K<sub>N</sub> &ge; G &minus; C<sub>0</sub>
+    </div>
+
+    <p>Because the cost of nuclear escalation K<sub>N</sub> is astronomically large, <strong>even a tiny probability of nuclear use can dominate India&rsquo;s entire calculation</strong>. This is why the existing India-Pakistan nuclear uncertainty matters far more than speculative claims about a Pakistani nuclear umbrella for Saudi Arabia. <sup><a href="#note-sipri">9</a></sup> SIPRI estimates ~170 Pakistani and ~190 Indian warheads as of January 2026. No trilateral nuclear doctrine exists in public.</p>
+
+    <div class="insight">
+      <span class="note-label">Note</span>
+      <div class="body"><strong>The <sup><a href="#note-moralhazard">10</a></sup> moral-hazard paradox:</strong> Better intelligence accuracy &theta; creates <em>more polarized</em> behaviour. When evidence of Indian initiation is strong, support becomes much more likely. When evidence indicates Pakistani initiation, support collapses. Paradoxically, improving attribution simultaneously makes the pact <strong>more credible as a defensive alliance and less exploitable by Pakistan</strong>.</div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 7 ═══ -->
+  <section id="s7">
+    <div class="section-mark"><span class="num">07</span><span class="dashed-rule"></span></div>
+    <h2>What Changes the Equilibrium</h2>
+    <p>The models produce clear predictions about how changes in the pact or its environment shift behaviour.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Variable Change</th>
+            <th>Effect on Deterrence</th>
+            <th>Effect on Intervention</th>
+            <th>Main Danger</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Greater treaty clarity</td>
+            <td>Usually raises q</td>
+            <td>Raises response probability</td>
+            <td>Increases entrapment/moral hazard</td>
+          </tr>
+          <tr>
+            <td>Greater interoperability &lambda;</td>
+            <td>Strongly increases credible deterrence</td>
+            <td>Lowers material cost of action</td>
+            <td>May appear threatening offensively</td>
+          </tr>
+          <tr>
+            <td>Greater nuclear ambiguity n</td>
+            <td>Raises tail risk in South Asia</td>
+            <td>Limited Gulf applicability</td>
+            <td>Miscalculation and uncontrolled escalation</td>
+          </tr>
+          <tr>
+            <td>Stronger US reassurance u</td>
+            <td>Can strengthen deterrence immediately</td>
+            <td>Lowers operational response costs</td>
+            <td>Free-riding / slower autonomous integration</td>
+          </tr>
+          <tr>
+            <td>US withdrawal</td>
+            <td>Raises demand for pact</td>
+            <td>Initially makes action more expensive</td>
+            <td>Capability gap during transition</td>
+          </tr>
+          <tr>
+            <td>Higher domestic cost d<sub>i</sub></td>
+            <td>Lowers adversary belief in response</td>
+            <td>Reduces high-cost assistance</td>
+            <td>Alliance abandonment</td>
+          </tr>
+          <tr>
+            <td>Better attribution &theta;</td>
+            <td>Improves conditional deterrence</td>
+            <td>More targeted response</td>
+            <td>Adversary incentives to obscure responsibility</td>
+          </tr>
+          <tr>
+            <td>Strong third-party defence z</td>
+            <td>Usually raises defence capacity</td>
+            <td>Can substitute for pact combat</td>
+            <td>Alliance free-riding</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>The Hump-Shaped Ambiguity Curve</h3>
+    <p>Treaty ambiguity has a <strong>non-linear effect</strong> on deterrence. Some ambiguity creates deterrent uncertainty &mdash; an attacker can&rsquo;t be sure a limited operation will stay below the threshold. But too much ambiguity lets adversaries infer that allies will always find an excuse not to respond.</p>
+    <p>The relationship between ambiguity and deterrence is <sup><a href="#note-hump">11</a></sup> hump-shaped: a moderate uncertainty generates caution; excessive uncertainty destroys commitment.</p>
+
+    <div class="interactive-box">
+      <h4>Interactive &mdash; The Ambiguity-Deterrence Curve</h4>
+      <p class="hint">Drag the peak position and width to see how the hump-shaped relationship works.</p>
+      <div class="slider-row">
+        <label>Peak ambiguity</label>
+        <input type="range" id="sl-peak" min="20" max="80" step="1" value="50">
+        <span class="slider-val" id="val-peak">50%</span>
+      </div>
+      <div class="slider-row">
+        <label>Curve width</label>
+        <input type="range" id="sl-width" min="10" max="50" step="1" value="25">
+        <span class="slider-val" id="val-width">25</span>
+      </div>
+      <canvas id="ambiguity-canvas" width="760" height="220" style="width:100%;margin-top:1rem;"></canvas>
+    </div>
+
+    <h3>The Coalition-Size Paradox</h3>
+    <p>Foreign Minister Fidan has mentioned potential expansion &mdash; Egypt was named specifically. But adding members creates a paradox:</p>
+
+    <div class="eq-box">
+      <span class="eq-label">The Expansion Paradox</span>
+      N &uarr; &nbsp;&Rightarrow;&nbsp; Aggregate Capability &uarr; &nbsp;&nbsp;but&nbsp;&nbsp; Preference Heterogeneity &uarr; &nbsp;&nbsp;and&nbsp;&nbsp; Decision Speed &darr;
+    </div>
+
+    <p><strong>A three-member compact with highly credible minimum commitments can be strategically stronger than a ten-member organization whose response requires unanimous bargaining during every crisis.</strong></p>
+  </section>
+
+  <!-- ═══ SECTION 8 ═══ -->
+  <section id="s8">
+    <div class="section-mark"><span class="num">08</span><span class="dashed-rule"></span></div>
+    <h2>The Optimal Design: Tiered Commitment</h2>
+    <p>The models converge on a clear prescription. The alliance should <strong>make cheap, mutually beneficial actions nearly automatic</strong>, while preserving consultation for actions carrying extreme escalation risk.</p>
+
+    <div class="tiers">
+      <div class="tier tier-1">
+        <div class="tier-label">Tier 1</div>
+        <div class="tier-body">
+          <strong>Automatic Low-Cost Defence</strong>
+          <span>Intelligence sharing, early warning data, cyber defence, air/missile-defence information, logistical access, resupply, crisis consultations. Low C<sub>j</sub>, high credibility. These actions satisfy the intervention inequality almost always.</span>
+        </div>
+      </div>
+      <div class="tier tier-2">
+        <div class="tier-label">Tier 2</div>
+        <div class="tier-body">
+          <strong>Discretionary Reinforcement</strong>
+          <span>Pre-designated reinforcement units, ammunition pre-positioning, maritime escort, limited combat deployments. Moderate C<sub>j</sub>. Credible when institutionalization &lambda; is high enough to lower costs. The equilibrium is conditional on crisis type and attribution.</span>
+        </div>
+      </div>
+      <div class="tier tier-3">
+        <div class="tier-label">Tier 3</div>
+        <div class="tier-body">
+          <strong>Deliberately Uncertain</strong>
+          <span>Major interstate war, offensive campaigns, nuclear-related contingencies. Very high C<sub>j</sub>, E<sub>j</sub>, d<sub>j</sub>. The pact deliberately leaves this ambiguous &mdash; enough uncertainty to deter, enough discretion to avoid entrapment.</span>
+        </div>
+      </div>
+    </div>
+
+    <p>The strategically superior formula is:</p>
+    <div class="eq-box">
+      <span class="eq-label">The Optimal Commitment Formula</span>
+      Certain Limited Response &nbsp;+&nbsp; Credible Possibility of Larger Response
+    </div>
+
+    <p>&hellip;rather than an incredible promise of automatic maximal response.</p>
+
+    <h3>The Seven Institutional Mechanisms</h3>
+
+    <details>
+      <summary>1. Pre-authorized minimum response package</summary>
+      <div class="detail-body">A published or privately pre-authorized package after a verified attack: intelligence, early warning, cyber defence, air-defence data, logistical access, resupply, crisis consultations. Low cost, high credibility. Once an adversary believes <em>something consequential happens automatically</em>, deterrence rises.</div>
+    </details>
+    <details>
+      <summary>2. Pre-positioned forces</summary>
+      <div class="detail-body">An air-defence battery already deployed in Saudi Arabia creates a different game from a promise to send one later. Pre-positioning reduces mobilization time, creates sunk costs, and generates a <sup><a href="#note-tripwire">12</a></sup> tripwire: attacking Saudi infrastructure may endanger Pakistani or T&uuml;rkish personnel.</div>
+    </details>
+    <details>
+      <summary>3. Integrated early warning and C2</summary>
+      <div class="detail-body">Shared sensor data is an obvious public good. The GCC has called for strengthened ballistic-missile early-warning. Integrating Pakistani and T&uuml;rkish systems with a Saudi/GCC framework lowers defensive costs while giving the pact an operational function that doesn&rsquo;t require agreeing on who the enemy is.</div>
+    </details>
+    <details>
+      <summary>4. Real deployment exercises</summary>
+      <div class="detail-body">Measure T<sub>decision</sub>, T<sub>deployment</sub>, T<sub>integration</sub> &mdash; time from attack to authorization, from authorization to arrival, from arrival to combat effectiveness. Repeated exercises reduce all three and reveal bottlenecks before adversaries exploit them.</div>
+    </details>
+    <details>
+      <summary>5. Shared attribution protocol</summary>
+      <div class="detail-body">Predetermined evidentiary standards: &theta; &ge; &theta;<sub>defensive</sub> for automatic defensive assistance, &theta; &ge; &theta;<sub>offensive</sub> for retaliation against an alleged sponsor. This separates rapid defence from potentially catastrophic escalation.</div>
+    </details>
+    <details>
+      <summary>6. Anti-entrapment understanding</summary>
+      <div class="detail-body">For India-Pakistan crises: publicly, aggression against Pakistan carries consequences. Privately, the strongest guarantees apply only when Pakistan has not initiated escalation. Public deterrence plus private restraint &mdash; more stable than either an unconditional guarantee or a completely vague pact.</div>
+    </details>
+    <details>
+      <summary>7. Nuclear clarification</summary>
+      <div class="detail-body">Two coherent options: (a) state explicitly that the pact is conventional and does not alter Pakistani nuclear command; or (b) develop an explicit nuclear consultation mechanism. What is dangerous is relying on speculation about a &ldquo;nuclear umbrella&rdquo; without established doctrine or red lines.</div>
+    </details>
+  </section>
+
+  <!-- ═══ SECTION 9 ═══ -->
+  <section id="s9">
+    <div class="section-mark"><span class="num">09</span><span class="dashed-rule"></span></div>
+    <h2>Seven Testable Predictions</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Prediction</th>
+            <th>Observable Evidence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">01</td>
+            <td>Defensive cooperation institutionalizes before offensive war planning</td>
+            <td>Earliest implementation: intelligence, command-post exercises, missile/drone defence, logistics, communications</td>
+          </tr>
+          <tr>
+            <td class="num">02</td>
+            <td>Saudi contingencies produce stronger alliance behaviour than India-Pakistan contingencies</td>
+            <td>Overlapping interests clearest on protecting Saudi infrastructure from missiles and drones</td>
+          </tr>
+          <tr>
+            <td class="num">03</td>
+            <td>Repeated attacks produce stepwise, not continuous, escalation</td>
+            <td>Response stays defensive until posterior belief in sponsor responsibility crosses &mu;*, then escalates abruptly</td>
+          </tr>
+          <tr>
+            <td class="num">04</td>
+            <td>Physical deployments deter more than communiqu&eacute;s</td>
+            <td>Stationed units impose sunk costs and create potential casualties &mdash; costly signals</td>
+          </tr>
+          <tr>
+            <td class="num">05</td>
+            <td>Saudi/T&uuml;rkkiye will distinguish between defending Pakistan and supporting Pakistani escalation</td>
+            <td>Diplomatic messaging during the first serious India-Pakistan crisis after the treaty</td>
+          </tr>
+          <tr>
+            <td class="num">06</td>
+            <td>Strong US reassurance may delay autonomous integration</td>
+            <td>If US-GCC cooperation remains intensive and Makkah secretariat develops slowly, substitution dominates</td>
+          </tr>
+          <tr>
+            <td class="num">07</td>
+            <td>Alliance expansion will expose a capability-vs-consensus trade-off</td>
+            <td>Additional members like Egypt raise reach but create decision-making delays</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 10 ═══ -->
+  <section id="s10">
+    <div class="section-mark"><span class="num">10</span><span class="dashed-rule"></span></div>
+    <h2>The Bottom Line</h2>
+    <p>The Makkah agreement has already changed the game. Iran, India, Israel, the Houthis, and other actors must now attach <strong>some positive probability</strong> to Pakistani and T&uuml;rkish involvement in contingencies that previously would have been treated mainly as bilateral or US-Gulf problems. That alone can modify bargaining behaviour.</p>
+
+    <p>But deterrence depends on the <em>size</em> of that probability.</p>
+
+    <div class="note">
+      <p><strong>The pact&rsquo;s most credible equilibrium</strong> is likely to be: highly credible for consultation, intelligence, logistics, and defensive military support; moderately credible for reinforcement and limited combat; and deliberately uncertain for major interstate war or nuclear escalation.</p>
+      <p>That may not sound as dramatic as &ldquo;Islamic NATO,&rdquo; but from a <sup><a href="#note-fearon">13</a></sup> game-theoretic perspective it may actually be the more rational and sustainable design.</p>
+    </div>
+
+    <p>The decisive variable is not what the pact is <em>called</em>. It is whether its institutions transform the political cost of abandonment and the military cost of intervention enough that helping an attacked partner becomes rational <strong>after the attack</strong>, not merely attractive when leaders sign the treaty.</p>
+
+    <p>On present evidence, the pact has the political architecture necessary to attempt that transformation. It does not yet have the publicly demonstrated operational machinery to prove it has succeeded.</p>
+
+    <div class="central-q">
+      <div class="rule"></div>
+      <p class="q-text" style="font-size:1.05rem">q &rarr; 1 for defensive support &nbsp;&nbsp;|&nbsp;&nbsp; 0 &lt; q &lt; 1 for offensive combat<br><br>The pact succeeds when adversaries face predictable costs for attack, yet partners retain enough discretion to avoid automatic entrapment.</p>
+      <div class="rule bottom"></div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ═══ ENDNOTES ═══ -->
+  <div class="endnotes">
+    <div class="endnotes-head">
+      <span class="mono" style="font-size: var(--type-label-size); letter-spacing: var(--type-label-track); color: var(--text-label);">Sources</span>
+    </div>
+    <ol>
+      <li id="note-spa"><a href="https://www.spa.gov.sa/en/N2649227" target="_blank" rel="noreferrer">Saudi Press Agency (SPA)</a> &mdash; Joint statement, 7 August 2026.</li>
+      <li id="note-fidan"><a href="https://www.msb.gov.tr/Basin-ve-Yayin/Aciklamalar/f4b2f616b43641d19df3a8355afb1014" target="_blank" rel="noreferrer">Turkish Ministry of National Defence</a> &mdash; Fidan remarks, August 2026.</li>
+      <li id="note-morrow"><a href="https://www.annualreviews.org/content/journals/10.1146/annurev.polisci.3.1.63" target="_blank" rel="noreferrer">James Morrow</a> &mdash; &ldquo;Alliances: Why Write Them Down?&rdquo;, <em>Annual Review of Political Science</em>.</li>
+      <li id="note-unsc"><a href="https://digitallibrary.un.org/record/4108191/files/S_2026_283-EN.pdf" target="_blank" rel="noreferrer">UN Security Council Document S/2026/283</a>.</li>
+      <li id="note-eu"><a href="https://www.consilium.europa.eu/en/press/press-releases/2026/02/23/red-sea-council-extends-the-mandate-of-operation-aspides-to-safeguard-freedom-of-navigation/" target="_blank" rel="noreferrer">Council of the European Union</a> &mdash; ASPIDES mission extension, 2026.</li>
+      <li id="note-snyder"><a href="https://www.cambridge.org/core/journals/world-politics/article/security-dilemma-in-alliance-politics/681B1AF11D96E61995028026205CE783" target="_blank" rel="noreferrer">Glenn Snyder</a> &mdash; &ldquo;The Security Dilemma in Alliance Politics&rdquo;, <em>World Politics</em>.</li>
+      <li id="note-sipri"><a href="https://www.sipri.org/visualizations/2026/world-nuclear-forces-january-2026" target="_blank" rel="noreferrer">SIPRI</a> &mdash; World Nuclear Forces, January 2026.</li>
+      <li id="note-fearon"><a href="https://www.cambridge.org/core/journals/international-organization/article/rationalist-explanations-for-war/E3B716A4034C11ECF8CE8732BC2F80DD" target="_blank" rel="noreferrer">James Fearon</a> &mdash; &ldquo;Rationalist Explanations for War&rdquo;, <em>International Organization</em>.</li>
+    </ol>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="colophon">
+      <span>Game-theory analysis &middot; Makkah Joint Defence Agreement</span>
+      <span>MMXXVI</span>
+    </div>
+  </footer>
+
+  </div><!-- end content-col -->
+
+  <!-- ═══ RIGHT RAIL: marginalia ═══ -->
+  <aside class="right-rail">
+    <div class="right-rail-inner">
+      <div class="right-rail-head">Margin</div>
+
+      <div>
+        <div class="margin-thought">&ldquo;I hadn&rsquo;t realized how much of alliance credibility comes down to subgame perfection &mdash; a treaty can promise anything, but if honoring it wouldn&rsquo;t be rational in the moment, the promise doesn&rsquo;t deter. That single insight reframes every &lsquo;Islamic NATO&rsquo; headline I&rsquo;ve read.&rdquo;</div>
+      </div>
+
+      <div class="margin-note">
+        <div class="margin-note-term">Expected Utility</div>
+        <div class="margin-note-body">Weights each possible outcome by its probability. A threat only deters if its probability-weighted cost outweighs the attacker&rsquo;s expected gain &mdash; not if the worst case alone looks bad.</div>
+      </div>
+
+      <div class="margin-note">
+        <div class="margin-note-term">Subgame Perfection</div>
+        <div class="margin-note-body">An equilibrium concept requiring that a strategy remain optimal at every point in the game, not just at the start. It rules out threats the alliance wouldn&rsquo;t actually carry out if tested.</div>
+      </div>
+
+      <div>
+        <div class="margin-thought">The attribution problem in the Houthi scenario is what makes it genuinely hard &mdash; not a design flaw of the pact, but a structural feature of proxy warfare. Bayes&rsquo; rule is the right framework, but the intelligence inputs determine whether the math leads to restraint or escalation.</div>
+      </div>
+
+      <div class="margin-note">
+        <div class="margin-note-term">Bayesian Game</div>
+        <div class="margin-note-body">A game where players don&rsquo;t know each other&rsquo;s true type and update their beliefs as evidence arrives. Here, whether the Houthis act autonomously or under Iranian direction.</div>
+      </div>
+
+      <div>
+        <div class="margin-thought">India&ndash;Pakistan is where the abandonment-versus-entrapment dilemma is sharpest. Saudi and T&uuml;rkish support isn&rsquo;t automatic &mdash; it depends entirely on who they believe started it. The pact actually makes <em>good intelligence</em> a strategic asset, not just an operational one.</div>
+      </div>
+
+      <div class="margin-note">
+        <div class="margin-note-term">Moral Hazard</div>
+        <div class="margin-note-body">A guarantee of support can change the guaranteed party&rsquo;s own behaviour. Pakistan might take more risks precisely because it expects the alliance to back it up.</div>
+      </div>
+
+      <div class="margin-note">
+        <div class="margin-note-term">Tripwire Force</div>
+        <div class="margin-note-body">Deliberately placed where it will be hit first. Its presence, not its combat power, is what deters &mdash; attacking it guarantees escalation the aggressor would rather avoid.</div>
+      </div>
+
+      <div>
+        <div class="margin-thought">The hump-shaped ambiguity curve is the most counterintuitive finding. Both &ldquo;perfectly clear&rdquo; and &ldquo;completely vague&rdquo; treaties deter less than one in the middle. The Makkah pact&rsquo;s deliberate ambiguity about Tier 3 responses may actually be optimal, not a weakness to fix.</div>
+      </div>
+    </div>
+  </aside>
+
+</div><!-- end entry-frame -->
+
+<script>
+// ══════════════════════════════════════════════════════════
+// Theme toggle
+// ══════════════════════════════════════════════════════════
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const themeLabel = document.getElementById('themeLabel');
+
+function readStoredTheme() {
+  try { return localStorage.getItem('mmm-theme'); } catch (e) { return null; }
+}
+function writeStoredTheme(mode) {
+  try { localStorage.setItem('mmm-theme', mode); } catch (e) { /* storage unavailable */ }
+}
+function applyTheme(mode) {
+  if (mode === 'dark') {
+    root.setAttribute('data-theme', 'dark');
+    themeLabel.textContent = 'Light';
+  } else {
+    root.removeAttribute('data-theme');
+    themeLabel.textContent = 'Dark';
+  }
+}
+applyTheme(readStoredTheme() || 'light');
+
+themeToggle.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  writeStoredTheme(next);
+  drawAmbiguity();
+});
+
+// ══════════════════════════════════════════════════════════
+// Scroll-spy for LeftNav
+// ══════════════════════════════════════════════════════════
+const leftNav = document.getElementById('leftNav');
+const navLinks = leftNav ? Array.from(leftNav.querySelectorAll('a[href^="#s"]')) : [];
+const sections = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+function updateScrollSpy() {
+  let activeId = null;
+  const scrollY = window.scrollY + window.innerHeight * 0.25;
+  for (let i = sections.length - 1; i >= 0; i--) {
+    if (sections[i].offsetTop <= scrollY) {
+      activeId = sections[i].id;
+      break;
+    }
+  }
+  navLinks.forEach(a => {
+    const isActive = a.getAttribute('href') === '#' + activeId;
+    a.classList.toggle('active', isActive);
+  });
+}
+
+updateScrollSpy();
+window.addEventListener('scroll', () => {
+  clearTimeout(window.__mmmScrollSpy);
+  window.__mmmScrollSpy = setTimeout(updateScrollSpy, 50);
+}, { passive: true });
+
+// ══════════════════════════════════════════════════════════
+// Interactive: Iran Deterrence Threshold
+// ══════════════════════════════════════════════════════════
+const slB = document.getElementById('sl-b'), valB = document.getElementById('val-b');
+const slCH = document.getElementById('sl-ch'), valCH = document.getElementById('val-ch');
+const slCL = document.getElementById('sl-cl'), valCL = document.getElementById('val-cl');
+const slEI = document.getElementById('sl-ei'), valEI = document.getElementById('val-ei');
+const iranResult = document.getElementById('iran-result');
+
+function updateIran() {
+  const B = parseFloat(slB.value), CH = parseFloat(slCH.value), CL = parseFloat(slCL.value), EI = parseFloat(slEI.value);
+  valB.textContent = B.toFixed(1);
+  valCH.textContent = CH.toFixed(1);
+  valCL.textContent = CL.toFixed(1);
+  valEI.textContent = EI.toFixed(1);
+  const denom = CH - CL;
+  let qStar, deterred;
+  if (denom <= 0) {
+    iranResult.innerHTML = '<span>C<sub>H</sub> &le; C<sub>L</sub>: model breaks down (strong response costs less than weak)</span>';
+    return;
+  }
+  const num = B - EI - CL;
+  qStar = Math.max(0, Math.min(1, num / denom));
+  deterred = qStar <= 0;
+  const euAttackAtQ50 = B - (0.5 * CH + 0.5 * CL) - EI;
+  iranResult.innerHTML =
+    'Deterrence threshold q* = <span class="val">' + qStar.toFixed(3) + '</span> (' + (qStar * 100).toFixed(1) + '%)<br>' +
+    'Iran\'s expected utility at q=0.5 = <span class="val">' + euAttackAtQ50.toFixed(2) + '</span><br>' +
+    (deterred
+      ? '<span class="deterred">&#10003; deterred even at q=0 (costs always exceed benefits)</span>'
+      : euAttackAtQ50 <= 0
+        ? '<span class="deterred">&#10003; deterred when q &ge; 50%</span>'
+        : '<span class="not-deterred">&#10007; not deterred at q=50% &mdash; alliance must credibly exceed ' + (qStar*100).toFixed(0) + '%</span>'
+    );
+}
+[slB, slCH, slCL, slEI].forEach(s => s.addEventListener('input', updateIran));
+updateIran();
+
+// ══════════════════════════════════════════════════════════
+// Interactive: India-Pakistan Support Threshold
+// ══════════════════════════════════════════════════════════
+const slV = document.getElementById('sl-v'), valV = document.getElementById('val-v');
+const slM = document.getElementById('sl-m'), valM = document.getElementById('val-m');
+const slC = document.getElementById('sl-c'), valC2 = document.getElementById('val-c');
+const slR = document.getElementById('sl-r'), valR = document.getElementById('val-r');
+const indpakResult = document.getElementById('indpak-result');
+
+function updateIndPak() {
+  const V = parseFloat(slV.value), M = parseFloat(slM.value), C = parseFloat(slC.value), R = parseFloat(slR.value);
+  valV.textContent = V.toFixed(1);
+  valM.textContent = M.toFixed(1);
+  valC2.textContent = C.toFixed(1);
+  valR.textContent = R.toFixed(1);
+  const denom = V + M + R;
+  const num = M + C;
+  const tau = denom > 0 ? Math.min(1, num / denom) : 1;
+  const supportLikely = tau < 0.5;
+  const supportPossible = tau < 0.75;
+  indpakResult.innerHTML =
+    'Support threshold &tau; = <span class="val">' + tau.toFixed(3) + '</span> (' + (tau * 100).toFixed(1) + '%)<br>' +
+    'Required: p(Pakistan is victim) &gt; ' + (tau*100).toFixed(1) + '%<br>' +
+    (supportLikely
+      ? '<span class="deterred">&#10003; support likely &mdash; low threshold means broad support range</span>'
+      : supportPossible
+        ? '<span class="maybe">&#9679; moderate threshold &mdash; support depends heavily on evidence</span>'
+        : '<span class="not-deterred">&#10007; high threshold &mdash; only very clear victimhood triggers support</span>'
+    );
+}
+[slV, slM, slC, slR].forEach(s => s.addEventListener('input', updateIndPak));
+updateIndPak();
+
+// ══════════════════════════════════════════════════════════
+// Interactive: Ambiguity-Deterrence Canvas (theme-aware)
+// ══════════════════════════════════════════════════════════
+const ambCanvas = document.getElementById('ambiguity-canvas');
+const ambCtx = ambCanvas.getContext('2d');
+const slPeak = document.getElementById('sl-peak'), valPeak = document.getElementById('val-peak');
+const slWidth = document.getElementById('sl-width'), valWidth = document.getElementById('val-width');
+
+const PALETTE = {
+  light: { grid: 'rgba(46,43,39,0.06)', axis: '#c0b8a5', label: '#726c5e', tick: '#a39a86', copper: '#8a5a3b' },
+  dark:  { grid: 'rgba(239,233,219,0.07)', axis: '#4c4335', label: '#a89c85', tick: '#756a54', copper: '#8a5a3b' }
+};
+
+function drawAmbiguity() {
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  const C = isDark ? PALETTE.dark : PALETTE.light;
+  const peak = parseFloat(slPeak.value) / 100;
+  const width = parseFloat(slWidth.value) / 100;
+  valPeak.textContent = slPeak.value + '%';
+  valWidth.textContent = slWidth.value;
+  const W = ambCanvas.width, H = ambCanvas.height;
+  const pad = { l: 60, r: 30, t: 20, b: 40 };
+  const gW = W - pad.l - pad.r, gH = H - pad.t - pad.b;
+  ambCtx.clearRect(0, 0, W, H);
+  ambCtx.strokeStyle = C.grid; ambCtx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) { const y = pad.t + (gH / 5) * i; ambCtx.beginPath(); ambCtx.moveTo(pad.l, y); ambCtx.lineTo(W - pad.r, y); ambCtx.stroke(); }
+  ambCtx.strokeStyle = C.axis; ambCtx.lineWidth = 1;
+  ambCtx.beginPath(); ambCtx.moveTo(pad.l, pad.t); ambCtx.lineTo(pad.l, H - pad.b); ambCtx.lineTo(W - pad.r, H - pad.b); ambCtx.stroke();
+  ambCtx.fillStyle = C.label; ambCtx.font = '11px "IBM Plex Mono", monospace'; ambCtx.textAlign = 'center';
+  ambCtx.fillText('TREATY AMBIGUITY', W / 2, H - 5);
+  ambCtx.save(); ambCtx.translate(15, H / 2); ambCtx.rotate(-Math.PI / 2); ambCtx.fillText('DETERRENCE LEVEL (Q)', 0, 0); ambCtx.restore();
+  ambCtx.fillStyle = C.tick; ambCtx.font = '10px "IBM Plex Mono", monospace'; ambCtx.textAlign = 'center';
+  ['NONE', 'LOW', 'MODERATE', 'HIGH', 'TOTAL'].forEach((label, i) => { ambCtx.fillText(label, pad.l + (gW / 4) * i, H - pad.b + 18); });
+  ambCtx.textAlign = 'right';
+  for (let i = 0; i <= 5; i++) { ambCtx.fillText((i * 20) + '%', pad.l - 8, H - pad.b - (gH / 5) * i + 4); }
+  ambCtx.beginPath(); ambCtx.strokeStyle = C.copper; ambCtx.lineWidth = 1.5;
+  const sigma = width * 0.6;
+  for (let px = 0; px <= gW; px++) { const x = px / gW; const gauss = Math.exp(-0.5 * Math.pow((x - peak) / sigma, 2)); const y = pad.t + gH * (1 - gauss); if (px === 0) ambCtx.moveTo(pad.l + px, y); else ambCtx.lineTo(pad.l + px, y); }
+  ambCtx.stroke();
+  const peakX = pad.l + gW * peak;
+  ambCtx.beginPath(); ambCtx.arc(peakX, pad.t, 3, 0, Math.PI * 2); ambCtx.fillStyle = C.copper; ambCtx.fill();
+  ambCtx.font = '10px "IBM Plex Mono", monospace'; ambCtx.textAlign = 'center'; ambCtx.fillText('PEAK', peakX, pad.t - 10);
+  ambCtx.font = '10px "IBM Plex Mono", monospace'; ambCtx.fillStyle = C.tick; ambCtx.textAlign = 'left';
+  ambCtx.fillText('too vague \u2014 q drops', Math.min(pad.l + gW * 0.68, W - pad.r - 130), pad.t + gH * 0.62);
+  ambCtx.textAlign = 'center'; ambCtx.fillText('sweet spot', peakX, H - pad.b - gH * 0.08);
+}
+[slPeak, slWidth].forEach(s => s.addEventListener('input', drawAmbiguity));
+drawAmbiguity();
+</script>
+</body>
+</html>

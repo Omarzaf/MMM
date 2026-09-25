@@ -1,0 +1,13 @@
+{
+  "name": "hiphop-pakistan-editorial",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node tools/build-site.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "verify": "pnpm build && pnpm test && node tools/verify-site.mjs",
+    "test:e2e": "node tools/browser-smoke.mjs",
+    "preview": "node tools/serve-preview.mjs"
+  }
+}

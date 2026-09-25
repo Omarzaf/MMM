@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "generated_on": "2026-09-03",
+  "dataset_path": "intermediate/research_dataset.json",
+  "default_timeout_ms": 10000,
+  "default_concurrency": 8,
+  "max_redirects": 5,
+  "output_path": "tmp/link-health/latest.json",
+  "waf_allowlist": [
+    {
+      "host": "www.dawn.com",
+      "statuses": [403, 406, 429],
+      "rationale": "Dawn commonly blocks automated probes while serving normal browser traffic."
+    },
+    {
+      "host": "www.secp.gov.pk",
+      "statuses": [403, 406, 429],
+      "rationale": "SECP pages can reject bot-like requests despite being reachable in a browser."
+    },
+    {
+      "host": "www.datacenterdynamics.com",
+      "statuses": [403, 406, 429],
+      "rationale": "Data Center Dynamics uses bot protection that can challenge CI-origin requests."
+    },
+    {
+      "host": "www.brecorder.com",
+      "statuses": [403, 406, 429],
+      "rationale": "Business Recorder may rate-limit or block automation while allowing interactive access."
+    }
+  ]
+}

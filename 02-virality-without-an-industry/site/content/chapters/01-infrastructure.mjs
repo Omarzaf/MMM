@@ -1,0 +1,56 @@
+export default {
+  id: 'infrastructure',
+  number: '01',
+  group: 'Side A — Circulation',
+  title: 'Infrastructure in flux',
+  wordBudget: [700, 900],
+  blocks: [
+    {
+      kind: 'paragraph',
+      text: 'The study starts in 2014 because access to the internet changed first, before anyone could say that Pakistani music had moved online. That year, Pakistan auctioned licences for 3G and 4G mobile networks. The auction is a clean starting point: a dated public event that marks the shift from limited mobile internet to mass mobile broadband. What matters is less the sale itself than what came after. The government’s Economic Survey shows broadband subscriptions rising from 16,885,518 in 2014–15 to 102,699,967 in 2020–21. Those are subscriptions, not individual people, listeners, artists, or paying music fans. Still, they show why sharing music online suddenly became a realistic idea.',
+      sourceIds: ['S002', 'L001'],
+      claimMode: 'synthesis',
+    },
+    { kind: 'figure', figureId: 'broadband' },
+    {
+      kind: 'paragraph',
+      text: 'The middle of the decade brought a second opening. YouTube returned in January 2016 after being blocked for several years, this time through a local Pakistani version of the site. That return should not be romanticized as a move from censorship to freedom. It reopened a powerful route for music, but the state kept the power to restrict platforms again. For musicians and labels, the practical change was simple: a video site that almost everyone used was back, for releasing songs, being discovered, storing work, and being searched for. For this research, the limit matters just as much. The return proves that a channel was open. It does not prove income, an equal chance of being recommended, or reliable payment.',
+      sourceIds: ['S004', 'L004', 'L005'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'That limit keeps this chapter from becoming a tidy cause-and-effect story. Broadband growth and YouTube’s return came before the famous moments when Pakistani songs went global, but coming first is not the same as causing. The public record supports a timeline of conditions that made things possible: more mobile data subscriptions, a video platform back online, and a bigger potential audience. On their own, those facts cannot explain why one artist crossed over, why one playlist mattered, why one label deal happened, or whether an independent rapper in Karachi made a safer living. Better networks widened the roads that music could travel; they did not tell us who controlled the tollbooths.',
+      sourceIds: ['L001', 'S004', 'S025', 'S030'],
+      claimMode: 'synthesis',
+    },
+    {
+      kind: 'paragraph',
+      text: 'The years from 2021 to 2026 need the same caution. The current Economic Survey reports 119 million broadband subscriptions in 2021–22, 127 million in 2022–23, 139 million in 2023–24, 150 million in 2024–25, and 161 million by March 2026, when broadband penetration reached 64.2 percent. That is a major national record of connectivity, but it measures telecoms, not music. It counts subscriptions rather than individual people. It says nothing directly about how many people listen to music, how many pay for audio apps, or where in the country artists find opportunities. March 2026 is also only part of a year, so it cannot be compared with full years.',
+      sourceIds: ['L002'],
+      claimMode: 'single-primary',
+    },
+    {
+      kind: 'paragraph',
+      text: 'Total data use widens the picture, but not what we can conclude from it. The official table shows combined mobile and fixed-line data traffic rising from 16,250 petabytes (PB) in 2021–22 to an estimated 30,783 PB in 2025–26. The chart keeps that official total, but notes that the mobile and fixed figures for 2025–26 add up to 30,782 PB, one short of the reported total. More importantly, this is all internet traffic. It is not music, video, or audio streaming, and it is not evidence that artists earned more. The mismatch is tiny, but it is useful: even official statistics have flaws, and the chart should carry them.',
+      sourceIds: ['L002'],
+      claimMode: 'single-primary',
+    },
+    { kind: 'figure', figureId: 'traffic' },
+    {
+      kind: 'paragraph',
+      text: 'The arrival of 5G in 2026 sits at the edge of the story for the same reason. A 5G spectrum auction and launches in a few selected cities mark the start of another round of network building. They do not mean nationwide use, and they have no proven effect on music. They matter because the ground is still shifting while this is being written. They do not give the 2014–2026 story a triumphant ending. The year is not over, and every chart treats 2026 as an epilogue of confirmed events rather than a full year of data.',
+      sourceIds: ['L020', 'L021', 'L002'],
+      claimMode: 'synthesis',
+    },
+    { kind: 'figure', figureId: 'timeline' },
+    {
+      kind: 'paragraph',
+      text: 'Read this way, infrastructure is neither background scenery nor destiny. It is the floor that Pakistan’s online music visibility stands on. Hip-hop makes that floor easy to see, because rap crews, informal studios, discovery on phones, and self-released tracks all depend on channels that can be opened, blocked, promoted, priced, or ignored. But the floor is not the house. A better network can carry a song further while leaving open the questions of who manages the rights, who gets paid, how venues make money, and who has bargaining power.',
+      sourceIds: ['S002', 'S004', 'L001', 'L002', 'L030'],
+      claimMode: 'synthesis',
+    },
+  ],
+  establishes: 'Pakistan’s internet and mobile networks expanded sharply, from the 2014 move to mobile broadband through the unfinished 2026 round of upgrades.',
+  unknown: 'Official network statistics still cannot show who earned money from music, who owned the rights, or which artists gained lasting work.',
+};

@@ -1,0 +1,233 @@
+{
+  "verified_snapshot_cutoff_utc": "2026-09-03T04:15:00Z",
+  "report_path": "outputs/01a0653c-96d7-7c92-918b-3975d6716164/Pakistan_AI_Policy_and_Digital_Infrastructure_Verified_15-Day_Monitoring_Report_2026-08-18_to_2026-09-03_UTC.docx",
+  "report_sha256": "139a8236ab06441726ea566367a67397fa24c72c7d3235bbcdbd379f78974177",
+  "passed": true,
+  "checks": [
+    {
+      "name": "event count",
+      "passed": true,
+      "detail": "36 in-period/discovered records"
+    },
+    {
+      "name": "baseline/context count",
+      "passed": true,
+      "detail": "16 total baselines/context records"
+    },
+    {
+      "name": "baseline lifecycle breakdown",
+      "passed": true,
+      "detail": "13 carry-in + 3 disputed"
+    },
+    {
+      "name": "source count",
+      "passed": true,
+      "detail": "111 assessed sources"
+    },
+    {
+      "name": "exclusion count",
+      "passed": true,
+      "detail": "13 material exclusions"
+    },
+    {
+      "name": "watchlist count",
+      "passed": true,
+      "detail": "14 watchlist rows"
+    },
+    {
+      "name": "unique event IDs",
+      "passed": true,
+      "detail": "none duplicated"
+    },
+    {
+      "name": "unique source IDs",
+      "passed": true,
+      "detail": "none duplicated"
+    },
+    {
+      "name": "required event fields",
+      "passed": true,
+      "detail": "all populated"
+    },
+    {
+      "name": "reference-array schema",
+      "passed": true,
+      "detail": "all reference fields are arrays"
+    },
+    {
+      "name": "external evidence per record",
+      "passed": true,
+      "detail": "every record has at least one assessed external source"
+    },
+    {
+      "name": "briefing references resolve",
+      "passed": true,
+      "detail": "all resolve"
+    },
+    {
+      "name": "source references resolve",
+      "passed": true,
+      "detail": "all resolve"
+    },
+    {
+      "name": "watchlist URL provenance",
+      "passed": true,
+      "detail": "every linked watch item resolves to the source register"
+    },
+    {
+      "name": "watchlist report traceability",
+      "passed": true,
+      "detail": "all stable watch IDs appear in the report"
+    },
+    {
+      "name": "verification-discovered provenance",
+      "passed": true,
+      "detail": "records without briefing references are explicitly verification-discovered"
+    },
+    {
+      "name": "primary-source absence bounded",
+      "passed": true,
+      "detail": "empty primary arrays retain secondary evidence and non-High confidence"
+    },
+    {
+      "name": "event/exclusion separation",
+      "passed": true,
+      "detail": "no excluded lifecycle item is counted as an evidence record"
+    },
+    {
+      "name": "source URL syntax",
+      "passed": true,
+      "detail": "all valid HTTP(S) URLs"
+    },
+    {
+      "name": "HTML audited counts",
+      "passed": true,
+      "detail": "body metadata matches audited counts"
+    },
+    {
+      "name": "HTML rendered row counts",
+      "passed": true,
+      "detail": "52 records; 111 sources; 14 watch items"
+    },
+    {
+      "name": "HTML Pages entrypoint",
+      "passed": true,
+      "detail": "index.html carries the report and the named path redirects to it"
+    },
+    {
+      "name": "HTML student guide structure",
+      "passed": true,
+      "detail": "student guide sits between the TL;DR and Section I inside the frame, and is linked from the contents rail"
+    },
+    {
+      "name": "HTML student resource links",
+      "passed": true,
+      "detail": "all student data, method, repository, citation, and license links resolve locally"
+    },
+    {
+      "name": "HTML student guide mobile guards",
+      "passed": true,
+      "detail": "student cards can shrink and collapse to one column"
+    },
+    {
+      "name": "README student guide",
+      "passed": true,
+      "detail": "student workflow, repository map, data access, citation, and split licensing are documented"
+    },
+    {
+      "name": "HTML self-contained runtime",
+      "passed": true,
+      "detail": "no external scripts, stylesheets, or CSS assets beyond the Google Fonts face, which degrades to the declared local stack"
+    },
+    {
+      "name": "HTML structural accessibility",
+      "passed": true,
+      "detail": "language, skip target, theme state, links, and table headers pass"
+    },
+    {
+      "name": "HTML mobile overflow guards",
+      "passed": true,
+      "detail": "figures, tables, ledger rows and watchlist can shrink within a 390px viewport"
+    },
+    {
+      "name": "S052 canonical source",
+      "passed": true,
+      "detail": "https://www.radio.gov.pk/24-07-2026/pm-field-marshal-inaugurate-sky47-karakorum-01-data-centre"
+    },
+    {
+      "name": "S067 availability disclosure",
+      "passed": true,
+      "detail": "404 on 2026-09-03 audit; retained as provenance/archive-only"
+    },
+    {
+      "name": "confidence vocabulary",
+      "passed": true,
+      "detail": "High/Medium/Low only"
+    },
+    {
+      "name": "WHO mutable-date conflict",
+      "passed": true,
+      "detail": "24-Aug capture and 28-Aug current display preserved"
+    },
+    {
+      "name": "telecom withdrawal publication date",
+      "passed": true,
+      "detail": "2026-08-28"
+    },
+    {
+      "name": "report event assignment",
+      "passed": true,
+      "detail": "missing/duplicate: none; extra: none"
+    },
+    {
+      "name": "required report sections",
+      "passed": true,
+      "detail": "all 17 sections plus appendix present"
+    },
+    {
+      "name": "no drafting placeholders",
+      "passed": true,
+      "detail": "none found"
+    },
+    {
+      "name": "top-level source-file census",
+      "passed": true,
+      "detail": "13 files"
+    },
+    {
+      "name": "non-briefing source files",
+      "passed": true,
+      "detail": "1 excluded file"
+    },
+    {
+      "name": "expected nominal briefings",
+      "passed": true,
+      "detail": "1440"
+    },
+    {
+      "name": "observed briefing units",
+      "passed": true,
+      "detail": "14"
+    },
+    {
+      "name": "nominal missing briefings",
+      "passed": true,
+      "detail": "1426"
+    },
+    {
+      "name": "DOCX package integrity",
+      "passed": true,
+      "detail": "75767 bytes; unzip test passed"
+    },
+    {
+      "name": "DOCX authorship metadata",
+      "passed": true,
+      "detail": "creator and lastModifiedBy identify Muhammad Umar Zafar"
+    },
+    {
+      "name": "DOCX repaired-source disclosure",
+      "passed": true,
+      "detail": "S052 uses the canonical URL and S067 carries its archive-only availability note"
+    }
+  ]
+}

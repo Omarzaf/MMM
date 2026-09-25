@@ -1,0 +1,14 @@
+item_id,item,type,reason,disposition
+EXC-001,pakistan-music-economy-meaning-man_1.html,lack of Pakistan AI/digital-policy nexus,Readable standalone essay about Pakistan’s music economy; not a monitoring brief and no material AI-policy or digital-infrastructure nexus.,excluded from briefing dataset
+EXC-002,Strict-window no-change statements in B001–B014,repeated negative observation,A no-change finding describes the bounded search window; it is not an underlying event and repetition is not corroboration.,"retained in coverage log, not event count"
+EXC-003,Mutable PPRA headline counts,unstable aggregate,Counts moved and sometimes reset; without identifying underlying rows they do not establish a substantive procurement event.,excluded from findings
+EXC-004,Generic PPRA rows,out of scope,"Pneumatic items, generic security equipment, civil works, fire-hydrant evaluation and office relocation lack a material AI/digital-infrastructure nexus.",excluded
+EXC-005,Guddu ST-16 / 747 MW work,insufficient AI nexus,General grid rehabilitation is not evidence of dedicated AI-compute energy supply.,excluded
+EXC-006,ETPB data-centre evaluation EVL00000000515,outside reporting period,Dated 4 May 2026; no in-span update was verified.,excluded
+EXC-007,Date-only X-access claim,unsupported/contradictory,No primary PTA/Interior notice was located and the claim conflicted with earlier reporting.,excluded pending primary evidence
+EXC-008,Daily Times under-16 article dated 3 September,syndicated/repeated coverage,Recycles the 31 August IHC proceeding and does not establish a new event.,deduplicated into EVT-PLAT-20260831-IHC-U16
+EXC-009,Google directories and Pakistan-filtered jobs,verification observation,Directory contents and undated job listings help test claims but are not separate event milestones.,"used as evidence, not counted as events"
+EXC-010,Google PID 21 August and MOIB 24 August releases,duplicate official coverage,Both describe the same framework MoU; the later ministry item is not independent corroboration.,clustered into EVT-GOOG-20260821-MOU
+EXC-011,PISF 1 September press story,repeated coverage,Appears to repeat the 10/11 August Cabinet decision and published framework.,retained as baseline context only
+EXC-012,Gomal University data-centre and RDA portal claims,unsupported,Mentioned as earlier feed claims without direct item URLs or technical/acceptance evidence.,watchlist only
+EXC-013,Files absent at 15-minute cadence,missing evidence,Missing briefings are not imputed and their absence is not evidence that no event occurred.,coverage limitation

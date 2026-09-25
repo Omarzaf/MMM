@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Pre-release citation metadata for this private publication candidate; add the frozen release version and date only after human approval."
+title: "PDP 2026: Pakistan AI Policy and Digital Infrastructure Verified Monitoring Package"
+repository-code: "https://github.com/Omarzaf/PDP-2026"
+authors:
+  - family-names: "Zafar"
+    given-names: "Muhammad Umar"
+abstract: >-
+  Citation metadata for the PDP 2026 monitoring package. License boundary:
+  authored report text, derived dataset structure, observatory copy, and other
+  original public-facing research content are intended for CC BY 4.0 under the
+  repository root LICENSE; original code under tools/ is MIT under tools/LICENSE;
+  third-party source materials and linked external documents are excluded unless
+  their own upstream terms permit reuse.
+keywords:
+  - Pakistan
+  - AI policy
+  - digital infrastructure
+  - research monitoring

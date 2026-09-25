@@ -1,0 +1,307 @@
+/* ============================================================ tokens
+   Mirrors tokens/*.css. Inlined so the entry is a standalone file, as the
+   other entries in the series are. Copper is deliberately not redefined
+   for dark mode — it is the one constant across both grounds. */
+:root {
+  --paper-1:#f4f1ea; --paper-2:#eee9df; --paper-3:#e5e0d3; --paper-4:#ddd7c8;
+  --ink-1:#2e2b27; --ink-2:#3f3b35; --ink-3:#5c584f; --ink-4:#726c5e;
+  --ink-5:#8c8578; --ink-6:#a39a86; --ink-7:#c0b8a5;
+  --copper:#8a5a3b;
+
+  --surface-page:var(--paper-1); --surface-hover:var(--paper-2);
+  --rule-hairline:var(--paper-3); --rule-structural:var(--paper-4);
+  --text-display:var(--ink-1); --text-body:var(--ink-2); --text-lead:var(--ink-3);
+  --text-support:var(--ink-4); --text-label:var(--ink-6); --text-faint:var(--ink-7);
+
+  --font-display:"Newsreader",Georgia,serif;
+  --font-body:"Newsreader",Georgia,serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+
+  --type-entry-size:46px; --type-entry-line:1.18; --type-entry-track:0.005em;
+  --type-h2-size:30px; --type-h2-line:1.28;
+  --type-h3-size:21px; --type-h3-line:1.35;
+  --type-lead-size:21px; --type-lead-line:1.6;
+  --type-body-size:18px; --type-body-line:1.78;
+  --measure-prose:64ch; --measure-lead:60ch;
+  --type-label-size:11px; --type-label-track:0.14em;
+  --type-label-size-sm:10px; --type-label-track-sm:0.1em;
+  --type-label-track-lg:0.18em;
+  --type-support-size:14px; --type-support-line:1.5;
+  --type-marginalia-size:16px; --type-marginalia-line:1.6;
+  --measure-marginalia:34ch;
+
+  --space-1:5px; --space-2:12px; --space-3:20px; --space-4:28px;
+  --space-5:40px; --space-6:56px; --space-7:76px; --space-8:104px;
+  --rule-weight:1px; --radius-image:2px;
+  --contents-max:760px; --rail-width:300px; --rail-left-width:200px;
+  --gutter-column:76px; --gutter-left:48px;
+  /* Three zones cannot fit the legacy 1120px page max: 200+48+760+76+300 = 1384.
+     See DESIGN-REVIEW-2026-08-18.md, outstanding item 5 — flagged, not assumed. */
+  --page-max-entry:1384px;
+
+  --gap-heading-body:var(--space-2); --gap-paragraph:var(--space-3);
+  --gap-block:var(--space-4); --gap-section:var(--space-6); --gap-page:var(--space-5);
+
+  --ease-standard:ease; --dur-hover:160ms;
+  color-scheme:light;
+}
+:root[data-theme="dark"] {
+  --paper-1:#1c1815; --paper-2:#241f1a; --paper-3:#332c25; --paper-4:#443a30;
+  --ink-1:#f3ede1; --ink-2:#ddd5c5; --ink-3:#c2b8a3; --ink-4:#a89c85;
+  --ink-5:#8f8368; --ink-6:#756a54; --ink-7:#4c4335;
+  color-scheme:dark;
+}
+
+
+/* ============================================================ base */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--surface-page); color:var(--text-body);
+  font-family:var(--font-body); font-size:var(--type-body-size);
+  line-height:var(--type-body-line);
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+p{margin:0 0 var(--gap-paragraph)}
+em{color:var(--text-lead)}
+strong{color:var(--text-display); font-weight:600}
+code{font-family:var(--font-mono); font-size:0.84em; color:var(--text-body)}
+
+.mono{font-family:var(--font-mono); text-transform:uppercase;
+  font-size:var(--type-label-size); letter-spacing:var(--type-label-track);
+  color:var(--text-support)}
+.mono.sm{font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm)}
+.mono.lg{letter-spacing:var(--type-label-track-lg)}
+.mono.faint{color:var(--text-label)}
+.mono.ink{color:var(--text-display)}
+
+
+/* ============================================================ chrome */
+.topbar{
+  position:fixed; top:0; left:0; right:0; z-index:20;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:var(--space-3) var(--space-5);
+  background:var(--surface-page);
+}
+.topbar a{text-decoration:none}
+.topbar a:hover{color:var(--copper)}
+.theme-toggle{
+  background:none; border:0; padding:var(--space-1) 0; cursor:pointer;
+  font-family:var(--font-mono); text-transform:uppercase;
+  font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm);
+  color:var(--text-support);
+}
+.theme-toggle:hover{color:var(--copper)}
+
+/* Four tracks: nav | gutter | content | rail. The rail track is empty in the
+   flow — the marginalia float into it — but it must be reserved, or the grid
+   centres on the nav+content width alone and pushes the rail off-screen. */
+.page{
+  max-width:calc(var(--page-max-entry) + var(--space-3) * 2); margin:0 auto;
+  padding:var(--space-8) var(--space-3) var(--space-8);
+  display:grid;
+  grid-template-columns:
+    var(--rail-left-width)
+    var(--gutter-left)
+    minmax(0,var(--contents-max))
+    calc(var(--gutter-column) + var(--rail-width));
+  justify-content:center;
+}
+.leftnav{grid-column:1}
+.article{grid-column:3}
+
+/* ---- left rail: sticky contents nav ---- */
+.leftnav{position:sticky; top:var(--space-8); align-self:start;
+  display:flex; flex-direction:column; gap:var(--space-2)}
+.leftnav .heading{margin-bottom:var(--space-1)}
+.leftnav a{
+  display:flex; gap:var(--space-2); align-items:baseline; text-decoration:none;
+  color:var(--text-support); transition:color var(--dur-hover) var(--ease-standard);
+}
+.leftnav a .num{font-family:var(--font-mono); font-size:var(--type-label-size-sm);
+  letter-spacing:var(--type-label-track-sm); color:var(--text-label);
+  transition:color var(--dur-hover) var(--ease-standard)}
+.leftnav a .t{font-size:14px; line-height:1.4}
+.leftnav a:hover{color:var(--text-display)}
+.leftnav a.is-active{color:var(--text-display)}
+.leftnav a.is-active .num{color:var(--copper)}
+
+/* ---- content column ---- */
+.article{min-width:0}
+.article > p, .article > ul, .article > ol{max-width:var(--measure-prose)}
+
+/* ---- right rail: marginalia, pulled out of the flow so prose keeps its rhythm ---- */
+.margin{
+  float:right; clear:right;
+  width:var(--rail-width);
+  margin-right:calc(-1 * (var(--rail-width) + var(--gutter-column)));
+  margin-bottom:var(--gap-block);
+  margin-left:var(--gutter-column);
+}
+.margin-thought{
+  font-style:italic; font-size:var(--type-marginalia-size);
+  line-height:var(--type-marginalia-line); max-width:var(--measure-marginalia);
+  color:var(--text-lead); margin:0;
+}
+.margin-note .term{display:block; margin-bottom:var(--space-1)}
+.margin-note p{font-size:var(--type-support-size); line-height:var(--type-support-line);
+  color:var(--text-support); margin:0}
+
+
+/* ============================================================ hero */
+.hero{margin-bottom:var(--gap-page)}
+.hero .eyebrow{display:flex; align-items:center; gap:var(--space-2);
+  margin-bottom:var(--space-5)}
+.hero h1{
+  font-size:var(--type-entry-size); line-height:var(--type-entry-line);
+  letter-spacing:var(--type-entry-track); font-weight:500;
+  color:var(--text-display); margin:0 0 var(--space-3);
+}
+.thesis{
+  font-style:italic; font-size:var(--type-lead-size); line-height:var(--type-lead-line);
+  color:var(--text-lead); max-width:var(--measure-lead); margin:0 0 var(--space-4);
+}
+.lede{max-width:var(--measure-prose); color:var(--text-body); margin:0 0 var(--space-4)}
+.disclaimer{max-width:var(--measure-prose); margin:0; font-size:var(--type-support-size);
+  line-height:var(--type-support-line); color:var(--text-support)}
+.disclaimer .mono{font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm)}
+figure.entry-mark{margin:var(--gap-page) 0 var(--gap-page)}
+figure.entry-mark svg{border:0}
+
+/* ---- TL;DR ---- */
+.tldr{
+  border-top:var(--rule-weight) solid var(--rule-structural);
+  border-bottom:var(--rule-weight) solid var(--rule-structural);
+  padding:var(--gap-block) 0; margin:var(--gap-page) 0;
+  max-width:var(--measure-prose);
+}
+.tldr .heading{display:block; margin-bottom:var(--gap-heading-body)}
+.tldr ol{margin:0; padding-left:1.15em}
+.tldr li{margin-bottom:var(--space-1)}
+.tldr li:last-child{margin-bottom:0}
+
+
+/* ============================================================ sections */
+section{
+  border-top:var(--rule-weight) solid var(--rule-structural);
+  padding-top:var(--gap-block); margin-top:var(--gap-section);
+}
+section > .num{display:block; margin-bottom:var(--space-1)}
+h2{font-size:var(--type-h2-size); line-height:var(--type-h2-line); font-weight:500;
+  color:var(--text-display); margin:0 0 var(--gap-heading-body);
+  max-width:var(--measure-prose)}
+h3{font-size:var(--type-h3-size); line-height:var(--type-h3-line); font-weight:500;
+  color:var(--text-display); margin:var(--gap-block) 0 var(--gap-heading-body);
+  max-width:var(--measure-prose)}
+.article ul,.article ol{padding-left:1.2em}
+.article li{margin-bottom:var(--space-2)}
+
+
+/* ============================================================ figures */
+figure{margin:var(--gap-block) 0; max-width:var(--contents-max)}
+figure svg{display:block; width:100%; height:auto;
+  border:var(--rule-weight) solid var(--rule-hairline); border-radius:var(--radius-image)}
+figcaption{margin-top:var(--space-2); max-width:var(--measure-prose);
+  font-family:var(--font-mono); text-transform:uppercase;
+  font-size:var(--type-label-size-sm); letter-spacing:var(--type-label-track-sm);
+  line-height:1.7; color:var(--text-support)}
+
+/* ---- the one bespoke interactive ---- */
+.levers{
+  margin:var(--gap-block) 0; max-width:var(--contents-max);
+  border-top:var(--rule-weight) solid var(--rule-structural);
+  border-bottom:var(--rule-weight) solid var(--rule-structural);
+  padding:var(--gap-block) 0;
+}
+.levers .controls{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-5);
+  margin-bottom:var(--gap-block)}
+.lever label{display:block; margin-bottom:var(--space-2)}
+.lever .val{font-family:var(--font-mono); font-size:16px; color:var(--text-display);
+  letter-spacing:0.02em}
+.lever input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; background:transparent;
+  margin:var(--space-2) 0 0; cursor:pointer;
+}
+.lever input[type=range]::-webkit-slider-runnable-track{
+  height:1px; background:var(--rule-structural)}
+.lever input[type=range]::-moz-range-track{height:1px; background:var(--rule-structural)}
+.lever input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:11px; height:11px; border-radius:50%;
+  background:var(--copper); margin-top:-5px; border:0}
+.lever input[type=range]::-moz-range-thumb{
+  width:11px; height:11px; border-radius:50%; background:var(--copper); border:0}
+.lever input[type=range]:focus-visible{outline:1px solid var(--copper); outline-offset:6px}
+.levers .readout{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4);
+  padding-top:var(--gap-block);
+  border-top:var(--rule-weight) solid var(--rule-hairline)}
+.readout .k{display:block; margin-bottom:var(--space-1)}
+.readout .v{font-family:var(--font-mono); font-size:22px; color:var(--text-display);
+  letter-spacing:0.01em; display:block}
+.readout .sub{font-size:13px; line-height:1.45; color:var(--text-support);
+  margin-top:var(--space-1); display:block}
+.readout .v.hit{color:var(--copper)}
+
+
+/* ============================================================ citations + endnotes */
+sup.cite{line-height:0}
+sup.cite a{font-family:var(--font-mono); font-size:9.5px; color:var(--copper);
+  text-decoration:none; padding:0 1px}
+sup.cite a:hover{text-decoration:underline}
+.endnotes{border-top:var(--rule-weight) solid var(--rule-structural);
+  padding-top:var(--gap-block); margin-top:var(--gap-section)}
+.endnotes .heading{display:block; margin-bottom:var(--gap-heading-body)}
+.endnotes ol{margin:0; padding-left:1.6em; max-width:var(--measure-prose)}
+.endnotes li{font-size:var(--type-support-size); line-height:var(--type-support-line);
+  color:var(--text-support); margin-bottom:var(--space-2)}
+.endnotes li:target{color:var(--text-body)}
+.endnotes a{color:inherit}
+.endnotes a:hover{color:var(--copper)}
+
+.colophon{display:flex; justify-content:space-between; gap:var(--space-4);
+  margin-top:var(--gap-section); padding-top:var(--space-3);
+  border-top:var(--rule-weight) solid var(--rule-structural)}
+
+
+/* ============================================================ responsive
+   Review item 5 proposed default: the left nav collapses first, then the
+   right rail stacks below the content. Implemented here, flagged for Umar. */
+@media (max-width:1423px){
+  .page{grid-template-columns:
+    minmax(0,var(--contents-max))
+    calc(var(--gutter-column) + var(--rail-width));}
+  .leftnav{display:none}
+  .article{grid-column:1}
+}
+@media (max-width:1175px){
+  .page{grid-template-columns:minmax(0,var(--contents-max))}
+  .margin{
+    float:none; width:auto; max-width:var(--measure-prose);
+    margin:var(--gap-block) 0; padding-left:var(--space-3);
+    border-left:var(--rule-weight) solid var(--rule-structural);
+  }
+  .margin-thought{max-width:none}
+}
+@media (max-width:760px){
+  .page{padding:var(--space-7) var(--space-3) var(--space-6)}
+  .topbar{padding:var(--space-3)}
+  :root{--type-entry-size:34px; --type-h2-size:25px; --type-lead-size:19px;
+        --type-body-size:17px}
+  .levers .controls{grid-template-columns:1fr; gap:var(--space-4)}
+  .levers .readout{grid-template-columns:1fr; gap:var(--space-3)}
+  figure{overflow-x:auto}
+  figure svg{min-width:620px}
+  .colophon{flex-direction:column; gap:var(--space-2)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+/* ---- classes replacing inline style attributes, which the site CSP blocks ---- */
+.levers .heading-block { display: block; margin-bottom: var(--space-1); }
+.levers .caption {
+  font-size: var(--type-support-size);
+  line-height: var(--type-support-line);
+  color: var(--text-support);
+  max-width: var(--measure-prose);
+  margin: 0 0 var(--gap-block);
+}
+
