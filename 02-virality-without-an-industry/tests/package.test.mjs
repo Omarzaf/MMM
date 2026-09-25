@@ -7,6 +7,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   renameSync,
   rmSync,
   symlinkSync,
@@ -94,7 +95,11 @@ function createFixture() {
     mkdirSync(join(rootDir, 'site'), { recursive: true });
     copyFileSync(join(projectRoot, 'site', 'styles.css'), join(rootDir, 'site', 'styles.css'));
     copyFileSync(join(projectRoot, 'site', 'interactions.mjs'), join(rootDir, 'site', 'interactions.mjs'));
-  copyFileSync(join(projectRoot, 'site', 'fonts.css'), join(rootDir, 'site', 'fonts.css'));
+    copyFileSync(join(projectRoot, 'site', 'fonts.css'), join(rootDir, 'site', 'fonts.css'));
+    // fonts.css points at package-local font files, so the fixture needs them too.
+    const fontRoot = join(projectRoot, 'assets', 'hiphop-pakistan', 'fonts');
+    mkdirSync(join(fixtureAssetRoot, 'fonts'), { recursive: true });
+    for (const font of readdirSync(fontRoot)) copyFileSync(join(fontRoot, font), join(fixtureAssetRoot, 'fonts', font));
     mkdirSync(join(rootDir, 'docs', 'superpowers', 'specs'), { recursive: true });
     copyFileSync(briefPath, join(rootDir, 'docs', 'superpowers', 'specs', '2026-08-23-hiphop-pakistan-live-research-brief.md'));
     return rootDir;

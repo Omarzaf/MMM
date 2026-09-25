@@ -143,7 +143,7 @@ a:hover {
   z-index: 20;
   top: 0;
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-columns: auto auto auto minmax(0, 1fr);
   align-items: center;
   gap: 1.5rem;
   min-height: 4.5rem;
@@ -163,6 +163,22 @@ a:hover {
   letter-spacing: .1em;
   text-transform: uppercase;
   white-space: nowrap;
+}
+
+.series-mark {
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--rule);
+  color: var(--ink-muted);
+  font: 650 .66rem/1.2 var(--interface);
+  letter-spacing: .1em;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.series-mark:hover,
+.series-mark:focus-visible {
+  color: var(--rust);
 }
 
 .nav-mark {
@@ -1649,6 +1665,19 @@ footer p {
   }
 }
 
+/* The series link takes the chapter bar's spare width; below 1600px the
+   "Living Liner Notes" mark (which only returns to the prelude) gives way so
+   every chapter stays visible. */
+@media (min-width: 700px) and (max-width: 1599px) {
+  .chapter-nav {
+    grid-template-columns: auto auto minmax(0, 1fr);
+  }
+
+  .nav-mark {
+    display: none;
+  }
+}
+
 @media (max-width: 699px) {
   :root {
     --gutter: clamp(1rem, 4.5vw, 1.25rem);
@@ -1677,6 +1706,11 @@ footer p {
 
   .nav-mark {
     display: none;
+  }
+
+  .series-mark {
+    padding: .2rem 0;
+    border-right: 0;
   }
 
   .chapter-nav ol {
@@ -1990,6 +2024,7 @@ footer p {
   <a class="skip-link" href="#report">Skip to the report</a>
   <button class="theme-toggle" type="button" data-theme-toggle data-enhancement-control hidden aria-pressed="false" aria-label="Switch color theme">Dark</button>
   <nav class="chapter-nav" aria-label="Report chapters">
+    <a class="series-mark" href="https://umarzafar.vercel.app/meaning-man-and-model.html">← Meaning, Man and Model</a>
     <a class="nav-mark" href="#chapter-00" aria-label="Return to Prelude">Living Liner Notes</a>
     <p class="chapter-nav__group" data-current-group>Prelude</p>
     <ol><li><a href="#chapter-00" data-chapter-link="00" aria-label="Chapter 00: Opening contradiction" aria-current="step"><span class="chapter-nav__number" aria-hidden="true">00</span><span class="chapter-nav__label" aria-hidden="true">Opening</span></a></li>
@@ -3597,18 +3632,18 @@ footer p {
   <p class="source-limitation"><strong>Limitation.</strong> The source records policy intent, not implementation, budget, enforcement, or outcomes.</p>
   <p><a class="external-source" href="https://radio.gov.pk/26-06-2023/pakistans-first-music-policy-prepared-to-resolve-issues-of-piracy-copyrights-marriyum" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
 </article>
-<article class="source-entry" id="source-S014" data-source-id="S014" data-origin="Starter archive" data-family="Journalism" data-verified-on="2026-08-23" data-search="cabinet approves draft national music policy pakistan today policy process and approval milestone. — the federal cabinet approved a draft national music policy in august 2023. locate the final gazetted text, implementing rules, responsible agencies, and budget before coding policy implementation.">
+<article class="source-entry" id="source-S014" data-source-id="S014" data-origin="Starter archive" data-family="Journalism" data-verified-on="2026-08-23" data-search="pakistan introduces first-ever policy to safeguard and promote national music heritage arab news pakistan policy process and approval milestone. — the federal cabinet approved a draft national music policy in august 2023. locate the final gazetted text, implementing rules, responsible agencies, and budget before coding policy implementation. replaces a pakistan today report of the same 9 august 2023 decision whose link no longer resolves.">
   <div class="source-entry__identity">
     <span class="source-id">S014</span>
     <span class="source-origin">Starter archive</span>
   </div>
-  <h3>Cabinet approves draft National Music Policy</h3>
-  <p class="source-byline">Pakistan Today · 2023-08-09</p>
+  <h3>Pakistan introduces first-ever policy to safeguard and promote national music heritage</h3>
+  <p class="source-byline">Arab News Pakistan · 2023-08-10</p>
   <p class="source-verified">Verified 2026-08-23</p>
-  <p><span class="evidence-tag">National journalism reporting cabinet decision</span> Journalism · Tier 2</p>
+  <p><span class="evidence-tag">Journalism reporting cabinet decision</span> Journalism · Tier 2</p>
   <p>Policy process and approval milestone. — The federal cabinet approved a draft national music policy in August 2023.</p>
-  <p class="source-limitation"><strong>Limitation.</strong> Locate the final gazetted text, implementing rules, responsible agencies, and budget before coding policy implementation.</p>
-  <p><a class="external-source" href="https://www.pakistantoday.com.pk/2023/08/09/cabinet-approves-first-ever-music-policy-to-promote-industry/" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
+  <p class="source-limitation"><strong>Limitation.</strong> Locate the final gazetted text, implementing rules, responsible agencies, and budget before coding policy implementation. Replaces a Pakistan Today report of the same 9 August 2023 decision whose link no longer resolves.</p>
+  <p><a class="external-source" href="https://www.arabnews.pk/pakistan/pakistan-introduces-first-ever-policy-to-safeguard-and-promote-national-music-heritage-2352951" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
 </article>
 <article class="source-entry" id="source-S015" data-source-id="S015" data-origin="Starter archive" data-family="Journalism" data-verified-on="2026-08-23" data-search="patari opens for public the express tribune local streaming launch, intended revenue sharing, catalogue, and app strategy. — patari and taazi emerged as local legal-music distribution experiments in 2015. founders’ plans are not equivalent to realized business performance.">
   <div class="source-entry__identity">
@@ -3881,7 +3916,7 @@ footer p {
   <p><span class="evidence-tag">Rights-monitoring analysis</span> Civil society / monitoring · Tier 2</p>
   <p>Platform governance, content removal, self-censorship, and regulatory risk. — Digital cultural circulation occurs within a changing and contested content-regulation environment.</p>
   <p class="source-limitation"><strong>Limitation.</strong> A rights assessment should be paired with statutory text, court decisions, PTA notices, and creator testimony.</p>
-  <p><a class="external-source" href="https://www.hrw.org/news/2025/02/03/pakistan-amendment-draconian-cyber-law-deepens-crackdown" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
+  <p><a class="external-source" href="https://www.hrw.org/news/2025/02/03/pakistan-repeal-amendment-draconian-cyber-law" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
 </article>
 <article class="source-entry" id="source-S036" data-source-id="S036" data-origin="Starter archive" data-family="Official / primary" data-verified-on="2026-08-23" data-search="pakistan 2023 population and housing census pakistan bureau of statistics population, urban-rural, provincial, age, education, and sampling context. — audience and artist samples should be weighted or described against pakistan’s demographic and geographic structure. census variables do not measure music consumption, platform access, or creative employment directly.">
   <div class="source-entry__identity">
@@ -3894,7 +3929,7 @@ footer p {
   <p><span class="evidence-tag">Official census data</span> Official / primary · Tier 1</p>
   <p>Population, urban-rural, provincial, age, education, and sampling context. — Audience and artist samples should be weighted or described against Pakistan’s demographic and geographic structure.</p>
   <p class="source-limitation"><strong>Limitation.</strong> Census variables do not measure music consumption, platform access, or creative employment directly.</p>
-  <p><a class="external-source" href="https://www.pbs.gov.pk/digital-census/detailed-results" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
+  <p><a class="external-source" href="https://www.pbs.gov.pk/wp-content/uploads/2020/07/National-Census-Report-2023.pdf" target="_blank" rel="noopener noreferrer">Open original source <span aria-hidden="true">↗</span></a></p>
 </article>
 <article class="source-entry" id="source-S037" data-source-id="S037" data-origin="Starter archive" data-family="Official / primary" data-verified-on="2026-08-23" data-search="pakistan economic survey, information technology and telecommunications chapter government of pakistan, finance division macroeconomic, inflation, employment, digital economy, and telecom context. — music-sector outcomes must be interpreted against inflation, exchange rates, unemployment, and the broader digital economy. creative and music industries are rarely isolated as a separate statistical sector.">
   <div class="source-entry__identity">
@@ -4576,6 +4611,7 @@ footer p {
   </main>
   <footer>
     <p><strong>HipHop Pakistan · Living Liner Notes</strong></p>
+    <p>Entry II of <a href="https://umarzafar.vercel.app/meaning-man-and-model.html">Meaning, Man and Model</a>, a series by Umar Zafar.</p>
     <p>This locally generated research publication uses package-local images and documents. It loads no external runtime assets, analytics, or trackers.</p>
     <p>Prepared 23 August 2026 · Quantitative window 2014–2025 · 2026 epilogue only · Mixed methods</p>
   </footer>

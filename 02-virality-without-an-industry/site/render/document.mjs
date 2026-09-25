@@ -29,6 +29,10 @@ const NAV_LABELS = Object.freeze({
   '08': 'Sources',
 });
 
+
+// The series index this entry belongs to; the page links back to it from the
+// chapter bar and the footer.
+const SERIES_INDEX_URL = 'https://umarzafar.vercel.app/meaning-man-and-model.html';
 export function renderDocument({ research, chapters, images, styles, interactions, rootDir = sourceProjectRoot }) {
   assertRenderInputs(research, chapters, images, styles, interactions);
   if (typeof rootDir !== 'string' || rootDir.length === 0) throw new TypeError('rootDir must be a non-empty string');
@@ -59,6 +63,7 @@ export function renderDocument({ research, chapters, images, styles, interaction
   <a class="skip-link" href="#report">Skip to the report</a>
   <button class="theme-toggle" type="button" data-theme-toggle data-enhancement-control hidden aria-pressed="false" aria-label="Switch color theme">Dark</button>
   <nav class="chapter-nav" aria-label="Report chapters">
+    <a class="series-mark" href="${SERIES_INDEX_URL}">← Meaning, Man and Model</a>
     <a class="nav-mark" href="#chapter-00" aria-label="Return to Prelude">Living Liner Notes</a>
     <p class="chapter-nav__group" data-current-group>Prelude</p>
     <ol>${navigation}</ol>
@@ -69,6 +74,7 @@ ${renderedChapters}
   </main>
   <footer>
     <p><strong>HipHop Pakistan · Living Liner Notes</strong></p>
+    <p>Entry II of <a href="${SERIES_INDEX_URL}">Meaning, Man and Model</a>, a series by Umar Zafar.</p>
     <p>This locally generated research publication uses package-local images and documents. It loads no external runtime assets, analytics, or trackers.</p>
     <p>Prepared 23 August 2026 · Quantitative window 2014–2025 · 2026 epilogue only · Mixed methods</p>
   </footer>${scriptTag}

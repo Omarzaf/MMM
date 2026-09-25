@@ -35,4 +35,4 @@ node tools/build-site.mjs
 node --test tests/*.test.mjs
 ```
 
-The build is deterministic and should produce a file identical to `article/virality-without-an-industry.html`. As of this snapshot, 124 of 126 tests pass. The two failures are the determinism test and the verifier-CLI test, and both also fail in the original working folder. They are known issues in the test harness, not in the published page.
+The build is deterministic and produces a file identical to `article/virality-without-an-industry.html`. All 126 tests pass, and `node tools/verify-site.mjs` prints `PASS`.

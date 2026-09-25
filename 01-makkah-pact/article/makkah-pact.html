@@ -175,6 +175,13 @@
     transition: color var(--dur-hover) var(--ease-standard);
   }
   .theme-toggle:hover { color: var(--copper); }
+  .series-back {
+    position: absolute; top: 22px; left: 22px; z-index: 60;
+    font-family: var(--font-mono); font-size: var(--type-label-size-sm); letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-label); text-decoration: none;
+    transition: color var(--dur-hover) var(--ease-standard);
+  }
+  .series-back:hover, .series-back:focus-visible { color: var(--copper); }
   .theme-toggle .toggle-label {
     font-family: var(--font-mono); font-size: var(--type-label-size-sm);
     letter-spacing: var(--type-label-track-sm); text-transform: uppercase;
@@ -319,6 +326,7 @@
   @media (max-width: 600px) {
     body { font-size: 17px; }
     .theme-toggle { top: 12px; right: 12px; }
+    .series-back { top: 14px; left: 16px; }
     .hero { padding: var(--space-6) 0 var(--space-5); }
     section { padding: var(--gap-section) 0; }
     .matrix-grid { grid-template-columns: 96px 1fr 1fr; font-size: 12px; }
@@ -332,6 +340,8 @@
 </style>
 </head>
 <body>
+
+<a class="series-back" href="https://umarzafar.vercel.app/meaning-man-and-model.html">&larr; Meaning, Man and Model</a>
 
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
   <span class="toggle-label" id="themeLabel">Dark</span>
@@ -950,16 +960,21 @@
   <!-- ═══ ENDNOTES ═══ -->
   <div class="endnotes">
     <div class="endnotes-head">
-      <span class="mono" style="font-size: var(--type-label-size); letter-spacing: var(--type-label-track); color: var(--text-label);">Sources</span>
+      <span class="mono" style="font-size: var(--type-label-size); letter-spacing: var(--type-label-track); color: var(--text-label);">Sources and notes</span>
     </div>
     <ol>
       <li id="note-spa"><a href="https://www.spa.gov.sa/en/N2649227" target="_blank" rel="noreferrer">Saudi Press Agency (SPA)</a> &mdash; Joint statement, 7 August 2026.</li>
-      <li id="note-fidan"><a href="https://www.msb.gov.tr/Basin-ve-Yayin/Aciklamalar/f4b2f616b43641d19df3a8355afb1014" target="_blank" rel="noreferrer">Turkish Ministry of National Defence</a> &mdash; Fidan remarks, August 2026.</li>
+      <li id="note-fidan"><a href="https://www.aljazeera.com/news/2026/8/8/turkiye-says-mecca-defence-pact-not-aimed-at-iran" target="_blank" rel="noreferrer">Al Jazeera</a> &mdash; &ldquo;Turkiye says Mecca defence pact not aimed at Iran&rdquo;, 8 August 2026: Foreign Minister Hakan Fidan&rsquo;s account of request-based assistance.</li>
       <li id="note-morrow"><a href="https://www.annualreviews.org/content/journals/10.1146/annurev.polisci.3.1.63" target="_blank" rel="noreferrer">James Morrow</a> &mdash; &ldquo;Alliances: Why Write Them Down?&rdquo;, <em>Annual Review of Political Science</em>.</li>
       <li id="note-unsc"><a href="https://digitallibrary.un.org/record/4108191/files/S_2026_283-EN.pdf" target="_blank" rel="noreferrer">UN Security Council Document S/2026/283</a>.</li>
+      <li id="note-spe"><strong>Subgame perfection</strong> &mdash; An equilibrium concept requiring that a strategy remain optimal at every point in the game, not just at the start. It rules out threats the alliance wouldn&rsquo;t actually carry out if tested.</li>
+      <li id="note-bayes"><strong>Bayesian game</strong> &mdash; A game where players don&rsquo;t know each other&rsquo;s true type and update their beliefs as evidence arrives. Here, whether the Houthis act autonomously or under Iranian direction.</li>
       <li id="note-eu"><a href="https://www.consilium.europa.eu/en/press/press-releases/2026/02/23/red-sea-council-extends-the-mandate-of-operation-aspides-to-safeguard-freedom-of-navigation/" target="_blank" rel="noreferrer">Council of the European Union</a> &mdash; ASPIDES mission extension, 2026.</li>
       <li id="note-snyder"><a href="https://www.cambridge.org/core/journals/world-politics/article/security-dilemma-in-alliance-politics/681B1AF11D96E61995028026205CE783" target="_blank" rel="noreferrer">Glenn Snyder</a> &mdash; &ldquo;The Security Dilemma in Alliance Politics&rdquo;, <em>World Politics</em>.</li>
       <li id="note-sipri"><a href="https://www.sipri.org/visualizations/2026/world-nuclear-forces-january-2026" target="_blank" rel="noreferrer">SIPRI</a> &mdash; World Nuclear Forces, January 2026.</li>
+      <li id="note-moralhazard"><strong>Moral hazard</strong> &mdash; A guarantee of support can change the guaranteed party&rsquo;s own behaviour. Pakistan might take more risks precisely because it expects the alliance to back it up.</li>
+      <li id="note-hump"><strong>Hump-shaped ambiguity</strong> &mdash; Both &ldquo;perfectly clear&rdquo; and &ldquo;completely vague&rdquo; treaties deter less than one in the middle: moderate uncertainty generates caution; excessive uncertainty destroys commitment.</li>
+      <li id="note-tripwire"><strong>Tripwire force</strong> &mdash; Deliberately placed where it will be hit first. Its presence, not its combat power, is what deters &mdash; attacking it guarantees escalation the aggressor would rather avoid.</li>
       <li id="note-fearon"><a href="https://www.cambridge.org/core/journals/international-organization/article/rationalist-explanations-for-war/E3B716A4034C11ECF8CE8732BC2F80DD" target="_blank" rel="noreferrer">James Fearon</a> &mdash; &ldquo;Rationalist Explanations for War&rdquo;, <em>International Organization</em>.</li>
     </ol>
   </div>
